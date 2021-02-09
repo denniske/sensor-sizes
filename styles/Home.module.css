@@ -1,13 +1,11 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #111111;
   color: #EEE;
-  font-family: 'Roboto';
 }
 
 .main {
