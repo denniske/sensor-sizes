@@ -45,6 +45,7 @@ const useStyles = createStylesheet((theme) => ({
         display: 'flex',
         alignItems: 'end',
         justifyContent: 'center',
+        overflow: 'hidden',
     },
     model: {
         fontSize: '0.85rem',
@@ -69,6 +70,13 @@ const useStyles = createStylesheet((theme) => ({
     pointer: {
         cursor: 'pointer',
     },
+    text: {
+        border: 'none',
+        borderBottom: '1px solid #CCC',
+        background: 'transparent',
+        width: 40,
+        color: 'white',
+    },
 }));
 
 interface Props {
@@ -90,6 +98,9 @@ export function SensorComparison({sensors}: Props) {
     const loaded = useClientLoaded();
     const classes = useStyles();
     const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s) => s.default));
+    const [realPhysicalSensorSize, setRealPhysicalSensorSize] = useState(true);
+    const [screenSize, setScreenSize] = useState<number>(typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96 : 100);
+    const [screenSizeStr, setScreenSizeStr] = useState<string>(typeof window !== 'undefined' ? (Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96).toFixed(1) : '100');
 
     const maxWidth = windowDimensions.width - offset*2;
     const maxHeight = 700;
@@ -105,12 +116,28 @@ export function SensorComparison({sensors}: Props) {
         factor = min([factorWidth, factorHeight]);
     }
 
+    if (realPhysicalSensorSize && screenSize) {
+        const screenDiagonalPx = typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height) : 100;
+        const oneInchPx = screenDiagonalPx / screenSize;
+        const oneMillimeterPx = screenDiagonalPx / screenSize / 2.54 / 10;
+        factor = oneMillimeterPx;
+    }
+
     const onToggleSensor = (sensor) => {
-      if (selectedSensors.includes(sensor)) {
+        if (selectedSensors.includes(sensor)) {
           setSelectedSensors(selectedSensors.filter(s => s !== sensor));
-      } else {
+        } else {
           setSelectedSensors([...selectedSensors, sensor]);
-      }
+        }
+    };
+
+    const onToggleRealPhysicalSensorSize = (val) => {
+        setRealPhysicalSensorSize(!realPhysicalSensorSize);
+    };
+
+    const onScreenSizeChange = (event) => {
+        setScreenSizeStr(event.target.value.replace(',', '.'));
+        setScreenSize(parseFloat(event.target.value.replace(',', '.')));
     };
 
     const centerX = 0;
@@ -163,6 +190,17 @@ export function SensorComparison({sensors}: Props) {
             </div>
             <div className={classes.wrapper}>
                 <div>
+                    <h3>Options</h3>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} /></td>
+                            <td className={classes.cellName}>Real physical sensor size</td>
+                            <td className={classes.cell}>Screen size (")</td>
+                            <td className={classes.cell}><input type="text" className={classes.text} value={screenSizeStr} onChange={onScreenSizeChange} /></td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <h3>Selected</h3>
                     <table>
                         <thead>
