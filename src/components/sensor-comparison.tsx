@@ -61,6 +61,9 @@ const useStyles = createStylesheet((theme) => ({
     cellCheckbox: {
         width: 30,
     },
+    pointer: {
+        cursor: 'pointer',
+    },
 }));
 
 interface Props {
@@ -156,9 +159,8 @@ export function SensorComparison({sensors}: Props) {
                         <tbody>
                             {
                                 sensors.map(sensor => (
-                                    <tr key={sensor.name} style={{
-                                    }} className={classes.row}>
-                                        <td className={classes.cellCheckbox}><input type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => onToggleSensor(sensor)}/></td>
+                                    <tr key={sensor.name} className={classes.pointer} onClick={() => onToggleSensor(sensor)}>
+                                        <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} /></td>
                                         <td className={classes.cellName}>{sensor.name}</td>
                                         <td className={classes.cell}>{sensor.resolutionX}x{sensor.resolutionY}</td>
                                         <td className={classes.cell}>{sensor.width}mmx{sensor.height}mm</td>
