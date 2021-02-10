@@ -2,23 +2,44 @@ import { maxBy, min } from 'lodash';
 import {createStylesheet} from '../helper/styles';
 import {ISensor} from './sensor.type';
 import {useState} from 'react';
+import useWindowDimensions from '../hooks/use-window-dimensions';
+import useClientLoaded from '../hooks/use-client-loaded';
 
 const useStyles = createStylesheet((theme) => ({
     outer: {
         display: 'flex',
+        flex: 1,
         flexDirection: 'column',
     },
     container: {
-        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
         backgroundColor: '#111',
+        width: '100vw',
+        height: 700,
+        overflow: 'hidden',
+        marginVertical: 50,
+    },
+    surface: {
+        position: 'relative',
         width: 1000,
-        height: 800,
+        height: 700,
+    },
+    wrapper: {
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 10,
     },
     box: {
         position: 'absolute',
         borderStyle: 'solid',
         borderWidth: 2,
-        borderColor: '#AAA'
+        borderColor: '#AAA',
+        transitionDuration: '300ms',
+        transitionProperty: 'width, height, left, top, display, opacity',
     },
     name: {
         fontSize: '0.85rem',
@@ -33,6 +54,9 @@ const useStyles = createStylesheet((theme) => ({
     },
     cell: {
         width: 200,
+    },
+    cellName: {
+        width: 250,
     },
     cellCheckbox: {
         width: 30,
@@ -51,14 +75,18 @@ function sortSensors(selectedSensors: ISensor[], sensors: ISensor[]) {
     return result;
 }
 
+const offset = 50;
+
 export function SensorComparison({sensors}: Props) {
+    const windowDimensions = useWindowDimensions();
+    const loaded = useClientLoaded();
     const classes = useStyles();
     const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s, i) => {
         return ['ARRI Alexa 65', 'ARRI Alexa LF', 'KODAK Super 16mm'].includes(s.name);
     }));
 
-    const maxWidth = 1000;
-    const maxHeight = 800;
+    const maxWidth = windowDimensions.width - offset*2;
+    const maxHeight = 700;
 
     const maxSensorWidth = maxBy(selectedSensors, s => s.width);
     const maxSensorHeight = maxBy(selectedSensors, s => s.height);
@@ -79,59 +107,69 @@ export function SensorComparison({sensors}: Props) {
       }
     };
 
+    const centerX = 1000/2;
+    // const centerX = maxWidth/2;
+
     return (
         <div className={classes.outer}>
             <div className={classes.container}>
-                {
-                    sortSensors(selectedSensors, sensors).map(sensor => (
-                        <div key={sensor.name} style={{
-                            width: sensor.width*factor,
-                            height: sensor.height*factor,
-                            left: maxWidth/2-(sensor.width*factor)/2,
-                            top: maxHeight/2-(sensor.height*factor)/2,
-                            borderColor: sensor.color,
-                        }} className={classes.box}>
-                            <div className={classes.name}style={{
-                                color: sensor.textColor,
-                                backgroundColor: sensor.color,
-                            }}>{sensor.name}</div>
-                        </div>
-                    ))
-                }
+                <div className={classes.surface}>
+                    {
+                        loaded && sensors.map(sensor => (
+                            <div key={sensor.name} style={{
+                                width: sensor.width*factor,
+                                height: sensor.height*factor,
+                                left: centerX-(sensor.width*factor)/2,
+                                top: maxHeight/2-(sensor.height*factor)/2,
+                                borderColor: sensor.color,
+                                opacity: selectedSensors.includes(sensor) ? 1 : 0,
+                            }} className={classes.box}>
+                                <div className={classes.name}style={{
+                                    color: sensor.textColor,
+                                    backgroundColor: sensor.color,
+                                }}>{sensor.name}</div>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
-            <table>
-                <tbody>
-                    {
-                        sortSensors(selectedSensors, sensors).map(sensor => (
-                            <tr key={sensor.name} style={{
-                            }} className={classes.row}>
-                                <td className={classes.cellCheckbox}/>
-                                <td className={classes.cell}>{sensor.name}</td>
-                                <td className={classes.cell}>{sensor.resolutionX}x{sensor.resolutionY}</td>
-                                <td className={classes.cell}>{sensor.width}mmx{sensor.height}mm</td>
-                                <td className={classes.cell}>{sensor.imageCircle}mm</td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
-            <h3>All</h3>
-            <table>
-                <tbody>
-                    {
-                        sensors.map(sensor => (
-                            <tr key={sensor.name} style={{
-                            }} className={classes.row}>
-                                <td className={classes.cellCheckbox}><input type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => onToggleSensor(sensor)}/></td>
-                                <td className={classes.cell}>{sensor.name}</td>
-                                <td className={classes.cell}>{sensor.resolutionX}x{sensor.resolutionY}</td>
-                                <td className={classes.cell}>{sensor.width}mmx{sensor.height}mm</td>
-                                <td className={classes.cell}>{sensor.imageCircle}mm</td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+            <div className={classes.wrapper}>
+                <div>
+                    <table>
+                        <tbody>
+                            {
+                                sortSensors(selectedSensors, sensors).map(sensor => (
+                                    <tr key={sensor.name} style={{
+                                    }} className={classes.row}>
+                                        <td className={classes.cellCheckbox}/>
+                                        <td className={classes.cellName}>{sensor.name}</td>
+                                        <td className={classes.cell}>{sensor.resolutionX}x{sensor.resolutionY}</td>
+                                        <td className={classes.cell}>{sensor.width}mmx{sensor.height}mm</td>
+                                        <td className={classes.cell}>{sensor.imageCircle}mm</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                    <h3>All</h3>
+                    <table>
+                        <tbody>
+                            {
+                                sensors.map(sensor => (
+                                    <tr key={sensor.name} style={{
+                                    }} className={classes.row}>
+                                        <td className={classes.cellCheckbox}><input type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => onToggleSensor(sensor)}/></td>
+                                        <td className={classes.cellName}>{sensor.name}</td>
+                                        <td className={classes.cell}>{sensor.resolutionX}x{sensor.resolutionY}</td>
+                                        <td className={classes.cell}>{sensor.width}mmx{sensor.height}mm</td>
+                                        <td className={classes.cell}>{sensor.imageCircle}mm</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 }
