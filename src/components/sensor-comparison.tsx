@@ -32,6 +32,7 @@ const useStyles = createStylesheet((theme) => ({
     row: {
     },
     cell: {
+        width: 200,
     },
     cellCheckbox: {
         width: 30,
