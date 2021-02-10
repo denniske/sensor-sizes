@@ -48,10 +48,10 @@ const getRows = async () => {
     return rows.map(r => {
         return ({
             name: r.name,
-            width: parseInt(r.width),
-            height: parseInt(r.height),
-            resolutionX: parseFloat(r.resolutionX),
-            resolutionY: parseFloat(r.resolutionY),
+            width: parseFloat(r.width),
+            height: parseFloat(r.height),
+            resolutionX: parseInt(r.resolutionX),
+            resolutionY: parseInt(r.resolutionY),
             imageCircle: parseFloat(r.imageCircle),
         });
     });
