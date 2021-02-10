@@ -4,6 +4,7 @@ import {ISensor} from './sensor.type';
 import {useState} from 'react';
 import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
+import {noop} from '@babel/types';
 
 const useStyles = createStylesheet((theme) => ({
     outer: {
@@ -40,6 +41,9 @@ const useStyles = createStylesheet((theme) => ({
         borderColor: '#AAA',
         transitionDuration: '300ms',
         transitionProperty: 'width, height, left, top, display, opacity',
+        display: 'flex',
+        alignItems: 'end',
+        justifyContent: 'center',
     },
     name: {
         fontSize: '0.85rem',
@@ -113,6 +117,16 @@ export function SensorComparison({sensors}: Props) {
     const centerX = 1000/2;
     // const centerX = maxWidth/2;
 
+    const getAlignItems = (sensor: ISensor) => {
+        return sensor.anchor.startsWith('top') ? 'flex-start' : 'flex-end';
+    };
+
+    const getJustifyContent = (sensor: ISensor) => {
+        if (sensor.anchor.endsWith('left')) return 'flex-start';
+        if (sensor.anchor.endsWith('center')) return 'center';
+        return 'flex-end';
+    };
+
     return (
         <div className={classes.outer}>
             <div className={classes.container}>
@@ -126,8 +140,10 @@ export function SensorComparison({sensors}: Props) {
                                 top: maxHeight/2-(sensor.height*factor)/2,
                                 borderColor: sensor.color,
                                 opacity: selectedSensors.includes(sensor) ? 1 : 0,
+                                alignItems: getAlignItems(sensor),
+                                justifyContent: getJustifyContent(sensor),
                             }} className={classes.box}>
-                                <div className={classes.name}style={{
+                                <div className={classes.name} style={{
                                     color: sensor.textColor,
                                     backgroundColor: sensor.color,
                                 }}>{sensor.name}</div>
@@ -160,7 +176,7 @@ export function SensorComparison({sensors}: Props) {
                             {
                                 sensors.map(sensor => (
                                     <tr key={sensor.name} className={classes.pointer} onClick={() => onToggleSensor(sensor)}>
-                                        <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} /></td>
+                                        <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop} /></td>
                                         <td className={classes.cellName}>{sensor.name}</td>
                                         <td className={classes.cell}>{sensor.resolutionX}x{sensor.resolutionY}</td>
                                         <td className={classes.cell}>{sensor.width}mmx{sensor.height}mm</td>
