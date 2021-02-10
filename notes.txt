@@ -9,3 +9,10 @@ http://phfx.com/tools/formatCompare/formatCompare.cgi?makeA=RED&modelA=Monstro+8
 https://www.digicamdb.com/compare/canon_eos-r5-vs-leica_sl2/
 https://twitter.com/Cooke_Optics/status/1023968001224318976/photo/1
 
+
+- referenzsensor auswählen für crop factor (standard immer super 35)
+- hersteller logos
+
+x runden auf zwei dezimalstellen
+
+- (reale physische sensorgröße)

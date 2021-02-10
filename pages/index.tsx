@@ -8,13 +8,13 @@ export default function Home({sensors}) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>FILM SENSOR CHART</title>
+        <title>Sensor Size Comparison</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          FILM SENSOR CHART
+          SENSOR SIZE COMPARISON
         </h1>
         <SensorComparison sensors={sensors}/>
       </main>
@@ -23,9 +23,11 @@ export default function Home({sensors}) {
 }
 
 export async function getServerSideProps() {
+    const sensors = await getRows();
+    console.log(sensors);
     return {
         props: {
-            sensors: await getRows(),
+            sensors,
         },
     };
 }
@@ -47,7 +49,7 @@ const getRows = async () => {
 
     return rows.map(r => {
         return ({
-            name: r.name,
+            model: r.model,
             width: parseFloat(r.width),
             height: parseFloat(r.height),
             resolutionX: parseInt(r.resolutionX),
@@ -56,6 +58,7 @@ const getRows = async () => {
             color: r.color,
             textColor: r.textColor,
             anchor: r.anchor,
+            default: r.default === 'TRUE',
         });
     });
 };

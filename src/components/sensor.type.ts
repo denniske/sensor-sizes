@@ -1,6 +1,6 @@
 
 export interface ISensor {
-    name: string;
+    model: string;
     width: number;
     height: number;
     resolutionX: number;
@@ -9,4 +9,5 @@ export interface ISensor {
     color: string;
     textColor: string;
     anchor: string;
+    default: boolean;
 }

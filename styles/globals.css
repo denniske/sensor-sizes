@@ -10,6 +10,14 @@ body {
   overflow-x: hidden;
 }
 
+th {
+  text-align: left;
+}
+
+td span {
+  color: #AAA;
+}
+
 #__next {
   display: flex;
   flex: 1;

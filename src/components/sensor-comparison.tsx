@@ -45,7 +45,7 @@ const useStyles = createStylesheet((theme) => ({
         alignItems: 'end',
         justifyContent: 'center',
     },
-    name: {
+    model: {
         fontSize: '0.85rem',
         color: 'white',
         display: 'inline-block',
@@ -88,9 +88,7 @@ export function SensorComparison({sensors}: Props) {
     const windowDimensions = useWindowDimensions();
     const loaded = useClientLoaded();
     const classes = useStyles();
-    const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s, i) => {
-        return ['ARRI Alexa 65', 'ARRI Alexa LF', 'KODAK Super 16mm'].includes(s.name);
-    }));
+    const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s) => s.default));
 
     const maxWidth = windowDimensions.width - offset*2;
     const maxHeight = 700;
@@ -115,7 +113,6 @@ export function SensorComparison({sensors}: Props) {
     };
 
     const centerX = 1000/2;
-    // const centerX = maxWidth/2;
 
     const getAlignItems = (sensor: ISensor) => {
         return sensor.anchor.startsWith('top') ? 'flex-start' : 'flex-end';
@@ -127,13 +124,24 @@ export function SensorComparison({sensors}: Props) {
         return 'flex-end';
     };
 
+    const getResolution = (sensor: ISensor) => {
+        if (sensor.resolutionX && sensor.resolutionY) {
+            return `${sensor.resolutionX} x ${sensor.resolutionY}`;
+        }
+        return '-';
+    };
+
+    const getArea = (sensor: ISensor) => {
+        return `${sensor.width.toFixed(2)} x ${sensor.height.toFixed(2)}`;
+    };
+
     return (
         <div className={classes.outer}>
             <div className={classes.container}>
                 <div className={classes.surface}>
                     {
                         loaded && sensors.map(sensor => (
-                            <div key={sensor.name} style={{
+                            <div key={sensor.model} style={{
                                 width: sensor.width*factor,
                                 height: sensor.height*factor,
                                 left: centerX-(sensor.width*factor)/2,
@@ -143,10 +151,10 @@ export function SensorComparison({sensors}: Props) {
                                 alignItems: getAlignItems(sensor),
                                 justifyContent: getJustifyContent(sensor),
                             }} className={classes.box}>
-                                <div className={classes.name} style={{
+                                <div className={classes.model} style={{
                                     color: sensor.textColor,
                                     backgroundColor: sensor.color,
-                                }}>{sensor.name}</div>
+                                }}>{sensor.model}</div>
                             </div>
                         ))
                     }
@@ -154,17 +162,27 @@ export function SensorComparison({sensors}: Props) {
             </div>
             <div className={classes.wrapper}>
                 <div>
+                    <h3>Selected</h3>
                     <table>
+                        <thead>
+                        <tr>
+                            <th className={classes.cellCheckbox}/>
+                            <th className={classes.cellName}>Model</th>
+                            <th className={classes.cell}>Resolution (px)</th>
+                            <th className={classes.cell}>Area (mm)</th>
+                            <th className={classes.cell}>Image Circle (mm)</th>
+                        </tr>
+                        </thead>
                         <tbody>
                             {
                                 sortSensors(selectedSensors, sensors).map(sensor => (
-                                    <tr key={sensor.name} style={{
+                                    <tr key={sensor.model} style={{
                                     }} className={classes.row}>
                                         <td className={classes.cellCheckbox}/>
-                                        <td className={classes.cellName}>{sensor.name}</td>
-                                        <td className={classes.cell}>{sensor.resolutionX}x{sensor.resolutionY}</td>
-                                        <td className={classes.cell}>{sensor.width}mmx{sensor.height}mm</td>
-                                        <td className={classes.cell}>{sensor.imageCircle}mm</td>
+                                        <td className={classes.cellName}>{sensor.model}</td>
+                                        <td className={classes.cell}>{getResolution(sensor)}</td>
+                                        <td className={classes.cell}>{getArea(sensor)}</td>
+                                        <td className={classes.cell}>{sensor.imageCircle}</td>
                                     </tr>
                                 ))
                             }
@@ -172,15 +190,24 @@ export function SensorComparison({sensors}: Props) {
                     </table>
                     <h3>All</h3>
                     <table>
+                        <thead>
+                            <tr>
+                                <th className={classes.cellCheckbox}/>
+                                <th className={classes.cellName}>Model</th>
+                                <th className={classes.cell}>Resolution (px)</th>
+                                <th className={classes.cell}>Area (mm)</th>
+                                <th className={classes.cell}>Image Circle (mm)</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {
                                 sensors.map(sensor => (
-                                    <tr key={sensor.name} className={classes.pointer} onClick={() => onToggleSensor(sensor)}>
+                                    <tr key={sensor.model} className={classes.pointer} onClick={() => onToggleSensor(sensor)}>
                                         <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop} /></td>
-                                        <td className={classes.cellName}>{sensor.name}</td>
-                                        <td className={classes.cell}>{sensor.resolutionX}x{sensor.resolutionY}</td>
-                                        <td className={classes.cell}>{sensor.width}mmx{sensor.height}mm</td>
-                                        <td className={classes.cell}>{sensor.imageCircle}mm</td>
+                                        <td className={classes.cellName}>{sensor.model}</td>
+                                        <td className={classes.cell}>{getResolution(sensor)}</td>
+                                        <td className={classes.cell}>{getArea(sensor)}</td>
+                                        <td className={classes.cell}>{sensor.imageCircle}</td>
                                     </tr>
                                 ))
                             }
@@ -191,10 +218,3 @@ export function SensorComparison({sensors}: Props) {
         </div>
     );
 }
-
-// {/*<td className={classes.cell}>{sensor.resolutionX}</td>*/}
-// {/*<td className={classes.cell}>{sensor.resolutionY}</td>*/}
-// {/*<td className={classes.cell}>{sensor.width}</td>*/}
-// {/*<td className={classes.cell}>{sensor.height}</td>*/}
-// {/*<td className={classes.cell}>{sensor.imageCircle}</td>*/}
-
