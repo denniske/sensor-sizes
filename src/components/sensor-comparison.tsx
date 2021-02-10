@@ -92,6 +92,7 @@ export function SensorComparison({sensors}: Props) {
                             borderColor: sensor.color,
                         }} className={classes.box}>
                             <div className={classes.name}style={{
+                                color: sensor.textColor,
                                 backgroundColor: sensor.color,
                             }}>{sensor.name}</div>
                         </div>

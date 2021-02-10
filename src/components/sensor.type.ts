@@ -7,5 +7,6 @@ export interface ISensor {
     resolutionY: number;
     imageCircle: number;
     color: string;
+    textColor: string;
     anchor: string;
 }

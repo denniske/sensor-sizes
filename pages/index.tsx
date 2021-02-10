@@ -54,6 +54,7 @@ const getRows = async () => {
             resolutionY: parseInt(r.resolutionY),
             imageCircle: parseFloat(r.imageCircle),
             color: r.color,
+            textColor: r.textColor,
             anchor: r.anchor,
         });
     });
