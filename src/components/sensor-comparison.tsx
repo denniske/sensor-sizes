@@ -16,6 +16,7 @@ const useStyles = createStylesheet((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         backgroundColor: '#111',
+        // width: 500,
         width: '100vw',
         height: 700,
         overflow: 'hidden',
@@ -23,7 +24,7 @@ const useStyles = createStylesheet((theme) => ({
     },
     surface: {
         position: 'relative',
-        width: 1000,
+        width: 0,
         height: 700,
     },
     wrapper: {
@@ -112,7 +113,7 @@ export function SensorComparison({sensors}: Props) {
       }
     };
 
-    const centerX = 1000/2;
+    const centerX = 0;
 
     const getAlignItems = (sensor: ISensor) => {
         return sensor.anchor.startsWith('top') ? 'flex-start' : 'flex-end';
