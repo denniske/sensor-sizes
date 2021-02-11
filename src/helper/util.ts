@@ -1,4 +1,6 @@
 
+export const empty = 2;
+
 // function getPmm(my_diag) {
 //
 //     swidth = screen.width;
