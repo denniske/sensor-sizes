@@ -98,7 +98,7 @@ export function SensorComparison({sensors}: Props) {
     const loaded = useClientLoaded();
     const classes = useStyles();
     const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s) => s.default));
-    const [realPhysicalSensorSize, setRealPhysicalSensorSize] = useState(true);
+    const [realPhysicalSensorSize, setRealPhysicalSensorSize] = useState(false);
     const [screenSize, setScreenSize] = useState<number>(typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96 : 100);
     const [screenSizeStr, setScreenSizeStr] = useState<string>(typeof window !== 'undefined' ? (Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96).toFixed(1) : '100');
 
