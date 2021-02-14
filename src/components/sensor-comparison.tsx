@@ -56,16 +56,19 @@ const useStyles = createStylesheet((theme) => ({
         paddingVertical: 3,
         backgroundColor: '#AAA',
     },
-    row: {
-    },
+    row: {},
     cell: {
         width: 200,
+        paddingVertical: 2,
     },
     cellName: {
         width: 250,
     },
     cellCheckbox: {
         width: 30,
+    },
+    cellLogo: {
+        width: 150,
     },
     pointer: {
         cursor: 'pointer',
@@ -76,6 +79,9 @@ const useStyles = createStylesheet((theme) => ({
         background: 'transparent',
         width: 40,
         color: 'white',
+    },
+    title: {
+        marginLeft: 150,
     },
 }));
 
@@ -190,10 +196,11 @@ export function SensorComparison({sensors}: Props) {
             </div>
             <div className={classes.wrapper}>
                 <div>
-                    <h3>Options</h3>
+                    <h3 className={classes.title}>Options</h3>
                     <table>
                         <tbody>
                         <tr>
+                            <td className={classes.cellLogo}/>
                             <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} /></td>
                             <td className={classes.cellName}>Real physical sensor size</td>
                             <td className={classes.cell}>Screen size (")</td>
@@ -201,10 +208,11 @@ export function SensorComparison({sensors}: Props) {
                         </tr>
                         </tbody>
                     </table>
-                    <h3>Selected</h3>
+                    <h3 className={classes.title}>Selected</h3>
                     <table>
                         <thead>
                         <tr>
+                            <th className={classes.cellLogo}/>
                             <th className={classes.cellCheckbox}/>
                             <th className={classes.cellName}>Model</th>
                             <th className={classes.cell}>Resolution (px)</th>
@@ -217,20 +225,22 @@ export function SensorComparison({sensors}: Props) {
                                 sortSensors(selectedSensors, sensors).map(sensor => (
                                     <tr key={sensor.model} style={{
                                     }} className={classes.row}>
+                                        <td className={classes.cellLogo}/>
                                         <td className={classes.cellCheckbox}/>
                                         <td className={classes.cellName}>{sensor.model}</td>
                                         <td className={classes.cell}>{getResolution(sensor)}</td>
                                         <td className={classes.cell}>{getArea(sensor)}</td>
-                                        <td className={classes.cell}>{sensor.imageCircle}</td>
+                                        <td className={classes.cell}>{sensor.diagonal}</td>
                                     </tr>
                                 ))
                             }
                         </tbody>
                     </table>
-                    <h3>All</h3>
+                    <h3 className={classes.title}>All</h3>
                     <table>
                         <thead>
                             <tr>
+                                <th className={classes.cellLogo}/>
                                 <th className={classes.cellCheckbox}/>
                                 <th className={classes.cellName}>Model</th>
                                 <th className={classes.cell}>Resolution (px)</th>
@@ -240,13 +250,21 @@ export function SensorComparison({sensors}: Props) {
                         </thead>
                         <tbody>
                             {
-                                sensors.map(sensor => (
-                                    <tr key={sensor.model} className={classes.pointer} onClick={() => onToggleSensor(sensor)}>
+                                sensors.map((sensor, i) => (
+                                    <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
+                                        {
+                                            i == 0 &&
+                                            <td rowSpan={3} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://upload.wikimedia.org/wikipedia/commons/d/de/Arri_logo.svg"/></td>
+                                        }
+                                        {
+                                            i == 3 &&
+                                            <td rowSpan={2} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://static.wikia.nocookie.net/logopedia/images/2/27/Kodak_2006.svg"/></td>
+                                        }
                                         <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop} /></td>
                                         <td className={classes.cellName}>{sensor.model}</td>
                                         <td className={classes.cell}>{getResolution(sensor)}</td>
                                         <td className={classes.cell}>{getArea(sensor)}</td>
-                                        <td className={classes.cell}>{sensor.imageCircle}</td>
+                                        <td className={classes.cell}>{sensor.diagonal}</td>
                                     </tr>
                                 ))
                             }

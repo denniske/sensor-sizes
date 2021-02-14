@@ -5,7 +5,7 @@ export interface ISensor {
     height: number;
     resolutionX: number;
     resolutionY: number;
-    imageCircle: number;
+    diagonal: number;
     color: string;
     textColor: string;
     anchor: string;

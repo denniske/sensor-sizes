@@ -8,6 +8,7 @@ interface StandardCSSProperties extends CSS.Properties<number | string> {}
 
 interface CustomCSSProperties extends CSS.Properties<number | string> {
     'marginVertical'?: Property.MarginBottom<number | string>;
+    'paddingVertical'?: Property.PaddingBottom<number | string>;
 }
 
 type CustomCssStyles = Record<string, StandardCSSProperties>;
