@@ -52,17 +52,26 @@ const useStyles = createStylesheet((theme) => ({
         color: 'white',
         display: 'inline-block',
         margin: -2,
-        paddingHorizontal: 15,
+        paddingHorizontal: 8,
         paddingVertical: 3,
         backgroundColor: '#AAA',
     },
     row: {},
-    cell: {
-        width: 200,
+    cellWithout: {
         paddingVertical: 2,
     },
-    cellName: {
+    cell: {
+        width: 150,
+        paddingVertical: 2,
+    },
+    cellModel: {
         width: 250,
+    },
+    cellAspectRatio: {
+        width: 130,
+    },
+    cellArea: {
+        width: 130,
     },
     cellCheckbox: {
         width: 30,
@@ -81,7 +90,7 @@ const useStyles = createStylesheet((theme) => ({
         color: 'white',
     },
     title: {
-        marginLeft: 150,
+        // marginLeft: 150,
     },
 }));
 
@@ -165,9 +174,19 @@ export function SensorComparison({sensors}: Props) {
         return '-';
     };
 
-    const getArea = (sensor: ISensor) => {
+    const getDimensions = (sensor: ISensor) => {
         return `${sensor.width.toFixed(2)} x ${sensor.height.toFixed(2)}`;
     };
+
+    const getArea = (sensor: ISensor) => {
+        return `${sensor.area}`;
+    };
+
+    function getAspectRatio(aspectRatio: string) {
+        if (!aspectRatio) return;
+        const parts = aspectRatio.split(':');
+        return `${parseFloat(parts[0]).toFixed(2)}:1`;
+    }
 
     return (
         <div className={classes.outer}>
@@ -202,7 +221,7 @@ export function SensorComparison({sensors}: Props) {
                         <tr>
                             <td className={classes.cellLogo}/>
                             <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} /></td>
-                            <td className={classes.cellName}>Real physical sensor size</td>
+                            <td className={classes.cellModel}>Real physical sensor size</td>
                             <td className={classes.cell}>Screen size (")</td>
                             <td className={classes.cell}><input type="text" className={classes.text} value={screenSizeStr} onChange={onScreenSizeChange} /></td>
                         </tr>
@@ -212,25 +231,32 @@ export function SensorComparison({sensors}: Props) {
                     <table>
                         <thead>
                         <tr>
-                            {/*<th className={classes.cellLogo}/>*/}
+                            <th className={classes.cellLogo}/>
                             <th className={classes.cellCheckbox}/>
-                            <th className={classes.cellName}>Model</th>
-                            <th className={classes.cell}>Resolution (px)</th>
-                            <th className={classes.cell}>Area (mm)</th>
+                            <th className={classes.cellModel}>Model</th>
+                            <th className={classes.cell}>Dimensions (mm)</th>
+                            <th className={classes.cellAspectRatio}>Aspect Ratio</th>
                             <th className={classes.cell}>Diagonal (mm)</th>
+                            <th className={classes.cellArea}>Area (mm²)</th>
+                            <th className={classes.cell}>Resolution (px)</th>
+                            <th className={classes.cellWithout}>Crop Factor (S35){'\u00A0\u00A0\u00A0'}</th>
+                            <th className={classes.cellWithout}>Density (px/mm²)</th>
                         </tr>
                         </thead>
                         <tbody>
                             {
                                 sortSensors(selectedSensors, sensors).map(sensor => (
-                                    <tr key={sensor.model} style={{
-                                    }} className={classes.row}>
-                                        {/*<td className={classes.cellLogo}/>*/}
-                                        <td className={classes.cellCheckbox}/>
-                                        <td className={classes.cellName}>{sensor.model}</td>
-                                        <td className={classes.cell}>{getResolution(sensor)}</td>
-                                        <td className={classes.cell}>{getArea(sensor)}</td>
+                                    <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
+                                        <td className={classes.cellLogo}/>
+                                        <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop} /></td>
+                                        <td className={classes.cellModel}>{sensor.model}</td>
+                                        <td className={classes.cell}>{getDimensions(sensor)}</td>
+                                        <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
                                         <td className={classes.cell}>{sensor.diagonal}</td>
+                                        <td className={classes.cellArea}>{getArea(sensor)}</td>
+                                        <td className={classes.cell}>{getResolution(sensor)}</td>
+                                        <td className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                        <td className={classes.cellWithout}>{sensor.photositeDensity}</td>
                                     </tr>
                                 ))
                             }
@@ -240,31 +266,44 @@ export function SensorComparison({sensors}: Props) {
                     <table>
                         <thead>
                             <tr>
-                                {/*<th className={classes.cellLogo}/>*/}
+                                <th className={classes.cellLogo}/>
                                 <th className={classes.cellCheckbox}/>
-                                <th className={classes.cellName}>Model</th>
-                                <th className={classes.cell}>Resolution (px)</th>
-                                <th className={classes.cell}>Area (mm)</th>
+                                <th className={classes.cellModel}>Model</th>
+                                <th className={classes.cell}>Dimensions (mm)</th>
+                                <th className={classes.cellAspectRatio}>Aspect Ratio</th>
                                 <th className={classes.cell}>Diagonal (mm)</th>
+                                <th className={classes.cellArea}>Area (mm²)</th>
+                                <th className={classes.cell}>Resolution (px)</th>
+                                <th className={classes.cellWithout}>Crop Factor (S35){'\u00A0\u00A0\u00A0'}</th>
+                                <th className={classes.cellWithout}>Density (px/mm²)</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 sensors.map((sensor, i) => (
                                     <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
-                                        {/*{*/}
-                                        {/*    i == 0 &&*/}
-                                        {/*    <td rowSpan={3} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://upload.wikimedia.org/wikipedia/commons/d/de/Arri_logo.svg"/></td>*/}
-                                        {/*}*/}
+                                        {
+                                            i == 0 &&
+                                            <td rowSpan={4} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://upload.wikimedia.org/wikipedia/commons/d/de/Arri_logo.svg"/></td>
+                                        }
                                         {/*{*/}
                                         {/*    i == 3 &&*/}
                                         {/*    <td rowSpan={2} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://static.wikia.nocookie.net/logopedia/images/2/27/Kodak_2006.svg"/></td>*/}
                                         {/*}*/}
+                                        {
+                                            i > 3 &&
+                                            <th className={classes.cellLogo}/>
+                                        }
+
                                         <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop} /></td>
-                                        <td className={classes.cellName}>{sensor.model}</td>
-                                        <td className={classes.cell}>{getResolution(sensor)}</td>
-                                        <td className={classes.cell}>{getArea(sensor)}</td>
+                                        <td className={classes.cellModel}>{sensor.model}</td>
+                                        <td className={classes.cell}>{getDimensions(sensor)}</td>
+                                        <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
                                         <td className={classes.cell}>{sensor.diagonal}</td>
+                                        <td className={classes.cellArea}>{getArea(sensor)}</td>
+                                        <td className={classes.cell}>{getResolution(sensor)}</td>
+                                        <td className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                        <td className={classes.cellWithout}>{sensor.photositeDensity}</td>
                                     </tr>
                                 ))
                             }

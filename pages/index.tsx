@@ -45,20 +45,24 @@ const getRows = async () => {
     console.log(sheet.rowCount);
 
     const rows = await sheet.getRows();
-    // console.log(rows);
+    console.log(rows);
 
     return rows.map(r => {
         return ({
             model: r.model,
+            aspectRatio: r.aspectRatio,
+            diagonal: parseFloat(r.diagonal),
+            area: r.area,
             width: parseFloat(r.width),
             height: parseFloat(r.height),
             resolutionX: parseInt(r.resolutionX),
             resolutionY: parseInt(r.resolutionY),
-            diagonal: parseFloat(r.diagonal),
             color: r.color,
             textColor: r.textColor,
             anchor: r.anchor,
+            photositeDensity: r.photositeDensity,
             default: r.default === 'TRUE',
+            cropFactor: r['cropFactor (Super 35 mm)'],
         });
     });
 };
