@@ -212,12 +212,12 @@ export function SensorComparison({sensors}: Props) {
                     <table>
                         <thead>
                         <tr>
-                            <th className={classes.cellLogo}/>
+                            {/*<th className={classes.cellLogo}/>*/}
                             <th className={classes.cellCheckbox}/>
                             <th className={classes.cellName}>Model</th>
                             <th className={classes.cell}>Resolution (px)</th>
                             <th className={classes.cell}>Area (mm)</th>
-                            <th className={classes.cell}>Image Circle (mm)</th>
+                            <th className={classes.cell}>Diagonal (mm)</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -225,7 +225,7 @@ export function SensorComparison({sensors}: Props) {
                                 sortSensors(selectedSensors, sensors).map(sensor => (
                                     <tr key={sensor.model} style={{
                                     }} className={classes.row}>
-                                        <td className={classes.cellLogo}/>
+                                        {/*<td className={classes.cellLogo}/>*/}
                                         <td className={classes.cellCheckbox}/>
                                         <td className={classes.cellName}>{sensor.model}</td>
                                         <td className={classes.cell}>{getResolution(sensor)}</td>
@@ -240,26 +240,26 @@ export function SensorComparison({sensors}: Props) {
                     <table>
                         <thead>
                             <tr>
-                                <th className={classes.cellLogo}/>
+                                {/*<th className={classes.cellLogo}/>*/}
                                 <th className={classes.cellCheckbox}/>
                                 <th className={classes.cellName}>Model</th>
                                 <th className={classes.cell}>Resolution (px)</th>
                                 <th className={classes.cell}>Area (mm)</th>
-                                <th className={classes.cell}>Image Circle (mm)</th>
+                                <th className={classes.cell}>Diagonal (mm)</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 sensors.map((sensor, i) => (
                                     <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
-                                        {
-                                            i == 0 &&
-                                            <td rowSpan={3} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://upload.wikimedia.org/wikipedia/commons/d/de/Arri_logo.svg"/></td>
-                                        }
-                                        {
-                                            i == 3 &&
-                                            <td rowSpan={2} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://static.wikia.nocookie.net/logopedia/images/2/27/Kodak_2006.svg"/></td>
-                                        }
+                                        {/*{*/}
+                                        {/*    i == 0 &&*/}
+                                        {/*    <td rowSpan={3} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://upload.wikimedia.org/wikipedia/commons/d/de/Arri_logo.svg"/></td>*/}
+                                        {/*}*/}
+                                        {/*{*/}
+                                        {/*    i == 3 &&*/}
+                                        {/*    <td rowSpan={2} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://static.wikia.nocookie.net/logopedia/images/2/27/Kodak_2006.svg"/></td>*/}
+                                        {/*}*/}
                                         <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop} /></td>
                                         <td className={classes.cellName}>{sensor.model}</td>
                                         <td className={classes.cell}>{getResolution(sensor)}</td>
