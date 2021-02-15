@@ -7,6 +7,16 @@ import useClientLoaded from '../hooks/use-client-loaded';
 import {noop} from '@babel/types';
 
 const useStyles = createStylesheet((theme) => ({
+    links: {
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'flex-end',
+        flexDirection: 'row',
+        marginTop: 25,
+    },
+    link: {
+        marginHorizontal: 10,
+    },
     outer: {
         display: 'flex',
         flex: 1,
@@ -190,6 +200,17 @@ export function SensorComparison({sensors}: Props) {
 
     return (
         <div className={classes.outer}>
+
+            {/*<div className={classes.links}>*/}
+            {/*    <a className={classes.link} href="https://github.com/denniske/aoe2companion" target="_blank">*/}
+            {/*        <img src="https://img.shields.io/badge/github-aoe2companion-green?label=Github&logo=github&color=009900"/>*/}
+            {/*    </a>*/}
+            {/*    <a className={classes.link} href="https://www.buymeacoffee.com/denniskeil" target="_blank">*/}
+            {/*        <img src="https://img.shields.io/static/v1?label=Buy%20me%20a%20coffee&logo=buy-me-a-coffee&message=32%20supporters&logoColor=000000&labelColor=EECC00&color=2c2f33"/>*/}
+            {/*    </a>*/}
+            {/*</div>*/}
+
+
             <div className={classes.container}>
                 <div className={classes.surface}>
                     {
@@ -222,7 +243,7 @@ export function SensorComparison({sensors}: Props) {
                             <td className={classes.cellLogo}/>
                             <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} /></td>
                             <td className={classes.cellModel}>Real physical sensor size</td>
-                            <td className={classes.cell}>Screen size (")</td>
+                            <td className={classes.cell}>Screen size (inch)</td>
                             <td className={classes.cell}><input type="text" className={classes.text} value={screenSizeStr} onChange={onScreenSizeChange} /></td>
                         </tr>
                         </tbody>
@@ -309,6 +330,7 @@ export function SensorComparison({sensors}: Props) {
                             }
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ import {merge} from 'lodash';
 interface StandardCSSProperties extends CSS.Properties<number | string> {}
 
 interface CustomCSSProperties extends CSS.Properties<number | string> {
+    'marginHorizontal'?: Property.MarginBottom<number | string>;
     'marginVertical'?: Property.MarginBottom<number | string>;
     'paddingVertical'?: Property.PaddingBottom<number | string>;
 }
