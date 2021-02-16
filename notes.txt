@@ -2,14 +2,10 @@
 http://phfx.com/tools/dpThing_philsSensorChart/phfx_philsSensorChart.png
 http://phfx.com/tools/formatCompare/formatCompare.cgi?makeA=RED&modelA=Monstro+8K+VV&formatA=8K+FF&makeB=RED&modelB=Monstro+8K+VV&formatB=8K+FF&focalLengths=
 
-
-
-
-
 https://www.digicamdb.com/compare/canon_eos-r5-vs-leica_sl2/
 https://twitter.com/Cooke_Optics/status/1023968001224318976/photo/1
 
 
-
--  tabelle eine minimalhöhe geben
+notes:
+- tabelle eine minimalhöhe geben
 - wenn man filtert und dann auf ein logo klickt müssten wir noch schauen was passieren soll
