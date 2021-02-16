@@ -77,6 +77,7 @@ const getRows = async () => {
     return rows.map(r => {
         return ({
             model: r.model,
+            logo: r.logo,
             aspectRatio: r.aspectRatio,
             diagonal: parseFloat(r.diagonal),
             area: r.area,

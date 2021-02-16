@@ -1,7 +1,7 @@
 import { maxBy, min } from 'lodash';
 import {createStylesheet} from '../helper/styles';
 import {ISensor} from './sensor.type';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
 import {noop} from '@babel/types';
@@ -65,6 +65,7 @@ const useStyles = createStylesheet((theme) => ({
         paddingHorizontal: 8,
         paddingVertical: 3,
         backgroundColor: '#AAA',
+        zIndex: 10,
     },
     row: {},
     cellWithout: {
@@ -99,6 +100,13 @@ const useStyles = createStylesheet((theme) => ({
         width: 40,
         color: 'white',
     },
+    textSearch: {
+        border: 'none',
+        borderBottom: '1px solid #CCC',
+        background: 'transparent',
+        width: 140,
+        color: 'white',
+    },
     title: {
         // marginLeft: 150,
     },
@@ -126,6 +134,8 @@ export function SensorComparison({sensors}: Props) {
     const [realPhysicalSensorSize, setRealPhysicalSensorSize] = useState(false);
     const [screenSize, setScreenSize] = useState<number>(typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96 : 100);
     const [screenSizeStr, setScreenSizeStr] = useState<string>(typeof window !== 'undefined' ? (Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96).toFixed(1) : '100');
+    const [searchStr, setSearchStr] = useState<string>('');
+    const [filteredSensors, setFilteredSensors] = useState<ISensor[]>(sensors);
 
     const maxWidth = windowDimensions.width - offset*2;
     const maxHeight = 700;
@@ -148,11 +158,27 @@ export function SensorComparison({sensors}: Props) {
         factor = oneMillimeterPx;
     }
 
+    useEffect(() => {
+        setFilteredSensors(sensors.filter(s => s.model.toLowerCase().indexOf(searchStr.toLowerCase()) > -1));
+    }, [searchStr]);
+
     const onToggleSensor = (sensor) => {
+        console.log('onToggleSensor');
         if (selectedSensors.includes(sensor)) {
           setSelectedSensors(selectedSensors.filter(s => s !== sensor));
         } else {
           setSelectedSensors([...selectedSensors, sensor]);
+        }
+    };
+
+    const onToggleAllSensorsForLogo = (logo) => {
+        const allSensorsSelected = selectedSensors.filter(s => s.logo === logo).length === sensors.filter(s => s.logo === logo).length;
+        console.log('onToggleAllSensorsForLogo', allSensorsSelected);
+        const selectedWithout = selectedSensors.filter(s => s.logo !== logo);
+        if (allSensorsSelected) {
+            setSelectedSensors([...selectedWithout]);
+        } else {
+            setSelectedSensors([...selectedWithout, ...sensors.filter(s => s.logo === logo)]);
         }
     };
 
@@ -163,6 +189,10 @@ export function SensorComparison({sensors}: Props) {
     const onScreenSizeChange = (event) => {
         setScreenSizeStr(event.target.value.replace(',', '.'));
         setScreenSize(parseFloat(event.target.value.replace(',', '.')));
+    };
+
+    const onSearchChange = (event) => {
+        setSearchStr(event.target.value.trim());
     };
 
     const centerX = 0;
@@ -198,19 +228,17 @@ export function SensorComparison({sensors}: Props) {
         return `${parseFloat(parts[0]).toFixed(2)}:1`;
     }
 
+    const logoCount: Record<string, number> = {};
+
+    const logoAsset = {
+        'analog': 'analog.svg',
+        'arri': 'arri.svg',
+        'canon': 'canon.svg',
+        'red': 'red.png',
+    };
+
     return (
         <div className={classes.outer}>
-
-            {/*<div className={classes.links}>*/}
-            {/*    <a className={classes.link} href="https://github.com/denniske/aoe2companion" target="_blank">*/}
-            {/*        <img src="https://img.shields.io/badge/github-aoe2companion-green?label=Github&logo=github&color=009900"/>*/}
-            {/*    </a>*/}
-            {/*    <a className={classes.link} href="https://www.buymeacoffee.com/denniskeil" target="_blank">*/}
-            {/*        <img src="https://img.shields.io/static/v1?label=Buy%20me%20a%20coffee&logo=buy-me-a-coffee&message=32%20supporters&logoColor=000000&labelColor=EECC00&color=2c2f33"/>*/}
-            {/*    </a>*/}
-            {/*</div>*/}
-
-
             <div className={classes.container}>
                 <div className={classes.surface}>
                     {
@@ -300,33 +328,61 @@ export function SensorComparison({sensors}: Props) {
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td>
+                                    {'\u00A0'}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className={classes.cellLogo}/>
+                                <td className={classes.cellCheckbox}/>
+                                <td className={classes.cellModel}><input type="text" className={classes.textSearch} value={searchStr} onChange={onSearchChange} /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {'\u00A0'}
+                                </td>
+                            </tr>
                             {
-                                sensors.map((sensor, i) => (
-                                    <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
-                                        {
-                                            i == 0 &&
-                                            <td rowSpan={4} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://upload.wikimedia.org/wikipedia/commons/d/de/Arri_logo.svg"/></td>
-                                        }
-                                        {/*{*/}
-                                        {/*    i == 3 &&*/}
-                                        {/*    <td rowSpan={2} style={{verticalAlign: 'top', paddingTop: 6}}><img style={{width: 100, filter: 'brightness(0) invert()'}} src="https://static.wikia.nocookie.net/logopedia/images/2/27/Kodak_2006.svg"/></td>*/}
-                                        {/*}*/}
-                                        {
-                                            i > 3 &&
-                                            <th className={classes.cellLogo}/>
-                                        }
+                                filteredSensors.map((sensor, i) => {
 
-                                        <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop} /></td>
-                                        <td className={classes.cellModel}>{sensor.model}</td>
-                                        <td className={classes.cell}>{getDimensions(sensor)}</td>
-                                        <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                        <td className={classes.cell}>{sensor.diagonal}</td>
-                                        <td className={classes.cellArea}>{getArea(sensor)}</td>
-                                        <td className={classes.cell}>{getResolution(sensor)}</td>
-                                        <td className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                        <td className={classes.cellWithout}>{sensor.photositeDensity}</td>
-                                    </tr>
-                                ))
+                                    const hasPrintedLogo = logoCount[sensor.logo];
+                                    if (!hasPrintedLogo) {
+                                        logoCount[sensor.logo] = filteredSensors.filter(s => s.logo === sensor.logo).length;
+                                    }
+
+                                    return (
+                                        <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`}
+                                            onClick={() => onToggleSensor(sensor)}>
+
+                                            {
+                                                !hasPrintedLogo &&
+                                                <td rowSpan={logoCount[sensor.logo]} style={{verticalAlign: 'top', paddingTop: 6}}
+                                                    onClick={(ev) => {
+                                                        onToggleAllSensorsForLogo(sensor.logo);
+                                                        ev.stopPropagation();
+                                                    }}>
+                                                    <img
+                                                    style={{width: 100, filter: 'brightness(0) invert()'}}
+                                                    src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}/>
+                                                </td>
+                                            }
+
+                                            <td className={classes.cellCheckbox}><input className={classes.pointer}
+                                                                                        type="checkbox"
+                                                                                        checked={selectedSensors.includes(sensor)}
+                                                                                        onChange={() => noop}/></td>
+                                            <td className={classes.cellModel}>{sensor.model}</td>
+                                            <td className={classes.cell}>{getDimensions(sensor)}</td>
+                                            <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
+                                            <td className={classes.cell}>{sensor.diagonal}</td>
+                                            <td className={classes.cellArea}>{getArea(sensor)}</td>
+                                            <td className={classes.cell}>{getResolution(sensor)}</td>
+                                            <td className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                            <td className={classes.cellWithout}>{sensor.photositeDensity}</td>
+                                        </tr>
+                                    );
+                                })
                             }
                         </tbody>
                     </table>

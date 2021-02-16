@@ -1,5 +1,6 @@
 
 export interface ISensor {
+    logo: string;
     model: string;
     aspectRatio: string;
     diagonal: number;
