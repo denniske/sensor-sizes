@@ -214,6 +214,10 @@ export function SensorComparison({sensors}: Props) {
         return '-';
     };
 
+    const getDensity = (sensor: ISensor) => {
+        return sensor.photositeDensity && sensor.photositeDensity !== '0' ? sensor.photositeDensity : '-';
+    };
+
     const getDimensions = (sensor: ISensor) => {
         return `${sensor.width.toFixed(2)} x ${sensor.height.toFixed(2)}`;
     };
@@ -305,7 +309,7 @@ export function SensorComparison({sensors}: Props) {
                                         <td className={classes.cellArea}>{getArea(sensor)}</td>
                                         <td className={classes.cell}>{getResolution(sensor)}</td>
                                         <td className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                        <td className={classes.cellWithout}>{sensor.photositeDensity}</td>
+                                        <td className={classes.cellWithout}>{getDensity(sensor)}</td>
                                     </tr>
                                 ))
                             }
@@ -379,7 +383,7 @@ export function SensorComparison({sensors}: Props) {
                                             <td className={classes.cellArea}>{getArea(sensor)}</td>
                                             <td className={classes.cell}>{getResolution(sensor)}</td>
                                             <td className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                            <td className={classes.cellWithout}>{sensor.photositeDensity}</td>
+                                            <td className={classes.cellWithout}>{getDensity(sensor)}</td>
                                         </tr>
                                     );
                                 })
