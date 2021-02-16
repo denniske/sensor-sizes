@@ -104,7 +104,7 @@ const useStyles = createStylesheet((theme) => ({
         border: 'none',
         borderBottom: '1px solid #CCC',
         background: 'transparent',
-        width: 140,
+        width: 200,
         color: 'white',
     },
     title: {

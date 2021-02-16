@@ -24,7 +24,7 @@ export default function Home({sensors}) {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Sensor Size Comparison</title>
+                <title>Camera Sensor Size Comparison</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
@@ -41,7 +41,7 @@ export default function Home({sensors}) {
                 </div>
 
                 <h1 className={styles.title}>
-                    SENSOR SIZE COMPARISON
+                    CAMERA SENSOR SIZE COMPARISON
                 </h1>
                 <SensorComparison sensors={sensors}/>
             </main>
@@ -90,7 +90,7 @@ const getRows = async () => {
             anchor: r.anchor,
             photositeDensity: r.photositeDensity,
             default: r.default === 'TRUE',
-            cropFactor: r['cropFactor (Super 35 mm)'],
+            cropFactor: r['cropFactor (S35)'],
         });
     });
 };
