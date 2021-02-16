@@ -159,7 +159,7 @@ export function SensorComparison({sensors}: Props) {
     }
 
     useEffect(() => {
-        setFilteredSensors(sensors.filter(s => s.model.toLowerCase().indexOf(searchStr.toLowerCase()) > -1));
+        setFilteredSensors(sensors.filter(s => s.model.toLowerCase().indexOf(searchStr.toLowerCase().trim()) > -1));
     }, [searchStr]);
 
     const onToggleSensor = (sensor) => {
@@ -192,7 +192,7 @@ export function SensorComparison({sensors}: Props) {
     };
 
     const onSearchChange = (event) => {
-        setSearchStr(event.target.value.trim());
+        setSearchStr(event.target.value);
     };
 
     const centerX = 0;
@@ -340,7 +340,7 @@ export function SensorComparison({sensors}: Props) {
                             <tr>
                                 <td className={classes.cellLogo}/>
                                 <td className={classes.cellCheckbox}/>
-                                <td className={classes.cellModel}><input type="text" className={classes.textSearch} value={searchStr} onChange={onSearchChange} /></td>
+                                <td className={classes.cellModel}><input type="text" placeholder="search" className={classes.textSearch} value={searchStr} onChange={onSearchChange} /></td>
                             </tr>
                             <tr>
                                 <td>
