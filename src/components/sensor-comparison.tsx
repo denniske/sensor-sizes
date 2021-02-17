@@ -256,6 +256,7 @@ export function SensorComparison({sensors}: Props) {
         'blackmagic': 'blackmagic.svg',
         'panasonic': 'panasonic.svg',
         'panavision': 'panavision.svg',
+        'sony': 'sony.svg',
     };
 
     return (
