@@ -253,6 +253,9 @@ export function SensorComparison({sensors}: Props) {
         'arri': 'arri.svg',
         'canon': 'canon.svg',
         'red': 'red.png',
+        'blackmagic': 'blackmagic.svg',
+        'panasonic': 'panasonic.svg',
+        'panavision': 'panavision.svg',
     };
 
     return (
