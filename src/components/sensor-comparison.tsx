@@ -44,6 +44,7 @@ const useStyles = createStylesheet((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 10,
+        marginHorizontal: 15,
     },
     box: {
         position: 'absolute',
@@ -77,6 +78,9 @@ const useStyles = createStylesheet((theme) => ({
     },
     cellModel: {
         width: 250,
+    },
+    cellScreen: {
+        width: 200,
     },
     cellAspectRatio: {
         width: 130,
@@ -274,8 +278,8 @@ export function SensorComparison({sensors}: Props) {
                         <tr>
                             <td className={classes.cellLogo}/>
                             <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} /></td>
-                            <td className={classes.cellModel}>Real physical sensor size</td>
-                            <td className={classes.cell}>Screen size (inch)</td>
+                            <td className={`${classes.cellModel} ${classes.pointer}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</td>
+                            <td className={classes.cellScreen}>Your screen size (inch)</td>
                             <td className={classes.cell}><input type="text" className={classes.text} value={screenSizeStr} onChange={onScreenSizeChange} /></td>
                         </tr>
                         </tbody>

@@ -41,7 +41,7 @@ export default function Home({sensors}) {
                 </div>
 
                 <h1 className={styles.title}>
-                    CAMERA SENSOR SIZE COMPARISON
+                    CAMERA {'\u00A0'}SENSOR {'\u00A0'}SIZE {'\u00A0'}COMPARISON
                 </h1>
                 <SensorComparison sensors={sensors}/>
             </main>
