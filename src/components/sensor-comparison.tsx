@@ -5,6 +5,8 @@ import {useEffect, useState} from 'react';
 import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
 import {noop} from '@babel/types';
+import {faCoffee, faCross, faTimes} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -103,6 +105,8 @@ const useStyles = createStylesheet((theme) => ({
         background: 'transparent',
         width: 40,
         color: 'white',
+        outline: 'none',
+        paddingBottom: 5,
     },
     textSearch: {
         border: 'none',
@@ -110,6 +114,8 @@ const useStyles = createStylesheet((theme) => ({
         background: 'transparent',
         width: 200,
         color: 'white',
+        outline: 'none',
+        paddingBottom: 5,
     },
     title: {
         // marginLeft: 150,
@@ -197,6 +203,10 @@ export function SensorComparison({sensors}: Props) {
 
     const onSearchChange = (event) => {
         setSearchStr(event.target.value);
+    };
+
+    const onSearchClear = () => {
+        setSearchStr('');
     };
 
     const centerX = 0;
@@ -344,7 +354,14 @@ export function SensorComparison({sensors}: Props) {
                             <tr>
                                 <td className={classes.cellLogo}/>
                                 <td className={classes.cellCheckbox}/>
-                                <td className={classes.cellModel}><input type="text" placeholder="search" className={classes.textSearch} value={searchStr} onChange={onSearchChange} /></td>
+                                <td className={classes.cellModel}>
+                                    <input type="text" placeholder="search" className={classes.textSearch} value={searchStr} onChange={onSearchChange} />
+                                    {'\u00A0'}{'\u00A0'}
+                                    {
+                                        searchStr.length > 0 &&
+                                        <FontAwesomeIcon className={classes.pointer} icon={faTimes} onClick={() => onSearchClear()} />
+                                    }
+                                </td>
                             </tr>
                             <tr>
                                 <td>
