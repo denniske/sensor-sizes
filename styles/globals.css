@@ -20,7 +20,7 @@ td {
   line-height: 150%;
 }
 
-.table-all th {
+.table-no-select th {
   user-select: none;
 }
 
