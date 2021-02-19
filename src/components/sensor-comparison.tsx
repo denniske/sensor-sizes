@@ -115,6 +115,10 @@ const useStyles = createStylesheet((theme) => ({
     cellLogo: {
         width: 150,
     },
+    button: {
+        marginRight: 20,
+        cursor: 'pointer',
+    },
     pointer: {
         cursor: 'pointer',
     },
@@ -225,7 +229,7 @@ export function SensorComparison({sensors}: Props) {
             list = orderBy(list, [s => s[selectedSortColumn], s => s[selectedSortColumn2]], [selectedSortDirection, selectedSortDirection]);
         }
         setFilteredSelectedSensors(list);
-    }, [selectedSortColumn, selectedSortDirection]);
+    }, [selectedSensors, selectedSortColumn, selectedSortDirection]);
 
     const changeSort = (column: string, column2: string = null) => {
         if (sortColumn !== column) {
@@ -346,6 +350,10 @@ export function SensorComparison({sensors}: Props) {
         const parts = aspectRatio.split(':');
         return `${parseFloat(parts[0]).toFixed(2)}:1`;
     }
+
+    const copySelectionToClipboard = () => {
+        alert('Not implemented yet.');
+    };
 
     const logoCount: Record<string, number> = {};
 
@@ -485,6 +493,22 @@ export function SensorComparison({sensors}: Props) {
                             </tbody>
                         </table>
                     </div>
+
+                    {
+                        selectedSensors.length > 0 &&
+                        <table className="table-no-select">
+                            <thead>
+                            <tr>
+                                <th className={classes.cellLogo}/>
+                                <td>
+                                    <button className={classes.button} onClick={() => setSelectedSensors([])}>Clear selection</button>
+                                    <button className={classes.button} onClick={copySelectionToClipboard}>Copy selection to clipboard</button>
+                                </td>
+                            </tr>
+                            </thead>
+                        </table>
+                    }
+
                     <h3 className={classes.title}>All</h3>
                     <div className={classes.tableAll}>
                         <table className="table-no-select">
