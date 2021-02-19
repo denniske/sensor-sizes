@@ -186,6 +186,7 @@ export function SensorComparison({sensors}: Props) {
     const [screenSizeStr, setScreenSizeStr] = useState<string>(typeof window !== 'undefined' ? (Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96).toFixed(1) : '100');
     const [searchStr, setSearchStr] = useState<string>('');
     const [filteredSensors, setFilteredSensors] = useState<ISensor[]>(sensors);
+    const [showLogo, setShowLogo] = useState(true);
     const [filteredSelectedSensors, setFilteredSelectedSensors] = useState<ISensor[]>(selectedSensors);
 
     const maxWidth = windowDimensions.width - offset*2;
@@ -218,6 +219,7 @@ export function SensorComparison({sensors}: Props) {
             list = orderBy(list, [s => s[sortColumn], s => s[sortColumn2]], [sortDirection, sortDirection]);
         }
         setFilteredSensors(list);
+        setShowLogo(!(sortColumn?.length > 0));
     }, [searchStr, sortColumn, sortDirection]);
 
     useEffect(() => {
@@ -606,7 +608,7 @@ export function SensorComparison({sensors}: Props) {
                                                 onClick={() => onToggleSensor(sensor)}>
 
                                                 {
-                                                    !hasPrintedLogo && !(sortColumn?.length > 0) &&
+                                                    !hasPrintedLogo && showLogo &&
                                                     <td rowSpan={logoCount[sensor.logo]} style={{verticalAlign: 'top', paddingTop: 6}}
                                                         onClick={(ev) => {
                                                             onToggleAllSensorsForLogo(sensor.logo);
@@ -618,7 +620,7 @@ export function SensorComparison({sensors}: Props) {
                                                     </td>
                                                 }
                                                 {
-                                                    sortColumn?.length > 0 &&
+                                                    !showLogo &&
                                                     <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
                                                 }
 

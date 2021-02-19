@@ -52,7 +52,7 @@ export default function SensorLayout({sensors}) {
                 <div>
                     <a className={classes.footerLink} href="mailto:a@b.com" target="_blank">Contact</a>
 
-                    <Link href="/privacy" className={classes.footerLink}><a>Privacy Policy</a></Link>
+                    <Link href="/privacy" className={classes.footerLink}>Privacy Policy</Link>
                 </div>
             </main>
         </div>
