@@ -36,7 +36,7 @@ export default function Home({sensors}) {
                         <img src="https://img.shields.io/badge/github-sensor--size--comparison-green?label=Github&logo=github&color=009900"/>
                     </a>
                     <a className={classes.link} href="https://www.buymeacoffee.com/sensorsizes" target="_blank">
-                        <img src="https://img.shields.io/static/v1?label=Buy%20me%20a%20coffee&logo=buy-me-a-coffee&message=0%20supporters&logoColor=000000&labelColor=EECC00&color=2c2f33"/>
+                        <img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshields-io-buymeacoffee.vercel.app%2Fapi%3Fusername%3Dsensorsizes"/>
                     </a>
                 </div>
 
