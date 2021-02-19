@@ -37,8 +37,8 @@ export default function SensorLayout({sensors}) {
 
             <main className={styles.main}>
                 <div className={classes.links}>
-                    <a className={classes.link} href="https://github.com/denniske/sensor-size-comparison" target="_blank">
-                        <img src="https://img.shields.io/badge/github-sensor--size--comparison-green?label=Github&logo=github&color=009900"/>
+                    <a className={classes.link} href="https://github.com/denniske/sensor-sizes" target="_blank">
+                        <img src="https://img.shields.io/badge/github-sensor--sizes-green?label=Github&logo=github&color=009900"/>
                     </a>
                     <a className={classes.link} href="https://www.buymeacoffee.com/sensorsizes" target="_blank">
                         <img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshields-io-buymeacoffee.vercel.app%2Fapi%3Fusername%3Dsensorsizes"/>
