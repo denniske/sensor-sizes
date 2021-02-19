@@ -352,8 +352,42 @@ export function SensorComparison({sensors}: Props) {
         return `${aspectRatio}`;
     }
 
+    function copyTextToClipboard(text) {
+        // if (!navigator.clipboard) {
+        //     fallbackCopyTextToClipboard(text);
+        //     return;
+        // }
+        navigator.clipboard.writeText(text).then(function() {
+            console.log('Async: Copying to clipboard was successful!');
+        }, function(err) {
+            console.error('Async: Could not copy text: ', err);
+        });
+    }
+
     const copySelectionToClipboard = () => {
-        alert('Not implemented yet.');
+        const data = [
+            [
+                'Model',
+                'Dimensions (mm)',
+                'Aspect Ratio',
+                'Diagonal (mm)',
+                'Area (mm²)',
+                'Resolution (px)',
+                'Crop Factor (S35)',
+                'Density (px/mm²)',
+            ].join('\t'),
+            ...filteredSelectedSensors.map(sensor => [
+                `${sensor.model}`,
+                `${sensor.width.toFixed(2)} x ${sensor.height.toFixed(2)}`,
+                `${getAspectRatio(sensor.aspectRatio)}`,
+                `${getDiagonal(sensor)}`,
+                `${getArea(sensor)}`,
+                `${getResolution(sensor)}`,
+                `${sensor.cropFactor}`,
+                `${getDensity(sensor)}`,
+            ].join('\t'))
+        ];
+        copyTextToClipboard(data.join('\n'));
     };
 
     const logoCount: Record<string, number> = {};

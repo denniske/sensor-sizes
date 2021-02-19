@@ -9,8 +9,8 @@ https://twitter.com/Cooke_Optics/status/1023968001224318976/photo/1
 notes:
 - tabelle eine minimalhöhe geben
   - alternativ scrollposition wieder richtig setzen, wenn modell aus der unteren tabelle angeklickt wird
-- export nach clipboard als tabelle
-- wenn man filtert und dann auf ein logo klickt nur sichtbare modelle hinzufügen/entfernen
 - domain sensorsizes.com
 
+x export nach clipboard als tabelle
+x wenn man filtert und dann auf ein logo klickt nur sichtbare modelle hinzufügen/entfernen
 x tabelle springt/flackert horizontal nach filterung
