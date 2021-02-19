@@ -208,7 +208,7 @@ export function SensorComparison({sensors}: Props) {
         setFilteredSensors(list);
     }, [searchStr, sortColumn, sortDirection]);
 
-    const changeSort = (column: string, column2: string) => {
+    const changeSort = (column: string, column2: string = null) => {
         if (sortColumn !== column) {
             setSortColumn(column);
             setSortColumn2(column2);
