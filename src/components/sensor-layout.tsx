@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import {createStylesheet} from '../helper/styles';
 import {SensorComparison} from './sensor-comparison';
+import {Link} from '@material-ui/core';
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -14,6 +15,10 @@ const useStyles = createStylesheet((theme) => ({
     },
     link: {
         marginHorizontal: 10,
+    },
+    footerLink: {
+        color: '#CCC',
+        marginHorizontal: 20,
     },
     titlePart: {
         marginHorizontal: 2,
@@ -44,6 +49,11 @@ export default function SensorLayout({sensors}) {
                     <span className={classes.titlePart}>CAMERA</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZE</span> <span className={classes.titlePart}>COMPARISON</span>
                 </h1>
                 <SensorComparison sensors={sensors}/>
+                <div>
+                    <a className={classes.footerLink} href="mailto:a@b.com" target="_blank">Contact</a>
+
+                    <Link href="/privacy" className={classes.footerLink}><a>Privacy Policy</a></Link>
+                </div>
             </main>
         </div>
     )
