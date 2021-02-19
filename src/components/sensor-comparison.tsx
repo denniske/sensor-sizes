@@ -1,11 +1,11 @@
-import { maxBy, min } from 'lodash';
+import { maxBy, min, orderBy } from 'lodash';
 import {createStylesheet} from '../helper/styles';
 import {ISensor} from './sensor.type';
 import {useEffect, useState} from 'react';
 import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
 import {noop} from '@babel/types';
-import {faCoffee, faCross, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {faArrowDown, faArrowUp, faCoffee, faCross, faTimes} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const useStyles = createStylesheet((theme) => ({
@@ -73,22 +73,41 @@ const useStyles = createStylesheet((theme) => ({
     row: {},
     cellWithout: {
         paddingVertical: 2,
+        textAlign: 'right',
+    },
+    cellX: {
+        width: 20,
+        paddingVertical: 2,
+        textAlign: 'center',
+    },
+    cellW: {
+        width: 90,
+        paddingVertical: 2,
+        textAlign: 'right',
+    },
+    cellH: {
+        width: 40,
+        paddingVertical: 2,
+        textAlign: 'right',
     },
     cell: {
         width: 150,
         paddingVertical: 2,
+        textAlign: 'right',
     },
     cellModel: {
-        width: 250,
+        width: 265,
     },
     cellScreen: {
         width: 200,
     },
     cellAspectRatio: {
         width: 130,
+        textAlign: 'right',
     },
     cellArea: {
         width: 130,
+        textAlign: 'right',
     },
     cellCheckbox: {
         width: 30,
@@ -97,6 +116,10 @@ const useStyles = createStylesheet((theme) => ({
         width: 150,
     },
     pointer: {
+        cursor: 'pointer',
+    },
+    sortIcon: {
+        marginLeft: 5,
         cursor: 'pointer',
     },
     text: {
@@ -120,6 +143,9 @@ const useStyles = createStylesheet((theme) => ({
     title: {
         // marginLeft: 150,
     },
+    tableSelected: {
+        minHeight: 350,
+    },
 }));
 
 interface Props {
@@ -142,6 +168,9 @@ export function SensorComparison({sensors}: Props) {
     const classes = useStyles();
     const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s) => s.default));
     const [realPhysicalSensorSize, setRealPhysicalSensorSize] = useState(false);
+    const [sortColumn, setSortColumn] = useState(null);
+    const [sortColumn2, setSortColumn2] = useState(null);
+    const [sortDirection, setSortDirection] = useState(null);
     const [screenSize, setScreenSize] = useState<number>(typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96 : 100);
     const [screenSizeStr, setScreenSizeStr] = useState<string>(typeof window !== 'undefined' ? (Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96).toFixed(1) : '100');
     const [searchStr, setSearchStr] = useState<string>('');
@@ -169,8 +198,36 @@ export function SensorComparison({sensors}: Props) {
     }
 
     useEffect(() => {
-        setFilteredSensors(sensors.filter(s => s.model.toLowerCase().indexOf(searchStr.toLowerCase().trim()) > -1));
-    }, [searchStr]);
+        let list = sensors.filter(s => s.model.toLowerCase().indexOf(searchStr.toLowerCase().trim()) > -1 || s.logo.toLowerCase().indexOf(searchStr.toLowerCase().trim()) > -1);
+        if (sortColumn?.length > 0) {
+            list = orderBy(list, s => s[sortColumn], sortDirection);
+        }
+        if (sortColumn?.length > 0 && sortColumn2?.length > 0) {
+            list = orderBy(list, [s => s[sortColumn], s => s[sortColumn2]], [sortDirection, sortDirection]);
+        }
+        setFilteredSensors(list);
+    }, [searchStr, sortColumn, sortDirection]);
+
+    const changeSort = (column: string, column2: string) => {
+        if (sortColumn !== column) {
+            setSortColumn(column);
+            setSortColumn2(column2);
+            setSortDirection('asc');
+            return;
+        }
+        if (sortColumn === column && sortDirection === 'asc') {
+            setSortColumn(column);
+            setSortColumn2(column2);
+            setSortDirection('desc');
+            return;
+        }
+        if (sortColumn === column && sortDirection === 'desc') {
+            setSortColumn(null);
+            setSortColumn2(null);
+            setSortDirection(null);
+            return;
+        }
+    };
 
     const onToggleSensor = (sensor) => {
         console.log('onToggleSensor');
@@ -229,7 +286,7 @@ export function SensorComparison({sensors}: Props) {
     };
 
     const getDensity = (sensor: ISensor) => {
-        return sensor.photositeDensity && sensor.photositeDensity !== '0' ? sensor.photositeDensity : '-';
+        return sensor.photositeDensity ? sensor.photositeDensity.toLocaleString('en') : '-';
     };
 
     const getDimensions = (sensor: ISensor) => {
@@ -237,7 +294,11 @@ export function SensorComparison({sensors}: Props) {
     };
 
     const getArea = (sensor: ISensor) => {
-        return `${sensor.area}`;
+        return `${sensor.area.toFixed(2)}`;
+    };
+
+    const getDiagonal = (sensor: ISensor) => {
+        return `${sensor.diagonal.toFixed(2)}`;
     };
 
     function getAspectRatio(aspectRatio: string) {
@@ -278,7 +339,7 @@ export function SensorComparison({sensors}: Props) {
                                 <div className={classes.model} style={{
                                     color: sensor.textColor,
                                     backgroundColor: sensor.color,
-                                }}>{sensor.model}</div>
+                                }}>{sensor.logo} {sensor.model}</div>
                             </div>
                         ))
                     }
@@ -299,6 +360,7 @@ export function SensorComparison({sensors}: Props) {
                         </tbody>
                     </table>
                     <h3 className={classes.title}>Selected</h3>
+                    <div className={classes.tableSelected}>
                     <table>
                         <thead>
                         <tr>
@@ -318,12 +380,12 @@ export function SensorComparison({sensors}: Props) {
                             {
                                 sortSensors(selectedSensors, sensors).map(sensor => (
                                     <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
-                                        <td className={classes.cellLogo}/>
+                                        <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
                                         <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop} /></td>
                                         <td className={classes.cellModel}>{sensor.model}</td>
                                         <td className={classes.cell}>{getDimensions(sensor)}</td>
                                         <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                        <td className={classes.cell}>{sensor.diagonal}</td>
+                                        <td className={classes.cell}>{getDiagonal(sensor)}</td>
                                         <td className={classes.cellArea}>{getArea(sensor)}</td>
                                         <td className={classes.cell}>{getResolution(sensor)}</td>
                                         <td className={classes.cellWithout}>{sensor.cropFactor}</td>
@@ -333,20 +395,68 @@ export function SensorComparison({sensors}: Props) {
                             }
                         </tbody>
                     </table>
+                    </div>
+                    {/*<h3 className={classes.title}>All {sortColumn} - {sortDirection}</h3>*/}
                     <h3 className={classes.title}>All</h3>
-                    <table>
+                    <table className="table-all">
                         <thead>
                             <tr>
                                 <th className={classes.cellLogo}/>
                                 <th className={classes.cellCheckbox}/>
-                                <th className={classes.cellModel}>Model</th>
-                                <th className={classes.cell}>Dimensions (mm)</th>
-                                <th className={classes.cellAspectRatio}>Aspect Ratio</th>
-                                <th className={classes.cell}>Diagonal (mm)</th>
-                                <th className={classes.cellArea}>Area (mm²)</th>
-                                <th className={classes.cell}>Resolution (px)</th>
-                                <th className={classes.cellWithout}>Crop Factor (S35){'\u00A0\u00A0\u00A0'}</th>
-                                <th className={classes.cellWithout}>Density (px/mm²)</th>
+                                <th className={classes.cellModel}>
+                                    Model
+                                </th>
+                                <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('width', 'height')}>
+                                    Dimensions (mm)
+                                    {
+                                        sortColumn === 'width' &&
+                                        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                    }
+                                </th>
+                                <th className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSort('aspectRatio')}>
+                                    Aspect Ratio
+                                    {
+                                        sortColumn === 'aspectRatio' &&
+                                        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                    }
+                                </th>
+                                <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('diagonal')}>
+                                    Diagonal (mm)
+                                    {
+                                        sortColumn === 'diagonal' &&
+                                        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                    }
+                                </th>
+                                <th className={`${classes.cellArea} ${classes.pointer}`} onClick={() => changeSort('area')}>
+                                    Area (mm²)
+                                    {
+                                        sortColumn === 'area' &&
+                                        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                    }
+                                </th>
+                                <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('resolutionX', 'resolutionY')}>
+                                    Resolution (px)
+                                    {
+                                        sortColumn === 'resolutionX' &&
+                                        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                    }
+                                </th>
+                                <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('cropFactor')}>
+                                    {'\u00A0\u00A0\u00A0\u00A0'}
+                                    Crop Factor (S35)
+                                    {
+                                        sortColumn === 'cropFactor' &&
+                                        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                    }
+                                </th>
+                                <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('photositeDensity')}>
+                                    {'\u00A0\u00A0\u00A0\u00A0'}
+                                    Density (px/mm²)
+                                    {
+                                        sortColumn === 'photositeDensity' &&
+                                        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                    }
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -385,7 +495,7 @@ export function SensorComparison({sensors}: Props) {
                                             onClick={() => onToggleSensor(sensor)}>
 
                                             {
-                                                !hasPrintedLogo &&
+                                                !hasPrintedLogo && !(sortColumn?.length > 0) &&
                                                 <td rowSpan={logoCount[sensor.logo]} style={{verticalAlign: 'top', paddingTop: 6}}
                                                     onClick={(ev) => {
                                                         onToggleAllSensorsForLogo(sensor.logo);
@@ -396,15 +506,23 @@ export function SensorComparison({sensors}: Props) {
                                                     src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}/>
                                                 </td>
                                             }
+                                            {
+                                                sortColumn?.length > 0 &&
+                                                <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
+                                            }
 
                                             <td className={classes.cellCheckbox}><input className={classes.pointer}
                                                                                         type="checkbox"
                                                                                         checked={selectedSensors.includes(sensor)}
                                                                                         onChange={() => noop}/></td>
                                             <td className={classes.cellModel}>{sensor.model}</td>
-                                            <td className={classes.cell}>{getDimensions(sensor)}</td>
+
+                                            <td className={classes.cellW}>{sensor.width.toFixed(2)}</td>
+                                            <td className={classes.cellX}>x</td>
+                                            <td className={classes.cellH}>{sensor.height.toFixed(2)}</td>
+
                                             <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                            <td className={classes.cell}>{sensor.diagonal}</td>
+                                            <td className={classes.cell}>{getDiagonal(sensor)}</td>
                                             <td className={classes.cellArea}>{getArea(sensor)}</td>
                                             <td className={classes.cell}>{getResolution(sensor)}</td>
                                             <td className={classes.cellWithout}>{sensor.cropFactor}</td>

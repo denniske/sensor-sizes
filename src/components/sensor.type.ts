@@ -14,5 +14,5 @@ export interface ISensor {
     anchor: string;
     default: boolean;
     cropFactor: string;
-    photositeDensity: string;
+    photositeDensity: number;
 }

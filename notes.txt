@@ -8,4 +8,7 @@ https://twitter.com/Cooke_Optics/status/1023968001224318976/photo/1
 
 notes:
 - tabelle eine minimalhöhe geben
-- wenn man filtert und dann auf ein logo klickt müssten wir noch schauen was passieren soll
+
+- export nach clipboard als tabelle
+- wenn man filtert und dann auf ein logo klickt nur sichtbare modelle hinzufügen/entfernen
+- formatierung tabelle bei selected anpassen wie unten
