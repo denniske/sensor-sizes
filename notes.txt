@@ -12,3 +12,5 @@ notes:
 - export nach clipboard als tabelle
 - wenn man filtert und dann auf ein logo klickt nur sichtbare modelle hinzufügen/entfernen
 - tabelle springt/flackert horizontal nach filterung
+
+- domain sensorsizes.com

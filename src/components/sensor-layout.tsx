@@ -31,7 +31,7 @@ export default function SensorLayout({sensors}) {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Camera Sensor Size Comparison</title>
+                <title>Compare Sensor Sizes</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
@@ -46,7 +46,7 @@ export default function SensorLayout({sensors}) {
                 </div>
 
                 <h1 className={styles.title}>
-                    <span className={classes.titlePart}>CAMERA</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZE</span> <span className={classes.titlePart}>COMPARISON</span>
+                    <span className={classes.titlePart}>COMPARE</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span>
                 </h1>
                 <SensorComparison sensors={sensors}/>
                 <div>
