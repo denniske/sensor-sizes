@@ -15,11 +15,17 @@ export const getRows = async () => {
     const rows = await sheet.getRows();
     console.log(rows);
 
+    const parseAspectRatio = (aspectRatio: string) => {
+        if (!aspectRatio) return;
+        const parts = aspectRatio.split(':');
+        return `${parseFloat(parts[0]).toFixed(2)}:1`;
+    }
+
     return rows.map(r => {
         return ({
             model: r.model,
             logo: r.logo,
-            aspectRatio: r.aspectRatio,
+            aspectRatio: parseAspectRatio(r.aspectRatio),
             diagonal: parseFloat(r.diagonal),
             area: parseFloat(r.area.replace(',', '')),
             width: parseFloat(r.width),

@@ -345,10 +345,8 @@ export function SensorComparison({sensors}: Props) {
         return `${sensor.diagonal.toFixed(2)}`;
     };
 
-    function getAspectRatio(aspectRatio: string) {
-        if (!aspectRatio) return;
-        const parts = aspectRatio.split(':');
-        return `${parseFloat(parts[0]).toFixed(2)}:1`;
+    const getAspectRatio = (aspectRatio: string) => {
+        return `${aspectRatio}`;
     }
 
     const copySelectionToClipboard = () => {
