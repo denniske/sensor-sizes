@@ -11,6 +11,6 @@ notes:
   - alternativ scrollposition wieder richtig setzen, wenn modell aus der unteren tabelle angeklickt wird
 - export nach clipboard als tabelle
 - wenn man filtert und dann auf ein logo klickt nur sichtbare modelle hinzufügen/entfernen
-- tabelle springt/flackert horizontal nach filterung
-
 - domain sensorsizes.com
+
+x tabelle springt/flackert horizontal nach filterung

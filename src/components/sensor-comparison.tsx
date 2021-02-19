@@ -285,13 +285,14 @@ export function SensorComparison({sensors}: Props) {
     };
 
     const onToggleAllSensorsForLogo = (logo) => {
-        const allSensorsSelected = selectedSensors.filter(s => s.logo === logo).length === sensors.filter(s => s.logo === logo).length;
+        const shownSensors = filteredSensors.filter(s => s.logo === logo);
+        const allSensorsSelected = shownSensors.every(s => selectedSensors.includes(s));
         console.log('onToggleAllSensorsForLogo', allSensorsSelected);
-        const selectedWithout = selectedSensors.filter(s => s.logo !== logo);
+        const selectedWithout = selectedSensors.filter(s => !shownSensors.includes(s));
         if (allSensorsSelected) {
             setSelectedSensors([...selectedWithout]);
         } else {
-            setSelectedSensors([...selectedWithout, ...sensors.filter(s => s.logo === logo)]);
+            setSelectedSensors([...selectedWithout, ...shownSensors]);
         }
     };
 
