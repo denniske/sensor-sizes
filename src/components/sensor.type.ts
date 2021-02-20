@@ -13,6 +13,7 @@ export interface ISensor {
     textColor: string;
     anchor: string;
     default: boolean;
+    enabled: boolean;
     cropFactor: string;
     photositeDensity: number;
 }

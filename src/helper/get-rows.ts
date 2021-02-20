@@ -21,7 +21,7 @@ export const getRows = async () => {
         return `${parseFloat(parts[0]).toFixed(2)}:1`;
     }
 
-    return rows.map(r => {
+    const allRows = rows.map(r => {
         return ({
             model: r.model,
             logo: r.logo,
@@ -37,7 +37,10 @@ export const getRows = async () => {
             anchor: r.anchor,
             photositeDensity: parseInt(r.photositeDensity.replace(',', '')),
             default: r.default === 'TRUE',
+            enabled: r.enabled === 'TRUE',
             cropFactor: r['cropFactor (S35)'],
         });
     });
+
+    return allRows.filter(r => r.enabled);
 };
