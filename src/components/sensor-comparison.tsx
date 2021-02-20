@@ -282,6 +282,8 @@ export function SensorComparison({sensors}: Props) {
         } else {
           setSelectedSensors([...selectedSensors, sensor]);
         }
+        // console.log('scroll', window.scrollY);
+        // window.scrollTo(0, window.scrollY+30);
     };
 
     const onToggleAllSensorsForLogo = (logo) => {

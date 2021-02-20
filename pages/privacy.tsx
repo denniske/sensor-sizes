@@ -201,7 +201,7 @@ export default function Privacy() {
             <h2>Contact Us</h2>
             <p>If you have any questions about this Privacy Policy, please contact us:</p>
             <ul>
-                <li>By email: a@b.com</li>
+                <li>By email: hello@sensorsizes.com</li>
             </ul>
         </div>
     )

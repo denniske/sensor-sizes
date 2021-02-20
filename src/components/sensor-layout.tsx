@@ -50,7 +50,7 @@ export default function SensorLayout({sensors}) {
                 </h1>
                 <SensorComparison sensors={sensors}/>
                 <div>
-                    <a className={classes.footerLink} href="mailto:a@b.com" target="_blank">Contact</a>
+                    <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">Contact</a>
 
                     <Link href="/privacy" className={classes.footerLink}>Privacy Policy</Link>
                 </div>
