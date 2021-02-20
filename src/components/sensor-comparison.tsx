@@ -70,7 +70,9 @@ const useStyles = createStylesheet((theme) => ({
         backgroundColor: '#AAA',
         zIndex: 10,
     },
-    row: {},
+    row: {
+        height: 28
+    },
     cellWithout: {
         paddingVertical: 2,
         textAlign: 'right',
@@ -148,7 +150,7 @@ const useStyles = createStylesheet((theme) => ({
         // marginLeft: 150,
     },
     tableAll: {
-        minHeight: 1600,
+        minHeight: 1750,
         // background: 'red',
     },
     tableSelected: {
@@ -229,6 +231,10 @@ export function SensorComparison({sensors}: Props) {
         }
         if (selectedSortColumn?.length > 0 && selectedSortColumn2?.length > 0) {
             list = orderBy(list, [s => s[selectedSortColumn], s => s[selectedSortColumn2]], [selectedSortDirection, selectedSortDirection]);
+        }
+        // Fill up
+        for (let i = list.length; i < 10; i++) {
+            list.push({ model: 'temp' } as ISensor);
         }
         setFilteredSelectedSensors(list);
     }, [selectedSensors, selectedSortColumn, selectedSortDirection]);
@@ -507,23 +513,27 @@ export function SensorComparison({sensors}: Props) {
                             </thead>
                             <tbody>
                                 {
-                                    filteredSelectedSensors.map(sensor => (
-                                        <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
+                                    filteredSelectedSensors.map((sensor, i) => (
+                                        <tr key={i} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
                                             <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
-                                            <td className={classes.cellCheckbox}><input className={classes.pointer}
-                                                                                        type="checkbox"
-                                                                                        checked={selectedSensors.includes(sensor)}
-                                                                                        onChange={() => noop}/></td>
-                                            <td className={classes.cellModel}>{sensor.model}</td>
-                                            <td className={classes.cellW}>{sensor.width.toFixed(2)}</td>
-                                            <td className={classes.cellX}>x</td>
-                                            <td className={classes.cellH}>{sensor.height.toFixed(2)}</td>
-                                            <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                            <td className={classes.cell}>{getDiagonal(sensor)}</td>
-                                            <td className={classes.cellArea}>{getArea(sensor)}</td>
-                                            <td className={classes.cell}>{getResolution(sensor)}</td>
-                                            <td className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                            <td className={classes.cellWithout}>{getDensity(sensor)}</td>
+                                            {
+                                                sensor.model !== 'temp' &&
+                                                    <>
+                                                        <td className={classes.cellCheckbox}>
+                                                            <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
+                                                        </td>
+                                                        <td className={classes.cellModel}>{sensor.model}</td>
+                                                        <td className={classes.cellW}>{sensor.width.toFixed(2)}</td>
+                                                        <td className={classes.cellX}>x</td>
+                                                        <td className={classes.cellH}>{sensor.height.toFixed(2)}</td>
+                                                        <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
+                                                        <td className={classes.cell}>{getDiagonal(sensor)}</td>
+                                                        <td className={classes.cellArea}>{getArea(sensor)}</td>
+                                                        <td className={classes.cell}>{getResolution(sensor)}</td>
+                                                        <td className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                                        <td className={classes.cellWithout}>{getDensity(sensor)}</td>
+                                                    </>
+                                            }
                                         </tr>
                                     ))
                                 }
