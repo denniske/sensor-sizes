@@ -1,1 +1,1 @@
-App available at [https://sensor-iota.vercel.app/](https://sensor-iota.vercel.app/).
+App available at [https://sensorsizes.com/](https://sensorsizes.com/).
