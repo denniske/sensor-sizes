@@ -71,7 +71,7 @@ const useStyles = createStylesheet((theme) => ({
         zIndex: 10,
     },
     row: {
-        height: 28
+        height: 30
     },
     cellWithout: {
         paddingVertical: 2,
@@ -116,6 +116,10 @@ const useStyles = createStylesheet((theme) => ({
     },
     cellLogo: {
         width: 150,
+    },
+    cellWithLogo: {
+        pointerEvents: 'none',
+        background: 'none !important',
     },
     button: {
         marginRight: 20,
@@ -233,7 +237,8 @@ export function SensorComparison({sensors}: Props) {
             list = orderBy(list, [s => s[selectedSortColumn], s => s[selectedSortColumn2]], [selectedSortDirection, selectedSortDirection]);
         }
         // Fill up
-        for (let i = list.length; i < 10; i++) {
+        const fillUpCount = Math.max(10, Math.ceil(list.length / 10) * 10);
+        for (let i = list.length; i < fillUpCount; i++) {
             list.push({ model: 'temp' } as ISensor);
         }
         setFilteredSelectedSensors(list);
@@ -453,7 +458,7 @@ export function SensorComparison({sensors}: Props) {
                     </table>
                     <h3 className={classes.title}>Selected</h3>
                     <div className={classes.tableSelected}>
-                        <table className="table-no-select">
+                        <table className="table-no-select tabel-selected">
                             <thead>
                             <tr>
                                 <th className={classes.cellLogo}/>
@@ -511,6 +516,11 @@ export function SensorComparison({sensors}: Props) {
                                     }
                                 </th>
                             </tr>
+                            {/*<tr>*/}
+                            {/*    <td>*/}
+                            {/*        {'\u00A0'}*/}
+                            {/*    </td>*/}
+                            {/*</tr>*/}
                             </thead>
                             <tbody>
                                 {
@@ -542,24 +552,21 @@ export function SensorComparison({sensors}: Props) {
                         </table>
                     </div>
 
-                    {
-                        selectedSensors.length > 0 &&
-                        <table className="table-no-select">
-                            <thead>
-                            <tr>
-                                <th className={classes.cellLogo}/>
-                                <td>
-                                    <button className={classes.button} onClick={() => setSelectedSensors([])}>Clear selection</button>
-                                    <button className={classes.button} onClick={copySelectionToClipboard}>Copy selection to clipboard</button>
-                                </td>
-                            </tr>
-                            </thead>
-                        </table>
-                    }
+                    <table className="table-no-select">
+                        <thead>
+                        <tr>
+                            <th className={classes.cellLogo}/>
+                            <td>
+                                <button disabled={selectedSensors.length === 0} className={classes.button} onClick={() => setSelectedSensors([])}>Clear selection</button>
+                                <button disabled={selectedSensors.length === 0} className={classes.button} onClick={copySelectionToClipboard}>Copy selection to clipboard</button>
+                            </td>
+                        </tr>
+                        </thead>
+                    </table>
 
                     <h3 className={classes.title}>All</h3>
                     <div className={classes.tableAll}>
-                        <table className="table-no-select">
+                        <table className="table-no-select table-all">
                             <thead>
                                 <tr>
                                     <th className={classes.cellLogo}/>
@@ -619,8 +626,6 @@ export function SensorComparison({sensors}: Props) {
                                         }
                                     </th>
                                 </tr>
-                            </thead>
-                            <tbody>
                                 <tr>
                                     <td>
                                         {'\u00A0'}
@@ -643,6 +648,8 @@ export function SensorComparison({sensors}: Props) {
                                         {'\u00A0'}
                                     </td>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 {
                                     filteredSensors.map((sensor, i) => {
 
@@ -657,7 +664,7 @@ export function SensorComparison({sensors}: Props) {
 
                                                 {
                                                     !hasPrintedLogo && showLogo &&
-                                                    <td rowSpan={logoCount[sensor.logo]} style={{verticalAlign: 'top', paddingTop: sensor.logo === 'CINEMERIDIAN' ? 0 : 6}}
+                                                    <td rowSpan={logoCount[sensor.logo]} className={classes.cellWithLogo} style={{verticalAlign: 'top', paddingTop: sensor.logo === 'CINEMERIDIAN' ? 0 : 6}}
                                                         onClick={(ev) => {
                                                             onToggleAllSensorsForLogo(sensor.logo);
                                                             ev.stopPropagation();

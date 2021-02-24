@@ -15,7 +15,7 @@ x export nach clipboard als tabelle
 x wenn man filtert und dann auf ein logo klickt nur sichtbare modelle hinzufügen/entfernen
 x tabelle springt/flackert horizontal nach filterung
 
-- minimale höhe in 10er schritten
-- buttons deaktivieren anstatt ausblenden wenn keine kameras ausgewählt
+x minimale höhe in 10er schritten
+x buttons deaktivieren anstatt ausblenden wenn keine kameras ausgewählt
 - zeilen hervorheben
 

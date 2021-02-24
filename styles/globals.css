@@ -15,9 +15,23 @@ th {
 }
 
 td {
-  vertical-align: top;
-  padding: 2px 0;
+  /*vertical-align: top;*/
+  padding: 2px 3px;
   line-height: 150%;
+}
+
+td:last-child {
+  padding-right: 6px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.table-selected tbody tr:hover td,
+.table-all tbody tr:hover td {
+  background: #333;
+  color: inherit;
 }
 
 .table-no-select th {
