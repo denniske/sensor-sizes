@@ -409,6 +409,7 @@ export function SensorComparison({sensors}: Props) {
         'panasonic': 'panasonic.svg',
         'panavision': 'panavision.svg',
         'sony': 'sony.svg',
+        'cinemeridian': 'cinemeridian.png',
     };
 
     return (
@@ -656,7 +657,7 @@ export function SensorComparison({sensors}: Props) {
 
                                                 {
                                                     !hasPrintedLogo && showLogo &&
-                                                    <td rowSpan={logoCount[sensor.logo]} style={{verticalAlign: 'top', paddingTop: 6}}
+                                                    <td rowSpan={logoCount[sensor.logo]} style={{verticalAlign: 'top', paddingTop: sensor.logo === 'CINEMERIDIAN' ? 0 : 6}}
                                                         onClick={(ev) => {
                                                             onToggleAllSensorsForLogo(sensor.logo);
                                                             ev.stopPropagation();
