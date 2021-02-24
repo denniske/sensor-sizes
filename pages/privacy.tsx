@@ -14,7 +14,8 @@ export default function Privacy() {
     return (
         <div className={classes.container}>
             <Head>
-                <title>Camera Sensor Size Comparison Privacy Policy</title>
+                <title>Compare Sensor Sizes - Privacy Policy</title>
+                <link rel="icon" href="/favicon.png"/>
             </Head>
 
             <h4>
