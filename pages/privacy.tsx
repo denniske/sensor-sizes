@@ -25,11 +25,11 @@ export default function Privacy() {
             <h1>Privacy Policy</h1>
 
             <p>Effective date: October 03, 2019</p>
-            <p>camerasensorsizecomparison ("us", "we", or "our") operates the camerasensorsizecomparison mobile application (hereinafter referred to as the
+            <p>sensorsizes ("us", "we", or "our") operates the sensorsizes mobile application (hereinafter referred to as the
                 "Service").</p>
 
             <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our
-                Service and the choices you have associated with that data. The Privacy Policy for camerasensorsizecomparison has been created with
+                Service and the choices you have associated with that data. The Privacy Policy for sensorsizes has been created with
                 the help of <a href="https://www.termsfeed.com/">TermsFeed</a>.</p>
 
             <p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of
@@ -40,7 +40,7 @@ export default function Privacy() {
             <ul>
                 <li>
                     <p><strong>Service</strong></p>
-                    <p>Service is the camerasensorsizecomparison mobile application operated by camerasensorsizecomparison</p>
+                    <p>Service is the sensorsizes mobile application operated by sensorsizes</p>
                 </li>
                 <li>
                     <p><strong>Personal Data</strong></p>
@@ -103,7 +103,7 @@ export default function Privacy() {
 
             <h2>Use of Data</h2>
 
-            <p>camerasensorsizecomparison uses the collected data for various purposes:</p>
+            <p>sensorsizes uses the collected data for various purposes:</p>
             <ul>
                 <li>To provide and maintain the Service</li>
                 <li>To notify you about changes to our Service</li>
@@ -122,17 +122,17 @@ export default function Privacy() {
                 including Personal Data, to Germany and process it there.</p>
             <p>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that
                 transfer.</p>
-            <p>camerasensorsizecomparison will take all steps reasonably necessary to ensure that your data is treated securely and in accordance
+            <p>sensorsizes will take all steps reasonably necessary to ensure that your data is treated securely and in accordance
                 with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country
                 unless there are adequate controls in place including the security of your data and other personal information.</p>
 
             <h2>Disclosure Of Data</h2>
 
             <h3>Legal Requirements</h3>
-            <p>camerasensorsizecomparison may disclose your Personal Data in the good faith belief that such action is necessary to:</p>
+            <p>sensorsizes may disclose your Personal Data in the good faith belief that such action is necessary to:</p>
             <ul>
                 <li>To comply with a legal obligation</li>
-                <li>To protect and defend the rights or property of camerasensorsizecomparison</li>
+                <li>To protect and defend the rights or property of sensorsizes</li>
                 <li>To prevent or investigate possible wrongdoing in connection with the Service</li>
                 <li>To protect the personal safety of users of the Service or the public</li>
                 <li>To protect against legal liability</li>
