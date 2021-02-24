@@ -17,5 +17,5 @@ x tabelle springt/flackert horizontal nach filterung
 
 x minimale höhe in 10er schritten
 x buttons deaktivieren anstatt ausblenden wenn keine kameras ausgewählt
-- zeilen hervorheben
+x zeilen hervorheben
 

@@ -28,7 +28,6 @@ const useStyles = createStylesheet((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         backgroundColor: '#111',
-        // width: 500,
         width: '100vw',
         height: 700,
         overflow: 'hidden',
@@ -116,9 +115,9 @@ const useStyles = createStylesheet((theme) => ({
     },
     cellLogo: {
         width: 150,
+        background: 'none !important',
     },
     cellWithLogo: {
-        pointerEvents: 'none',
         background: 'none !important',
     },
     button: {
@@ -151,14 +150,11 @@ const useStyles = createStylesheet((theme) => ({
         paddingBottom: 5,
     },
     title: {
-        // marginLeft: 150,
     },
     tableAll: {
-        minHeight: 1750,
-        // background: 'red',
+        minHeight: 1850,
     },
     tableSelected: {
-        // minHeight: 500,
     },
 }));
 
@@ -193,6 +189,8 @@ export function SensorComparison({sensors}: Props) {
     const [searchStr, setSearchStr] = useState<string>('');
     const [filteredSensors, setFilteredSensors] = useState<ISensor[]>(sensors);
     const [showLogo, setShowLogo] = useState(true);
+    const [hoveredSensor, setHoveredSensor] = useState(null);
+    const [hoveredSensorAll, setHoveredSensorAll] = useState(null);
     const [filteredSelectedSensors, setFilteredSelectedSensors] = useState<ISensor[]>(selectedSensors);
 
     const maxWidth = windowDimensions.width - offset*2;
@@ -287,14 +285,11 @@ export function SensorComparison({sensors}: Props) {
     };
 
     const onToggleSensor = (sensor) => {
-        console.log('onToggleSensor');
         if (selectedSensors.includes(sensor)) {
           setSelectedSensors(selectedSensors.filter(s => s !== sensor));
         } else {
           setSelectedSensors([...selectedSensors, sensor]);
         }
-        // console.log('scroll', window.scrollY);
-        // window.scrollTo(0, window.scrollY+30);
     };
 
     const onToggleAllSensorsForLogo = (logo) => {
@@ -349,10 +344,6 @@ export function SensorComparison({sensors}: Props) {
         return sensor.photositeDensity ? sensor.photositeDensity.toLocaleString('en') : '-';
     };
 
-    const getDimensions = (sensor: ISensor) => {
-        return `${sensor.width.toFixed(2)} x ${sensor.height.toFixed(2)}`;
-    };
-
     const getArea = (sensor: ISensor) => {
         return `${sensor.area.toFixed(2)}`;
     };
@@ -366,10 +357,6 @@ export function SensorComparison({sensors}: Props) {
     }
 
     function copyTextToClipboard(text) {
-        // if (!navigator.clipboard) {
-        //     fallbackCopyTextToClipboard(text);
-        //     return;
-        // }
         navigator.clipboard.writeText(text).then(function() {
             console.log('Async: Copying to clipboard was successful!');
         }, function(err) {
@@ -417,6 +404,24 @@ export function SensorComparison({sensors}: Props) {
         'cinemeridian': 'cinemeridian.png',
     };
 
+    const onMouseEnterLeaveProps = (sensor: ISensor) => ({
+        onMouseEnter: () => {
+            setHoveredSensor(sensor);
+        },
+        onMouseLeave: () => {
+            setHoveredSensor(null);
+        },
+    });
+
+    const onMouseEnterLeavePropsAll = (sensor: ISensor) => ({
+        onMouseEnter: () => {
+            setHoveredSensorAll(sensor);
+        },
+        onMouseLeave: () => {
+            setHoveredSensorAll(null);
+        },
+    });
+
     return (
         <div className={classes.outer}>
             <div className={classes.container}>
@@ -458,7 +463,7 @@ export function SensorComparison({sensors}: Props) {
                     </table>
                     <h3 className={classes.title}>Selected</h3>
                     <div className={classes.tableSelected}>
-                        <table className="table-no-select tabel-selected">
+                        <table className="table-no-select table-selected">
                             <thead>
                             <tr>
                                 <th className={classes.cellLogo}/>
@@ -516,33 +521,28 @@ export function SensorComparison({sensors}: Props) {
                                     }
                                 </th>
                             </tr>
-                            {/*<tr>*/}
-                            {/*    <td>*/}
-                            {/*        {'\u00A0'}*/}
-                            {/*    </td>*/}
-                            {/*</tr>*/}
                             </thead>
                             <tbody>
                                 {
                                     filteredSelectedSensors.map((sensor, i) => (
-                                        <tr key={i} className={`${classes.row} ${classes.pointer}`} onClick={() => onToggleSensor(sensor)}>
+                                        <tr key={i} className={`${classes.row} ${classes.pointer} ${hoveredSensor === sensor ? 'hovered' : ''}`} onClick={() => onToggleSensor(sensor)}>
                                             <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
                                             {
                                                 sensor.model !== 'temp' &&
                                                     <>
-                                                        <td className={classes.cellCheckbox}>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellCheckbox}>
                                                             <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
                                                         </td>
-                                                        <td className={classes.cellModel}>{sensor.model}</td>
-                                                        <td className={classes.cellW}>{sensor.width.toFixed(2)}</td>
-                                                        <td className={classes.cellX}>x</td>
-                                                        <td className={classes.cellH}>{sensor.height.toFixed(2)}</td>
-                                                        <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                                        <td className={classes.cell}>{getDiagonal(sensor)}</td>
-                                                        <td className={classes.cellArea}>{getArea(sensor)}</td>
-                                                        <td className={classes.cell}>{getResolution(sensor)}</td>
-                                                        <td className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                                        <td className={classes.cellWithout}>{getDensity(sensor)}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellModel}>{sensor.model}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellX}>x</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
                                                     </>
                                             }
                                         </tr>
@@ -659,7 +659,7 @@ export function SensorComparison({sensors}: Props) {
                                         }
 
                                         return (
-                                            <tr key={sensor.model} className={`${classes.row} ${classes.pointer}`}
+                                            <tr key={sensor.model} className={`${classes.row} ${classes.pointer} ${hoveredSensorAll === sensor ? 'hovered' : ''}`}
                                                 onClick={() => onToggleSensor(sensor)}>
 
                                                 {
@@ -679,20 +679,19 @@ export function SensorComparison({sensors}: Props) {
                                                     <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
                                                 }
 
-                                                <td className={classes.cellCheckbox}><input className={classes.pointer}
-                                                                                            type="checkbox"
-                                                                                            checked={selectedSensors.includes(sensor)}
-                                                                                            onChange={() => noop}/></td>
-                                                <td className={classes.cellModel}>{sensor.model}</td>
-                                                <td className={classes.cellW}>{sensor.width.toFixed(2)}</td>
-                                                <td className={classes.cellX}>x</td>
-                                                <td className={classes.cellH}>{sensor.height.toFixed(2)}</td>
-                                                <td className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                                <td className={classes.cell}>{getDiagonal(sensor)}</td>
-                                                <td className={classes.cellArea}>{getArea(sensor)}</td>
-                                                <td className={classes.cell}>{getResolution(sensor)}</td>
-                                                <td className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                                <td className={classes.cellWithout}>{getDensity(sensor)}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellCheckbox}>
+                                                    <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
+                                                </td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellModel}>{sensor.model}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellX}>x</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
                                             </tr>
                                         );
                                     })

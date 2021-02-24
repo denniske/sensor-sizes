@@ -28,11 +28,18 @@ table {
   border-collapse: collapse;
 }
 
-.table-selected tbody tr:hover td,
-.table-all tbody tr:hover td {
+/*.table-selected tbody tr:hover td,*/
+/*.table-all tbody tr:hover td {*/
+/*  background: #333;*/
+/*  color: inherit;*/
+/*}*/
+
+.table-selected tbody tr.hovered td,
+.table-all tbody tr.hovered td {
   background: #333;
   color: inherit;
 }
+
 
 .table-no-select th {
   user-select: none;
