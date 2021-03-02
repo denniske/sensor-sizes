@@ -25,8 +25,12 @@ const useStyles = createStylesheet((theme) => ({
     },
 }));
 
+interface Props {
+    sensors: any;
+    dev?: boolean;
+}
 
-export default function SensorLayout({sensors, dev}) {
+export default function SensorLayout({sensors, dev}: Props) {
     const classes = useStyles();
     return (
         <div className={styles.container}>
