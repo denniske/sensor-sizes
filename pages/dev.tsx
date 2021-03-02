@@ -4,7 +4,7 @@ import {getRows} from '../src/helper/get-rows';
 
 export default function Home({sensors}) {
     return (
-        <SensorLayout sensors={sensors}/>
+        <SensorLayout sensors={sensors} dev={true}/>
     )
 }
 

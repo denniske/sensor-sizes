@@ -26,7 +26,7 @@ const useStyles = createStylesheet((theme) => ({
 }));
 
 
-export default function SensorLayout({sensors}) {
+export default function SensorLayout({sensors, dev}) {
     const classes = useStyles();
     return (
         <div className={styles.container}>
@@ -43,6 +43,12 @@ export default function SensorLayout({sensors}) {
                     <a className={classes.link} href="https://www.buymeacoffee.com/sensorsizes" target="_blank">
                         <img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshields-io-buymeacoffee.vercel.app%2Fapi%3Fusername%3Dsensorsizes"/>
                     </a>
+                    {
+                        dev &&
+                        <a className={classes.link} href="https://vercel.com/denniske/sensor-sizes/deployments" target="_blank">
+                            <img src="https://vercel-badge-azure.vercel.app/api/denniske/sensor-sizes"/>
+                        </a>
+                    }
                 </div>
 
                 <h1 className={styles.title}>
