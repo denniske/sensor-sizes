@@ -16,7 +16,8 @@
     "lodash": "^4.17.20",
     "next": "10.0.6",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-tooltip": "^4.2.15"
   },
   "devDependencies": {
     "@types/google-spreadsheet": "^3.0.2",

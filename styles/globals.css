@@ -12,12 +12,15 @@ body {
 
 th {
   text-align: left;
+  padding-bottom: 10px;
+  vertical-align: top;
 }
 
 td {
   /*vertical-align: top;*/
   padding: 2px 3px;
   line-height: 150%;
+  /*vertical-align: middle;*/
 }
 
 td:last-child {

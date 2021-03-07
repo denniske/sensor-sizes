@@ -31,12 +31,25 @@ const useStyles = createStylesheet((theme) => ({
         width: '100vw',
         height: 700,
         overflow: 'hidden',
-        marginVertical: 50,
+        marginVertical: 60,
     },
     surface: {
         position: 'relative',
         width: 0,
         height: 700,
+    },
+    options: {
+        flexDirection: 'row',
+        fontSize: 14,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    optionsLabel: {
+        marginLeft: 10,
+    },
+    optionsText: {
+        marginLeft: 20,
+        marginRight: 20,
     },
     wrapper: {
         display: 'flex',
@@ -72,6 +85,9 @@ const useStyles = createStylesheet((theme) => ({
     row: {
         height: 30
     },
+    divider: {
+        height: 7,
+    },
     cellWithout: {
         paddingVertical: 2,
         textAlign: 'right',
@@ -97,6 +113,7 @@ const useStyles = createStylesheet((theme) => ({
         textAlign: 'right',
     },
     cellModel: {
+        // flexDirection: 'row',
         width: 265,
     },
     cellScreen: {
@@ -138,16 +155,22 @@ const useStyles = createStylesheet((theme) => ({
         width: 40,
         color: 'white',
         outline: 'none',
-        paddingBottom: 5,
+        paddingTop: 4,
+        paddingBottom: 3,
+        fontSize: 14,
     },
     textSearch: {
         border: 'none',
-        borderBottom: '1px solid #CCC',
+        borderBottom: '1px solid #AAA',
         background: 'transparent',
-        width: 200,
+        width: 140,
         color: 'white',
         outline: 'none',
-        paddingBottom: 5,
+        paddingBottom: 3,
+        marginLeft: 15,
+    },
+    searchBox: {
+        flexDirection: 'row',
     },
     title: {
     },
@@ -155,6 +178,7 @@ const useStyles = createStylesheet((theme) => ({
         minHeight: 1850,
     },
     tableSelected: {
+        marginBottom: 6,
     },
 }));
 
@@ -185,7 +209,8 @@ export function SensorComparison({sensors}: Props) {
     const [selectedSortColumn2, setSelectedSortColumn2] = useState(null);
     const [selectedSortDirection, setSelectedSortDirection] = useState(null);
     const [screenSize, setScreenSize] = useState<number>(typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96 : 100);
-    const [screenSizeStr, setScreenSizeStr] = useState<string>(typeof window !== 'undefined' ? (Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96).toFixed(1) : '100');
+    const [screenSizeStr, setScreenSizeStr] = useState<string>('');
+    // const [screenSizeStr, setScreenSizeStr] = useState<string>(typeof window !== 'undefined' ? (Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96).toFixed(1) : '100');
     const [searchStr, setSearchStr] = useState<string>('');
     const [filteredSensors, setFilteredSensors] = useState<ISensor[]>(sensors);
     const [showLogo, setShowLogo] = useState(true);
@@ -235,7 +260,7 @@ export function SensorComparison({sensors}: Props) {
             list = orderBy(list, [s => s[selectedSortColumn], s => s[selectedSortColumn2]], [selectedSortDirection, selectedSortDirection]);
         }
         // Fill up
-        const fillUpCount = Math.max(10, Math.ceil(list.length / 10) * 10);
+        const fillUpCount = Math.max(5, Math.ceil(list.length / 5) * 5);
         for (let i = list.length; i < fillUpCount; i++) {
             list.push({ model: 'temp' } as ISensor);
         }
@@ -433,14 +458,16 @@ export function SensorComparison({sensors}: Props) {
                                 height: sensor.height*factor,
                                 left: centerX-(sensor.width*factor)/2,
                                 top: maxHeight/2-(sensor.height*factor)/2,
-                                borderColor: sensor.color,
+                                borderColor: hoveredSensor == sensor ? 'white' : sensor.color,
                                 opacity: selectedSensors.includes(sensor) ? 1 : 0,
                                 alignItems: getAlignItems(sensor),
                                 justifyContent: getJustifyContent(sensor),
+                                zIndex: hoveredSensor == sensor ? 100 : 'inherit',
                             }} className={classes.box}>
-                                <div className={classes.model} style={{
-                                    color: sensor.textColor,
-                                    backgroundColor: sensor.color,
+                                <div className={classes.model} {...onMouseEnterLeaveProps(sensor)} style={{
+                                    cursor: 'default',
+                                    color: hoveredSensor == sensor ? 'black' : sensor.textColor,
+                                    backgroundColor: hoveredSensor == sensor ? 'white' : sensor.color,
                                 }}>{sensor.logo} {sensor.model}</div>
                             </div>
                         ))
@@ -449,26 +476,32 @@ export function SensorComparison({sensors}: Props) {
             </div>
             <div className={classes.wrapper}>
                 <div>
-                    <h3 className={classes.title}>Options</h3>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td className={classes.cellLogo}/>
-                            <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} /></td>
-                            <td className={`${classes.cellModel} ${classes.pointer}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</td>
-                            <td className={classes.cellScreen}>Your screen size (inch)</td>
-                            <td className={classes.cell}><input type="text" className={classes.text} value={screenSizeStr} onChange={onScreenSizeChange} /></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <h3 className={classes.title}>Selected</h3>
+                    <div className={classes.options}>
+                        <input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} />
+                        <div className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</div>
+                        <div className={`${classes.optionsText}`}>Your screen size (inch)</div>
+                        <div ><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>
+                    </div>
+                    {/*<h3 className={classes.title}>Options</h3>*/}
+                    {/*<table>*/}
+                    {/*    <tbody>*/}
+                    {/*    <tr>*/}
+                    {/*        <td className={classes.cellLogo}/>*/}
+                    {/*        <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} /></td>*/}
+                    {/*        <td className={`${classes.cellModel} ${classes.pointer}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</td>*/}
+                    {/*        <td className={classes.cellScreen}>Your screen size (inch)</td>*/}
+                    {/*        <td className={classes.cell}><input type="text" className={classes.text} value={screenSizeStr} onChange={onScreenSizeChange} /></td>*/}
+                    {/*    </tr>*/}
+                    {/*    </tbody>*/}
+                    {/*</table>*/}
+                    <h3 className={classes.title}>{'\u00A0'}</h3>
                     <div className={classes.tableSelected}>
                         <table className="table-no-select table-selected">
                             <thead>
                             <tr>
                                 <th className={classes.cellLogo}/>
                                 <th className={classes.cellCheckbox}/>
-                                <th className={classes.cellModel}>Model</th>
+                                <th className={classes.cellModel}>Selected Models</th>
                                 <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('width', 'height')}>
                                     Dimensions (mm)
                                     {
@@ -564,7 +597,7 @@ export function SensorComparison({sensors}: Props) {
                         </thead>
                     </table>
 
-                    <h3 className={classes.title}>All</h3>
+                    <h3 className={classes.title}>{'\u00A0'}</h3>
                     <div className={classes.tableAll}>
                         <table className="table-no-select table-all">
                             <thead>
@@ -572,7 +605,15 @@ export function SensorComparison({sensors}: Props) {
                                     <th className={classes.cellLogo}/>
                                     <th className={classes.cellCheckbox}/>
                                     <th className={classes.cellModel}>
+                                        <div className={classes.searchBox}>
                                         Model
+                                            <input type="text" placeholder="Search" className={classes.textSearch} value={searchStr} onChange={onSearchChange} />
+                                            {'\u00A0'}{'\u00A0'}
+                                            {
+                                                searchStr.length > 0 &&
+                                                <FontAwesomeIcon className={classes.pointer} icon={faTimes} onClick={() => onSearchClear()} />
+                                            }
+                                        </div>
                                     </th>
                                     <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('width', 'height')}>
                                         Dimensions (mm)
@@ -626,28 +667,28 @@ export function SensorComparison({sensors}: Props) {
                                         }
                                     </th>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        {'\u00A0'}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className={classes.cellLogo}/>
-                                    <td className={classes.cellCheckbox}/>
-                                    <td className={classes.cellModel}>
-                                        <input type="text" placeholder="search" className={classes.textSearch} value={searchStr} onChange={onSearchChange} />
-                                        {'\u00A0'}{'\u00A0'}
-                                        {
-                                            searchStr.length > 0 &&
-                                            <FontAwesomeIcon className={classes.pointer} icon={faTimes} onClick={() => onSearchClear()} />
-                                        }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        {'\u00A0'}
-                                    </td>
-                                </tr>
+                                {/*<tr>*/}
+                                {/*    <td>*/}
+                                {/*        {'\u00A0'}*/}
+                                {/*    </td>*/}
+                                {/*</tr>*/}
+                                {/*<tr>*/}
+                                {/*    <td className={classes.cellLogo}/>*/}
+                                {/*    <td className={classes.cellCheckbox}/>*/}
+                                {/*    <td className={classes.cellModel}>*/}
+                                {/*        <input type="text" placeholder="search" className={classes.textSearch} value={searchStr} onChange={onSearchChange} />*/}
+                                {/*        {'\u00A0'}{'\u00A0'}*/}
+                                {/*        {*/}
+                                {/*            searchStr.length > 0 &&*/}
+                                {/*            <FontAwesomeIcon className={classes.pointer} icon={faTimes} onClick={() => onSearchClear()} />*/}
+                                {/*        }*/}
+                                {/*    </td>*/}
+                                {/*</tr>*/}
+                                {/*<tr>*/}
+                                {/*    <td>*/}
+                                {/*        {'\u00A0'}*/}
+                                {/*    </td>*/}
+                                {/*</tr>*/}
                             </thead>
                             <tbody>
                                 {
@@ -659,6 +700,11 @@ export function SensorComparison({sensors}: Props) {
                                         }
 
                                         return (
+                                            <>
+                                                {
+                                                    !hasPrintedLogo && showLogo && i != 0 &&
+                                                        <tr><td className={classes.divider}></td></tr>
+                                                }
                                             <tr key={sensor.model} className={`${classes.row} ${classes.pointer} ${hoveredSensorAll === sensor ? 'hovered' : ''}`}
                                                 onClick={() => onToggleSensor(sensor)}>
 
@@ -693,6 +739,7 @@ export function SensorComparison({sensors}: Props) {
                                                 <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
                                                 <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
                                             </tr>
+                                            </>
                                         );
                                     })
                                 }
