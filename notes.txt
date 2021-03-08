@@ -19,4 +19,6 @@ x minimale höhe in 10er schritten
 x buttons deaktivieren anstatt ausblenden wenn keine kameras ausgewählt
 x zeilen hervorheben
 
-- paypal donate shield
+- paypal button fertig machen
+
+- (units smaller in header)

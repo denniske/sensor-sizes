@@ -53,7 +53,7 @@ export default function SensorLayout({sensors, dev}: Props) {
                     <a className={classes.link} href="https://www.buymeacoffee.com/sensorsizes" target="_blank">
                         <img className={classes.linkImage} src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshields-io-buymeacoffee.vercel.app%2Fapi%3Fusername%3Dsensorsizes&color=444"/>
                     </a>
-                    <a className={classes.link} href="https://www.buymeacoffee.com/sensorsizes" target="_blank">
+                    <a className={classes.link} href="https://www.paypal.com/donate?business=hello%40sensorsizes.com&item_name=Compare+Sensor+Sizes&currency_code=EUR" target="_blank">
                         <img className={classes.linkImage} src="https://img.shields.io/static/v1?label=Paypal&message=donate&color=444&labelColor=CCC&logo=paypal&logoColor=violet"/>
                     </a>
                     {
