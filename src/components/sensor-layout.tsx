@@ -65,7 +65,7 @@ export default function SensorLayout({sensors, dev}: Props) {
                 </div>
 
                 <h1 className={styles.title}>
-                    <span className={classes.titlePart}>COMPARE</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span>
+                    <a href="/"><span className={classes.titlePart}>COMPARE</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
                 </h1>
                 <SensorComparison sensors={sensors}/>
                 <div>
