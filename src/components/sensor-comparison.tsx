@@ -1,7 +1,7 @@
 import { maxBy, min, orderBy } from 'lodash';
 import {createStylesheet} from '../helper/styles';
-import {ISensor} from './sensor.type';
-import {useEffect, useState} from 'react';
+import {ISensor, ITexts} from './sensor.type';
+import React, {useEffect, useState} from 'react';
 import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
 import {noop} from '@babel/types';
@@ -184,6 +184,7 @@ const useStyles = createStylesheet((theme) => ({
 
 interface Props {
     sensors: ISensor[];
+    texts: ITexts;
 }
 
 function sortSensors(selectedSensors: ISensor[], sensors: ISensor[]) {
@@ -196,7 +197,7 @@ function sortSensors(selectedSensors: ISensor[], sensors: ISensor[]) {
 
 const offset = 50;
 
-export function SensorComparison({sensors}: Props) {
+export function SensorComparison({sensors, texts}: Props) {
     const windowDimensions = useWindowDimensions();
     const loaded = useClientLoaded();
     const classes = useStyles();
@@ -464,11 +465,14 @@ export function SensorComparison({sensors}: Props) {
                                 justifyContent: getJustifyContent(sensor),
                                 zIndex: hoveredSensor == sensor ? 100 : 'inherit',
                             }} className={classes.box}>
-                                <div className={classes.model} {...onMouseEnterLeaveProps(sensor)} style={{
-                                    cursor: 'default',
-                                    color: hoveredSensor == sensor ? 'black' : sensor.textColor,
-                                    backgroundColor: hoveredSensor == sensor ? 'white' : sensor.color,
-                                }}>{sensor.logo} {sensor.model}</div>
+                                {
+                                    !realPhysicalSensorSize &&
+                                    <div className={classes.model} {...onMouseEnterLeaveProps(sensor)} style={{
+                                        cursor: 'default',
+                                        color: hoveredSensor == sensor ? 'black' : sensor.textColor,
+                                        backgroundColor: hoveredSensor == sensor ? 'white' : sensor.color,
+                                    }}>{sensor.logo} {sensor.model}</div>
+                                }
                             </div>
                         ))
                     }
@@ -478,9 +482,9 @@ export function SensorComparison({sensors}: Props) {
                 <div>
                     <div className={classes.options}>
                         <input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} />
-                        <div className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</div>
+                        <div data-tip={texts.realPhysicalSensorSize} className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</div>
                         <div className={`${classes.optionsText}`}>Your screen size (inch)</div>
-                        <div ><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>
+                        <div><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>
                     </div>
                     {/*<h3 className={classes.title}>Options</h3>*/}
                     {/*<table>*/}
@@ -502,42 +506,42 @@ export function SensorComparison({sensors}: Props) {
                                 <th className={classes.cellLogo}/>
                                 <th className={classes.cellCheckbox}/>
                                 <th className={classes.cellModel}>Selected Models</th>
-                                <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('width', 'height')}>
+                                <th colSpan={3} data-tip={texts.dimensions} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('width', 'height')}>
                                     Dimensions (mm)
                                     {
                                         selectedSortColumn === 'width' &&
                                         <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                     }
                                 </th>
-                                <th className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSelectedSort('aspectRatio')}>
+                                <th data-tip={texts.aspectRatio} className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSelectedSort('aspectRatio')}>
                                     Aspect Ratio
                                     {
                                         selectedSortColumn === 'aspectRatio' &&
                                         <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                     }
                                 </th>
-                                <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('diagonal')}>
+                                <th data-tip={texts.diagonal} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('diagonal')}>
                                     Diagonal (mm)
                                     {
                                         selectedSortColumn === 'diagonal' &&
                                         <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                     }
                                 </th>
-                                <th className={`${classes.cellArea} ${classes.pointer}`} onClick={() => changeSelectedSort('area')}>
-                                    Area (mm²)
-                                    {
-                                        selectedSortColumn === 'area' &&
-                                        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                    }
-                                </th>
-                                <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('resolutionX', 'resolutionY')}>
+                                {/*<th className={`${classes.cellArea} ${classes.pointer}`} onClick={() => changeSelectedSort('area')}>*/}
+                                {/*    Area (mm²)*/}
+                                {/*    {*/}
+                                {/*        selectedSortColumn === 'area' &&*/}
+                                {/*        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />*/}
+                                {/*    }*/}
+                                {/*</th>*/}
+                                <th  data-tip={texts.resolution} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('resolutionX', 'resolutionY')}>
                                     Resolution (px)
                                     {
                                         selectedSortColumn === 'resolutionX' &&
                                         <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                     }
                                 </th>
-                                <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('cropFactor')}>
+                                <th data-tip={texts.cropFactor} className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('cropFactor')}>
                                     {'\u00A0\u00A0\u00A0\u00A0'}
                                     Crop Factor (S35)
                                     {
@@ -545,7 +549,7 @@ export function SensorComparison({sensors}: Props) {
                                         <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                     }
                                 </th>
-                                <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('photositeDensity')}>
+                                <th data-tip={texts.density} className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('photositeDensity')}>
                                     {'\u00A0\u00A0\u00A0\u00A0'}
                                     Density (px/mm²)
                                     {
@@ -572,7 +576,7 @@ export function SensorComparison({sensors}: Props) {
                                                         <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
                                                         <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
                                                         <td {...onMouseEnterLeaveProps(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>
+                                                        {/*<td {...onMouseEnterLeaveProps(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>*/}
                                                         <td {...onMouseEnterLeaveProps(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
                                                         <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
                                                         <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
@@ -615,42 +619,42 @@ export function SensorComparison({sensors}: Props) {
                                             }
                                         </div>
                                     </th>
-                                    <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('width', 'height')}>
+                                    <th data-tip={texts.dimensions} colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('width', 'height')}>
                                         Dimensions (mm)
                                         {
                                             sortColumn === 'width' &&
                                             <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </th>
-                                    <th className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSort('aspectRatio')}>
+                                    <th data-tip={texts.aspectRatio} className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSort('aspectRatio')}>
                                         Aspect Ratio
                                         {
                                             sortColumn === 'aspectRatio' &&
                                             <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </th>
-                                    <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('diagonal')}>
+                                    <th data-tip={texts.diagonal} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('diagonal')}>
                                         Diagonal (mm)
                                         {
                                             sortColumn === 'diagonal' &&
                                             <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </th>
-                                    <th className={`${classes.cellArea} ${classes.pointer}`} onClick={() => changeSort('area')}>
-                                        Area (mm²)
-                                        {
-                                            sortColumn === 'area' &&
-                                            <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                        }
-                                    </th>
-                                    <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('resolutionX', 'resolutionY')}>
+                                    {/*<th className={`${classes.cellArea} ${classes.pointer}`} onClick={() => changeSort('area')}>*/}
+                                    {/*    Area (mm²)*/}
+                                    {/*    {*/}
+                                    {/*        sortColumn === 'area' &&*/}
+                                    {/*        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />*/}
+                                    {/*    }*/}
+                                    {/*</th>*/}
+                                    <th data-tip={texts.resolution} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('resolutionX', 'resolutionY')}>
                                         Resolution (px)
                                         {
                                             sortColumn === 'resolutionX' &&
                                             <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </th>
-                                    <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('cropFactor')}>
+                                    <th data-tip={texts.cropFactor} className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('cropFactor')}>
                                         {'\u00A0\u00A0\u00A0\u00A0'}
                                         Crop Factor (S35)
                                         {
@@ -658,7 +662,7 @@ export function SensorComparison({sensors}: Props) {
                                             <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </th>
-                                    <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('photositeDensity')}>
+                                    <th data-tip={texts.density} className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('photositeDensity')}>
                                         {'\u00A0\u00A0\u00A0\u00A0'}
                                         Density (px/mm²)
                                         {
@@ -700,46 +704,46 @@ export function SensorComparison({sensors}: Props) {
                                         }
 
                                         return (
-                                            <>
+                                            <React.Fragment key={sensor.model}>
                                                 {
                                                     !hasPrintedLogo && showLogo && i != 0 &&
-                                                        <tr><td className={classes.divider}></td></tr>
+                                                        <tr><td className={classes.divider}/></tr>
                                                 }
-                                            <tr key={sensor.model} className={`${classes.row} ${classes.pointer} ${hoveredSensorAll === sensor ? 'hovered' : ''}`}
-                                                onClick={() => onToggleSensor(sensor)}>
+                                                <tr className={`${classes.row} ${classes.pointer} ${hoveredSensorAll === sensor ? 'hovered' : ''}`}
+                                                    onClick={() => onToggleSensor(sensor)}>
 
-                                                {
-                                                    !hasPrintedLogo && showLogo &&
-                                                    <td rowSpan={logoCount[sensor.logo]} className={classes.cellWithLogo} style={{verticalAlign: 'top', paddingTop: sensor.logo === 'CINEMERIDIAN' ? 0 : 6}}
-                                                        onClick={(ev) => {
-                                                            onToggleAllSensorsForLogo(sensor.logo);
-                                                            ev.stopPropagation();
-                                                        }}>
-                                                        <img
-                                                        style={{width: 100, filter: 'brightness(0) invert()'}}
-                                                        src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}/>
+                                                    {
+                                                        !hasPrintedLogo && showLogo &&
+                                                        <td rowSpan={logoCount[sensor.logo]} className={classes.cellWithLogo} style={{verticalAlign: 'top', paddingTop: sensor.logo === 'CINEMERIDIAN' ? 0 : 6}}
+                                                            onClick={(ev) => {
+                                                                onToggleAllSensorsForLogo(sensor.logo);
+                                                                ev.stopPropagation();
+                                                            }}>
+                                                            <img
+                                                            style={{width: 100, filter: 'brightness(0) invert()'}}
+                                                            src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}/>
+                                                        </td>
+                                                    }
+                                                    {
+                                                        !showLogo &&
+                                                        <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
+                                                    }
+
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellCheckbox}>
+                                                        <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
                                                     </td>
-                                                }
-                                                {
-                                                    !showLogo &&
-                                                    <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
-                                                }
-
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellCheckbox}>
-                                                    <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
-                                                </td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellModel}>{sensor.model}</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellX}>x</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                                <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
-                                            </tr>
-                                            </>
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellModel}>{sensor.model}</td>
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellX}>x</td>
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
+                                                    {/*<td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>*/}
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
+                                                </tr>
+                                            </React.Fragment>
                                         );
                                     })
                                 }

@@ -1,6 +1,7 @@
 import {GoogleSpreadsheet} from 'google-spreadsheet';
+import {merge} from '@hapi/hoek';
 
-export const getRows = async () => {
+export const getSensorsFromSheet = async () => {
     const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
 
     await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY);
@@ -13,7 +14,7 @@ export const getRows = async () => {
     console.log(sheet.rowCount);
 
     const rows = await sheet.getRows();
-    console.log(rows);
+    // console.log(rows);
 
     const parseAspectRatio = (aspectRatio: string) => {
         if (!aspectRatio) return;
@@ -43,4 +44,33 @@ export const getRows = async () => {
     });
 
     return allRows.filter(r => r.enabled);
+};
+
+export const getTextsFromSheet = async () => {
+    const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
+
+    await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY);
+
+    await doc.loadInfo();
+    console.log(doc.title);
+
+    const sheet = doc.sheetsByIndex[1];
+    console.log(sheet.title);
+    console.log(sheet.rowCount);
+
+    const rows = await sheet.getRows();
+    // console.log(rows);
+
+    const titleRow = rows[0];
+    const textRow = rows[1];
+
+    return {
+        realPhysicalSensorSize: textRow.realPhysicalSensorSize,
+        dimensions: textRow.dimensions,
+        aspectRatio: textRow.aspectRatio,
+        diagonal: textRow.diagonal,
+        resolution: textRow.resolution,
+        cropFactor: textRow.cropFactor,
+        density: textRow.density,
+    };
 };

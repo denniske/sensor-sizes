@@ -17,3 +17,13 @@ export interface ISensor {
     cropFactor: string;
     photositeDensity: number;
 }
+
+export interface ITexts {
+    realPhysicalSensorSize: string;
+    dimensions: string;
+    aspectRatio: string;
+    diagonal: string;
+    resolution: string;
+    cropFactor: string;
+    density: string;
+}

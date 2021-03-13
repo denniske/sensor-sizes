@@ -1,5 +1,5 @@
 import SensorLayout from '../src/components/sensor-layout';
-import {getRows} from '../src/helper/get-rows';
+import {getSensorsFromSheet} from '../src/helper/get-rows';
 
 
 export default function Home({sensors}) {
@@ -9,7 +9,7 @@ export default function Home({sensors}) {
 }
 
 export async function getServerSideProps() {
-    const sensors = await getRows();
+    const sensors = await getSensorsFromSheet();
     console.log(sensors);
     return {
         props: {

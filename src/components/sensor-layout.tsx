@@ -4,6 +4,7 @@ import {createStylesheet} from '../helper/styles';
 import {SensorComparison} from './sensor-comparison';
 import {Link} from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
+import {useEffect, useState} from 'react';
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -31,10 +32,17 @@ const useStyles = createStylesheet((theme) => ({
 
 interface Props {
     sensors: any;
+    texts: any;
     dev?: boolean;
 }
 
-export default function SensorLayout({sensors, dev}: Props) {
+export default function SensorLayout({sensors, texts, dev}: Props) {
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        setLoaded(true);
+    });
+
     const classes = useStyles();
     return (
         <div className={styles.container}>
@@ -43,7 +51,10 @@ export default function SensorLayout({sensors, dev}: Props) {
                 <link rel="icon" href="/favicon.png"/>
             </Head>
 
-            <ReactTooltip place="top" type="light" effect="solid"/>
+            {
+                loaded &&
+                <ReactTooltip place="top" type="light" effect="solid"/>
+            }
 
             <main className={styles.main}>
                 <div className={classes.links}>
@@ -67,7 +78,7 @@ export default function SensorLayout({sensors, dev}: Props) {
                 <h1 className={styles.title}>
                     <a href="/"><span className={classes.titlePart}>COMPARE</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
                 </h1>
-                <SensorComparison sensors={sensors}/>
+                <SensorComparison sensors={sensors} texts={texts}/>
                 <div>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">Contact</a>
 
