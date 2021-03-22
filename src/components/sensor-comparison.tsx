@@ -609,7 +609,11 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                 <div>
                     <div className={classes.options}>
                         <input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} />
-                        <div data-tip={texts.realPhysicalSensorSize} className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</div>
+                        <div className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>
+                            <CustomTooltip title={texts.realPhysicalSensorSize}>
+                                Real physical sensor size
+                            </CustomTooltip>
+                        </div>
                         <div className={`${classes.optionsText}`}>Your screen size (inch)</div>
                         <div><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>
                     </div>
@@ -631,7 +635,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 {lenses.map(lense => (
                                     <MenuItem key={lense.model} value={lense.model}>
                                         <CustomCheckbox checked={selectedLenses.includes(lense)} />
-                                        <ListItemText primary={`${lense.model} (${lense.imageCircle.toFixed(2)} mm)`} />
+                                        <ListItemText primary={`${lense.logo} ${lense.model} (${lense.imageCircle.toFixed(2)} mm)`} />
                                     </MenuItem>
                                 ))}
                             </Select>

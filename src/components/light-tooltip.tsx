@@ -16,7 +16,7 @@ export const LightTooltip = withStyles((theme) => ({
     },
 }))(Tooltip);
 
-export function CustomTooltip(props: Omit<TooltipProps, 'children'> & { children: (string | React.ReactNode)[] }) {
+export function CustomTooltip(props: Omit<TooltipProps, 'children'> & { children: (string | React.ReactNode)[] | string | React.ReactNode }) {
     const { children, ...rest } = props;
     return <LightTooltip arrow placement="top" {...rest}><div>{children}</div></LightTooltip>
 }
