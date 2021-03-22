@@ -299,7 +299,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [selectedSortDirection, setSelectedSortDirection] = useState(null);
     const [screenSize, setScreenSize] = useState<number>(typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96 : 100);
     const [screenSizeStr, setScreenSizeStr] = useState<string>('');
-    const [imageCircle, setImageCircle] = useState<number>(10);
+    const [imageCircle, setImageCircle] = useState<number>(0);
     const [imageCircleStr, setImageCircleStr] = useState<string>('');
     const [imageCircleVisible, setImageCircleVisible] = useState(false);
     const [searchStr, setSearchStr] = useState<string>('');
@@ -311,7 +311,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [filteredSelectedSensors, setFilteredSelectedSensors] = useState<ISensor[]>(selectedSensors);
 
     const [selectedLensesStr, setSelectedLensesStr] = React.useState([]);
-    const [selectedLenses, setSelectedLenses] = React.useState([...lenses.filter((l, i) => i < 2)]);
+    const [selectedLenses, setSelectedLenses] = React.useState([]); // ...lenses.filter((l, i) => i < 2)
 
     const handleChange = (event) => {
         // console.log('handleChange', event.target.value);
@@ -610,7 +610,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                         ))
                     }
                     {
-                        loaded && imageCircle &&
+                        loaded && imageCircle > 0 &&
                         <div style={{
                             width: imageCircle*factor,
                             height: imageCircle*factor,
