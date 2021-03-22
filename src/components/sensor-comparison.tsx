@@ -655,8 +655,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
             </div>
             <div className={classes.wrapper}>
                 <div>
-
-
                     <div className={classes.options}>
                         <input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} />
                         <div data-tip={texts.realPhysicalSensorSize} className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</div>
@@ -664,41 +662,18 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                         <div><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>
                     </div>
 
-                    {/*<div className={classes.options}>*/}
-                    {/*    <input className={classes.pointer} type="checkbox" checked={imageCircleVisible} onChange={onToggleImageCircle} />*/}
-                    {/*    <div data-tip={texts.realPhysicalSensorSize} className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleImageCircle}>Lens Image circle</div>*/}
-                    {/*    <div className={`${classes.optionsText}`}>Your image circle (mm)</div>*/}
-                    {/*    <div><input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={onImageCircleChange} /></div>*/}
-                    {/*</div>*/}
-
-
-                    <div className={classes.heading}>
-                        Selected Lenses
-                    </div>
+                    <div className={classes.heading}>Selected Lenses</div>
                     <div className={classes.options2}>
                         <FormControl className={classes.formControl}>
-                            {/*<InputLabel id="demo-mutiple-checkbox-label">Selected lenses</InputLabel>*/}
                             <Select
-
                                 labelId="demo-mutiple-checkbox-label"
                                 id="demo-mutiple-checkbox"
                                 multiple
                                 value={selectedLensesStr}
                                 onChange={handleChange}
                                 input={<Input />}
-                                //renderValue={(selected) => selected.join(', ')}
-
                                 displayEmpty={true}
-
                                 renderValue={(selected: string[] | null) => selected?.length + ' selected'}
-
-                                /*renderValue={(selected) => (
-                                  <div className={classes.chips}>
-                                    {selected.map((value) => (
-                                      <Chip key={value} label={value} className={classes.chip} />
-                                    ))}
-                                  </div>
-                                )}*/
                                 MenuProps={MenuProps as any}
                             >
                                 {lenses.map(lense => (
@@ -713,18 +688,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                         <div><input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={onImageCircleChange} /></div>
                     </div>
 
-                    {/*<h3 className={classes.title}>Options</h3>*/}
-                    {/*<table>*/}
-                    {/*    <tbody>*/}
-                    {/*    <tr>*/}
-                    {/*        <td className={classes.cellLogo}/>*/}
-                    {/*        <td className={classes.cellCheckbox}><input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} /></td>*/}
-                    {/*        <td className={`${classes.cellModel} ${classes.pointer}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</td>*/}
-                    {/*        <td className={classes.cellScreen}>Your screen size (inch)</td>*/}
-                    {/*        <td className={classes.cell}><input type="text" className={classes.text} value={screenSizeStr} onChange={onScreenSizeChange} /></td>*/}
-                    {/*    </tr>*/}
-                    {/*    </tbody>*/}
-                    {/*</table>*/}
                     <h3 className={classes.title}>{'\u00A0'}</h3>
                     <div className={classes.tableSelected}>
                         <table className="table-no-select table-selected">
@@ -766,13 +729,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         </div>
                                     </LightTooltip>
                                 </th>
-                                {/*<th className={`${classes.cellArea} ${classes.pointer}`} onClick={() => changeSelectedSort('area')}>*/}
-                                {/*    Area (mm²)*/}
-                                {/*    {*/}
-                                {/*        selectedSortColumn === 'area' &&*/}
-                                {/*        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />*/}
-                                {/*    }*/}
-                                {/*</th>*/}
                                 <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('resolutionX', 'resolutionY')}>
                                     <LightTooltip arrow title={texts.resolution} placement="top">
                                         <div>
@@ -891,13 +847,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </th>
-                                    {/*<th className={`${classes.cellArea} ${classes.pointer}`} onClick={() => changeSort('area')}>*/}
-                                    {/*    Area (mm²)*/}
-                                    {/*    {*/}
-                                    {/*        sortColumn === 'area' &&*/}
-                                    {/*        <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />*/}
-                                    {/*    }*/}
-                                    {/*</th>*/}
                                     <th data-tip={texts.resolution} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('resolutionX', 'resolutionY')}>
                                         Resolution (px)
                                         {
@@ -922,28 +871,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         }
                                     </th>
                                 </tr>
-                                {/*<tr>*/}
-                                {/*    <td>*/}
-                                {/*        {'\u00A0'}*/}
-                                {/*    </td>*/}
-                                {/*</tr>*/}
-                                {/*<tr>*/}
-                                {/*    <td className={classes.cellLogo}/>*/}
-                                {/*    <td className={classes.cellCheckbox}/>*/}
-                                {/*    <td className={classes.cellModel}>*/}
-                                {/*        <input type="text" placeholder="search" className={classes.textSearch} value={searchStr} onChange={onSearchChange} />*/}
-                                {/*        {'\u00A0'}{'\u00A0'}*/}
-                                {/*        {*/}
-                                {/*            searchStr.length > 0 &&*/}
-                                {/*            <FontAwesomeIcon className={classes.pointer} icon={faTimes} onClick={() => onSearchClear()} />*/}
-                                {/*        }*/}
-                                {/*    </td>*/}
-                                {/*</tr>*/}
-                                {/*<tr>*/}
-                                {/*    <td>*/}
-                                {/*        {'\u00A0'}*/}
-                                {/*    </td>*/}
-                                {/*</tr>*/}
                             </thead>
                             <tbody>
                                 {

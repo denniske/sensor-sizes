@@ -35,6 +35,7 @@ x lenses name on round border possible?
 - select all lenses?
 - autocomplete?
 - multiselect height?
+- tooltips!
 
 select multiselect demo
 https://stackblitz.com/edit/tpxayh?file=demo.js
