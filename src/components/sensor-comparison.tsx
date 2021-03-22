@@ -211,7 +211,9 @@ export function SensorComparison({sensors, texts}: Props) {
     const [selectedSortDirection, setSelectedSortDirection] = useState(null);
     const [screenSize, setScreenSize] = useState<number>(typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96 : 100);
     const [screenSizeStr, setScreenSizeStr] = useState<string>('');
-    // const [screenSizeStr, setScreenSizeStr] = useState<string>(typeof window !== 'undefined' ? (Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96).toFixed(1) : '100');
+    const [imageCircle, setImageCircle] = useState<number>(10);
+    const [imageCircleStr, setImageCircleStr] = useState<string>('');
+    const [imageCircleVisible, setImageCircleVisible] = useState(false);
     const [searchStr, setSearchStr] = useState<string>('');
     const [filteredSensors, setFilteredSensors] = useState<ISensor[]>(sensors);
     const [showLogo, setShowLogo] = useState(true);
@@ -337,6 +339,15 @@ export function SensorComparison({sensors, texts}: Props) {
     const onScreenSizeChange = (event) => {
         setScreenSizeStr(event.target.value.replace(',', '.'));
         setScreenSize(parseFloat(event.target.value.replace(',', '.')));
+    };
+
+    const onToggleImageCircle = (val) => {
+        setImageCircleVisible(!imageCircleVisible);
+    };
+
+    const onImageCircleChange = (event) => {
+        setImageCircleStr(event.target.value.replace(',', '.'));
+        setImageCircle(parseFloat(event.target.value.replace(',', '.')));
     };
 
     const onSearchChange = (event) => {
@@ -476,16 +487,40 @@ export function SensorComparison({sensors, texts}: Props) {
                             </div>
                         ))
                     }
+                    {
+                        imageCircleVisible &&
+                        <div style={{
+                            width: imageCircle*factor,
+                            height: imageCircle*factor,
+                            left: centerX-(imageCircle*factor)/2,
+                            top: maxHeight/2-(imageCircle*factor)/2,
+                            borderColor: 'white',
+                            opacity: 1,
+                            zIndex: 200,
+                            borderRadius: '50%',
+                        }} className={classes.box}>
+                        </div>
+                    }
                 </div>
             </div>
             <div className={classes.wrapper}>
                 <div>
+
+
                     <div className={classes.options}>
                         <input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} />
                         <div data-tip={texts.realPhysicalSensorSize} className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>Real physical sensor size</div>
                         <div className={`${classes.optionsText}`}>Your screen size (inch)</div>
                         <div><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>
                     </div>
+
+                    <div className={classes.options}>
+                        <input className={classes.pointer} type="checkbox" checked={imageCircleVisible} onChange={onToggleImageCircle} />
+                        <div data-tip={texts.realPhysicalSensorSize} className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleImageCircle}>Image circle</div>
+                        <div className={`${classes.optionsText}`}>Your image circle (mm)</div>
+                        <div><input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={onImageCircleChange} /></div>
+                    </div>
+
                     {/*<h3 className={classes.title}>Options</h3>*/}
                     {/*<table>*/}
                     {/*    <tbody>*/}
