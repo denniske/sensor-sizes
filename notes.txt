@@ -30,7 +30,11 @@ lenses table
 
 x lenses name on round border possible?
 - lense color / textColor
-
+- disable scroll when multiselect is open
+- deselect all lenses
+- select all lenses?
+- autocomplete?
+- multiselect height?
 
 select multiselect demo
 https://stackblitz.com/edit/tpxayh?file=demo.js

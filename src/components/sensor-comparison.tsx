@@ -637,14 +637,17 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 zIndex: hoveredLense == lense ? 100 : 'inherit',
                                 borderRadius: '50%',
                             }} className={classes.box2}>
-                                <div className={classes.model} {...onMouseEnterLeaveProps2(lense)} style={{
-                                    cursor: 'default',
-                                    transform: `translate(99.5%) rotate(${i*-5}deg)`,
-                                    marginLeft: -1,
-                                    transformOrigin: -lense.imageCircle*factor/2,
-                                    color: hoveredLense == lense ? 'orange' : 'black',
-                                    backgroundColor: hoveredLense == lense ? 'white' : 'white',
-                                }}>{lense.logo} {lense.model}</div>
+                                {
+                                    !realPhysicalSensorSize &&
+                                    <div className={classes.model} {...onMouseEnterLeaveProps2(lense)} style={{
+                                        cursor: 'default',
+                                        transform: `translate(99.5%) rotate(${i * -5}deg)`,
+                                        marginLeft: -1,
+                                        transformOrigin: -lense.imageCircle * factor / 2,
+                                        color: hoveredLense == lense ? 'orange' : 'black',
+                                        backgroundColor: hoveredLense == lense ? 'white' : 'white',
+                                    }}>{lense.logo} {lense.model}</div>
+                                }
                             </div>
                         )
                     }
