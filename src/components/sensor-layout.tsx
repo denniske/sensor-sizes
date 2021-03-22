@@ -3,7 +3,6 @@ import styles from '../../styles/Home.module.css'
 import {createStylesheet} from '../helper/styles';
 import {SensorComparison} from './sensor-comparison';
 import {Link} from '@material-ui/core';
-import ReactTooltip from 'react-tooltip';
 import {useEffect, useState} from 'react';
 
 const useStyles = createStylesheet((theme) => ({
@@ -37,24 +36,12 @@ interface Props {
     dev?: boolean;
 }
 
-// import "bootstrap/dist/css/bootstrap.css";
-//
-// import Button from "react-bootstrap/Button";
-// import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-// import Tooltip from "react-bootstrap/Tooltip";
-
 export default function SensorLayout({lenses, sensors, texts, dev}: Props) {
     const [loaded, setLoaded] = useState(false);
-
-    console.log(lenses);
 
     useEffect(() => {
         setLoaded(true);
     });
-
-    // const renderTooltip = props => (
-    //     <Tooltip {...props}>Tooltip for the register button</Tooltip>
-    // );
 
     const classes = useStyles();
     return (
@@ -63,19 +50,6 @@ export default function SensorLayout({lenses, sensors, texts, dev}: Props) {
                 <title>Compare Sensor Sizes</title>
                 <link rel="icon" href="/favicon.png"/>
             </Head>
-
-            {
-                loaded &&
-                <ReactTooltip place="top" type="light" effect="solid"/>
-            }
-
-            {/*<Tooltip arrow title="Tooltip for the register button" placement="top">*/}
-            {/*    <Button variant="contained" style={{marginLeft:650}}>Register</Button>*/}
-            {/*</Tooltip>*/}
-
-            {/*<OverlayTrigger placement="top" overlay={renderTooltip}>*/}
-            {/*    <Button style={{marginLeft: 450}}>Register</Button>*/}
-            {/*</OverlayTrigger>*/}
 
             <main className={styles.main}>
                 <div className={classes.links}>

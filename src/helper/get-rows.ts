@@ -96,6 +96,8 @@ export const getLensesFromSheet = async () => {
             model: r.model,
             logo: r.logo,
             imageCircle: parseFloat(r.imageCircle),
+            color: r.color,
+            textColor: r.textColor,
         });
     });
 

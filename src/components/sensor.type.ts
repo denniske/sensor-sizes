@@ -22,6 +22,8 @@ export interface ILense {
     model: string;
     logo: string;
     imageCircle: number;
+    color: string;
+    textColor: string;
 }
 
 export interface ITexts {

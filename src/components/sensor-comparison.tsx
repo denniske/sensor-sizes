@@ -7,11 +7,9 @@ import useClientLoaded from '../hooks/use-client-loaded';
 import {noop} from '@babel/types';
 import {faArrowDown, faArrowUp, faCoffee, faCross, faTimes} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    Link, Tooltip, Button, withStyles, FormControl, InputLabel, Select, Input, MenuItem, Checkbox, ListItemText,
-    useTheme
-} from '@material-ui/core';
+import { FormControl, Select, Input, MenuItem, ListItemText } from '@material-ui/core';
 import CustomCheckbox from './custom-checkbox';
+import {CustomTooltip} from './light-tooltip';
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -203,13 +201,11 @@ const useStyles = createStylesheet((theme) => ({
         marginBottom: 10,
         marginTop: 40,
     },
-    options2: {
+    selectedLenses: {
         flexDirection: 'row',
         fontSize: 14,
-        // justifyContent: 'center',
         alignItems: 'flex-end',
         marginLeft: 180,
-        // marginTop: 50,
     },
     formControl: {
         width: 400,
@@ -226,33 +222,18 @@ const useStyles = createStylesheet((theme) => ({
     },
 }));
 
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
 const MenuProps = {
     PaperProps: {
         style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
+            // maxHeight: ITEM_HEIGHT * 10.5 + ITEM_PADDING_TOP,
+            // width: 250,
         },
     },
     variant: "menu",
     getContentAnchorEl: null,
 };
-
-
-const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-];
 
 interface Props {
     lenses: ILense[];
@@ -269,21 +250,6 @@ function sortSensors(selectedSensors: ISensor[], sensors: ISensor[]) {
 }
 
 const offset = 50;
-
-const LightTooltip = withStyles((theme) => ({
-    tooltip: {
-        backgroundColor: theme.palette.common.white,
-        color: 'rgba(0, 0, 0, 0.87)',
-        boxShadow: theme.shadows[1],
-        fontSize: 13,
-        fontWeight: 'normal',
-        maxWidth: 1000,
-        padding: 12,
-    },
-    arrow: {
-        color: theme.palette.common.white,
-    },
-}))(Tooltip);
 
 export function SensorComparison({lenses, sensors, texts}: Props) {
     const windowDimensions = useWindowDimensions();
@@ -314,21 +280,9 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [selectedLenses, setSelectedLenses] = React.useState([]); // ...lenses.filter((l, i) => i < 2)
 
     const handleChange = (event) => {
-        // console.log('handleChange', event.target.value);
         setSelectedLensesStr(event.target.value);
         setSelectedLenses(lenses.filter(l => event.target.value.includes(l.model)));
     };
-
-    // const handleChangeMultiple = (event) => {
-    //     const { options } = event.target;
-    //     const value = [];
-    //     for (let i = 0, l = options.length; i < l; i += 1) {
-    //         if (options[i].selected) {
-    //             value.push(options[i].value);
-    //         }
-    //     }
-    //     setSelectedLenses(value);
-    // };
 
     const maxWidth = windowDimensions.width - offset*2;
     const maxHeight = 700;
@@ -552,7 +506,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         'cinemeridian': 'cinemeridian.png',
     };
 
-    const onMouseEnterLeaveProps2 = (lense: ILense) => ({
+    const onMouseEnterLeaveLenseProps = (lense: ILense) => ({
         onMouseEnter: () => {
             setHoveredLense(lense);
         },
@@ -561,7 +515,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         },
     });
 
-    const onMouseEnterLeaveProps = (sensor: ISensor) => ({
+    const onMouseEnterLeaveSensorProps = (sensor: ISensor) => ({
         onMouseEnter: () => {
             setHoveredSensor(sensor);
         },
@@ -570,7 +524,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         },
     });
 
-    const onMouseEnterLeavePropsAll = (sensor: ISensor) => ({
+    const onMouseEnterLeaveSensorPropsAll = (sensor: ISensor) => ({
         onMouseEnter: () => {
             setHoveredSensorAll(sensor);
         },
@@ -578,8 +532,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
             setHoveredSensorAll(null);
         },
     });
-
-    console.log('selectedLenses', selectedLenses);
 
     return (
         <div className={classes.outer}>
@@ -600,7 +552,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                             }} className={classes.box}>
                                 {
                                     !realPhysicalSensorSize &&
-                                    <div className={classes.model} {...onMouseEnterLeaveProps(sensor)} style={{
+                                    <div className={classes.model} {...onMouseEnterLeaveSensorProps(sensor)} style={{
                                         cursor: 'default',
                                         color: hoveredSensor == sensor ? 'black' : sensor.textColor,
                                         backgroundColor: hoveredSensor == sensor ? 'white' : sensor.color,
@@ -630,7 +582,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 height: lense.imageCircle*factor,
                                 left: centerX-(lense.imageCircle*factor)/2,
                                 top: maxHeight/2-(lense.imageCircle*factor)/2,
-                                borderColor: 'white',
+                                borderColor: hoveredLense == lense ? 'white' : lense.color,
                                 justifyContent: 'flex-end',
                                 alignItems: 'center',
                                 opacity: 1,
@@ -639,13 +591,13 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                             }} className={classes.box2}>
                                 {
                                     !realPhysicalSensorSize &&
-                                    <div className={classes.model} {...onMouseEnterLeaveProps2(lense)} style={{
+                                    <div className={classes.model} {...onMouseEnterLeaveLenseProps(lense)} style={{
                                         cursor: 'default',
                                         transform: `translate(99.5%) rotate(${i * -5}deg)`,
                                         marginLeft: -1,
                                         transformOrigin: -lense.imageCircle * factor / 2,
-                                        color: hoveredLense == lense ? 'orange' : 'black',
-                                        backgroundColor: hoveredLense == lense ? 'white' : 'white',
+                                        color: hoveredLense == lense ? 'black' : lense.textColor,
+                                        backgroundColor: hoveredLense == lense ? 'white' : lense.color,
                                     }}>{lense.logo} {lense.model}</div>
                                 }
                             </div>
@@ -663,7 +615,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                     </div>
 
                     <div className={classes.heading}>Selected Lenses</div>
-                    <div className={classes.options2}>
+                    <div className={classes.selectedLenses}>
                         <FormControl className={classes.formControl}>
                             <Select
                                 labelId="demo-mutiple-checkbox-label"
@@ -697,72 +649,60 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 <th className={classes.cellCheckbox}/>
                                 <th className={classes.cellModel}>Selected Models</th>
                                 <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('width', 'height')}>
-                                    <LightTooltip arrow title={texts.dimensions} placement="top">
-                                        <div>
-                                            Dimensions (mm)
-                                            {
-                                                selectedSortColumn === 'width' &&
-                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                            }
-                                        </div>
-                                    </LightTooltip>
+                                    <CustomTooltip title={texts.dimensions}>
+                                        Dimensions (mm)
+                                        {
+                                            selectedSortColumn === 'width' &&
+                                            <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                        }
+                                    </CustomTooltip>
                                 </th>
                                 <th className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSelectedSort('aspectRatio')}>
-                                    <LightTooltip arrow title={texts.aspectRatio} placement="top">
-                                        <div>
-                                            Aspect Ratio
-                                            {
-                                                selectedSortColumn === 'aspectRatio' &&
-                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                            }
-                                        </div>
-                                    </LightTooltip>
+                                    <CustomTooltip title={texts.aspectRatio}>
+                                        Aspect Ratio
+                                        {
+                                            selectedSortColumn === 'aspectRatio' &&
+                                            <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                        }
+                                    </CustomTooltip>
                                 </th>
                                 <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('diagonal')}>
-                                    <LightTooltip arrow title={texts.diagonal} placement="top">
-                                        <div>
-                                            Diagonal (mm)
-                                            {
-                                                selectedSortColumn === 'diagonal' &&
-                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                            }
-                                        </div>
-                                    </LightTooltip>
+                                    <CustomTooltip title={texts.diagonal}>
+                                        Diagonal (mm)
+                                        {
+                                            selectedSortColumn === 'diagonal' &&
+                                            <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                        }
+                                    </CustomTooltip>
                                 </th>
                                 <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('resolutionX', 'resolutionY')}>
-                                    <LightTooltip arrow title={texts.resolution} placement="top">
-                                        <div>
-                                            Resolution (px)
-                                            {
-                                                selectedSortColumn === 'resolutionX' &&
-                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                            }
-                                        </div>
-                                    </LightTooltip>
+                                    <CustomTooltip title={texts.resolution}>
+                                        Resolution (px)
+                                        {
+                                            selectedSortColumn === 'resolutionX' &&
+                                            <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                        }
+                                    </CustomTooltip>
                                 </th>
                                 <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('cropFactor')}>
-                                    <LightTooltip arrow title={texts.cropFactor} placement="top">
-                                        <div>
-                                            {'\u00A0\u00A0\u00A0\u00A0'}
-                                            Crop Factor (S35)
-                                            {
-                                                selectedSortColumn === 'cropFactor' &&
-                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                            }
-                                        </div>
-                                    </LightTooltip>
+                                    <CustomTooltip title={texts.cropFactor}>
+                                        {'\u00A0\u00A0\u00A0\u00A0'}
+                                        Crop Factor (S35)
+                                        {
+                                            selectedSortColumn === 'cropFactor' &&
+                                            <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                        }
+                                    </CustomTooltip>
                                 </th>
                                 <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('photositeDensity')}>
-                                    <LightTooltip arrow title={texts.density} placement="top">
-                                        <div>
-                                            {'\u00A0\u00A0\u00A0\u00A0'}
-                                            Density (px/mm²)
-                                            {
-                                                selectedSortColumn === 'photositeDensity' &&
-                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                            }
-                                        </div>
-                                    </LightTooltip>
+                                    <CustomTooltip title={texts.density}>
+                                        {'\u00A0\u00A0\u00A0\u00A0'}
+                                        Density (px/mm²)
+                                        {
+                                            selectedSortColumn === 'photositeDensity' &&
+                                            <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                        }
+                                    </CustomTooltip>
                                 </th>
                             </tr>
                             </thead>
@@ -774,19 +714,19 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             {
                                                 sensor.model !== 'temp' &&
                                                     <>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellCheckbox}>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellCheckbox}>
                                                             <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
                                                         </td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellModel}>{sensor.model}</td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellX}>x</td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellModel}>{sensor.model}</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellX}>x</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
                                                         {/*<td {...onMouseEnterLeaveProps(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>*/}
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                                        <td {...onMouseEnterLeaveProps(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
                                                     </>
                                             }
                                         </tr>
@@ -817,7 +757,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                     <th className={classes.cellCheckbox}/>
                                     <th className={classes.cellModel}>
                                         <div className={classes.searchBox}>
-                                        Model
+                                            Model
                                             <input type="text" placeholder="Search" className={classes.textSearch} value={searchStr} onChange={onSearchChange} />
                                             {'\u00A0'}{'\u00A0'}
                                             {
@@ -826,49 +766,61 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             }
                                         </div>
                                     </th>
-                                    <th data-tip={texts.dimensions} colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('width', 'height')}>
-                                        Dimensions (mm)
-                                        {
-                                            sortColumn === 'width' &&
-                                            <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                        }
+                                    <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('width', 'height')}>
+                                        <CustomTooltip title={texts.dimensions}>
+                                            Dimensions (mm)
+                                            {
+                                                sortColumn === 'width' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </CustomTooltip>
                                     </th>
-                                    <th data-tip={texts.aspectRatio} className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSort('aspectRatio')}>
-                                        Aspect Ratio
-                                        {
-                                            sortColumn === 'aspectRatio' &&
-                                            <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                        }
+                                    <th className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSort('aspectRatio')}>
+                                        <CustomTooltip title={texts.aspectRatio}>
+                                            Aspect Ratio
+                                            {
+                                                sortColumn === 'aspectRatio' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </CustomTooltip>
                                     </th>
-                                    <th data-tip={texts.diagonal} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('diagonal')}>
-                                        Diagonal (mm)
-                                        {
-                                            sortColumn === 'diagonal' &&
-                                            <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                        }
+                                    <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('diagonal')}>
+                                        <CustomTooltip title={texts.diagonal}>
+                                            Diagonal (mm)
+                                            {
+                                                sortColumn === 'diagonal' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </CustomTooltip>
                                     </th>
-                                    <th data-tip={texts.resolution} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('resolutionX', 'resolutionY')}>
-                                        Resolution (px)
-                                        {
-                                            sortColumn === 'resolutionX' &&
-                                            <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                        }
+                                    <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSort('resolutionX', 'resolutionY')}>
+                                        <CustomTooltip title={texts.resolution}>
+                                            Resolution (px)
+                                            {
+                                                sortColumn === 'resolutionX' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </CustomTooltip>
                                     </th>
-                                    <th data-tip={texts.cropFactor} className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('cropFactor')}>
-                                        {'\u00A0\u00A0\u00A0\u00A0'}
-                                        Crop Factor (S35)
-                                        {
-                                            sortColumn === 'cropFactor' &&
-                                            <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                        }
+                                    <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('cropFactor')}>
+                                        <CustomTooltip title={texts.cropFactor}>
+                                            {'\u00A0\u00A0\u00A0\u00A0'}
+                                            Crop Factor (S35)
+                                            {
+                                                sortColumn === 'cropFactor' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </CustomTooltip>
                                     </th>
-                                    <th data-tip={texts.density} className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('photositeDensity')}>
-                                        {'\u00A0\u00A0\u00A0\u00A0'}
-                                        Density (px/mm²)
-                                        {
-                                            sortColumn === 'photositeDensity' &&
-                                            <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                        }
+                                    <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('photositeDensity')}>
+                                        <CustomTooltip title={texts.density}>
+                                            {'\u00A0\u00A0\u00A0\u00A0'}
+                                            Density (px/mm²)
+                                            {
+                                                sortColumn === 'photositeDensity' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </CustomTooltip>
                                     </th>
                                 </tr>
                             </thead>
@@ -907,19 +859,19 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                         <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
                                                     }
 
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellCheckbox}>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellCheckbox}>
                                                         <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
                                                     </td>
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellModel}>{sensor.model}</td>
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellX}>x</td>
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellModel}>{sensor.model}</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellX}>x</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
                                                     {/*<td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>*/}
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                                    <td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
+                                                    <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
                                                 </tr>
                                             </React.Fragment>
                                         );

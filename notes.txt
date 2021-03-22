@@ -5,37 +5,36 @@ http://phfx.com/tools/formatCompare/formatCompare.cgi?makeA=RED&modelA=Monstro+8
 https://www.digicamdb.com/compare/canon_eos-r5-vs-leica_sl2/
 https://twitter.com/Cooke_Optics/status/1023968001224318976/photo/1
 
-
 notes:
 x tabelle eine minimalhöhe geben
 x alternativ scrollposition wieder richtig setzen, wenn modell aus der unteren tabelle angeklickt wird
-
 x domain sensorsizes.com
 x export nach clipboard als tabelle
 x wenn man filtert und dann auf ein logo klickt nur sichtbare modelle hinzufügen/entfernen
 x tabelle springt/flackert horizontal nach filterung
-
 x minimale höhe in 10er schritten
 x buttons deaktivieren anstatt ausblenden wenn keine kameras ausgewählt
 x zeilen hervorheben
-
 x paypal button fertig machen
 
-- units smaller in header
+
+- units smaller in header?
 
 
 lenses table
 
-- use material ui checkbox everywhere?
-
-x lenses name on round border possible?
-- lense color / textColor
-- disable scroll when multiselect is open
 - deselect all lenses
 - select all lenses?
 - autocomplete?
-- multiselect height?
-- tooltips!
+
+- use material ui checkbox everywhere?
+
+x lenses name on round border possible?
+x lense color / textColor
+x disable scroll when multiselect is open
+x multiselect height?
+x tooltips!
+
 
 select multiselect demo
 https://stackblitz.com/edit/tpxayh?file=demo.js
