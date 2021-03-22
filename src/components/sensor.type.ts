@@ -18,6 +18,12 @@ export interface ISensor {
     photositeDensity: number;
 }
 
+export interface ILense {
+    model: string;
+    logo: string;
+    imageCircle: number;
+}
+
 export interface ITexts {
     realPhysicalSensorSize: string;
     dimensions: string;

@@ -31,17 +31,30 @@ const useStyles = createStylesheet((theme) => ({
 }));
 
 interface Props {
+    lenses: any;
     sensors: any;
     texts: any;
     dev?: boolean;
 }
 
-export default function SensorLayout({sensors, texts, dev}: Props) {
+// import "bootstrap/dist/css/bootstrap.css";
+//
+// import Button from "react-bootstrap/Button";
+// import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+// import Tooltip from "react-bootstrap/Tooltip";
+
+export default function SensorLayout({lenses, sensors, texts, dev}: Props) {
     const [loaded, setLoaded] = useState(false);
+
+    console.log(lenses);
 
     useEffect(() => {
         setLoaded(true);
     });
+
+    // const renderTooltip = props => (
+    //     <Tooltip {...props}>Tooltip for the register button</Tooltip>
+    // );
 
     const classes = useStyles();
     return (
@@ -55,6 +68,14 @@ export default function SensorLayout({sensors, texts, dev}: Props) {
                 loaded &&
                 <ReactTooltip place="top" type="light" effect="solid"/>
             }
+
+            {/*<Tooltip arrow title="Tooltip for the register button" placement="top">*/}
+            {/*    <Button variant="contained" style={{marginLeft:650}}>Register</Button>*/}
+            {/*</Tooltip>*/}
+
+            {/*<OverlayTrigger placement="top" overlay={renderTooltip}>*/}
+            {/*    <Button style={{marginLeft: 450}}>Register</Button>*/}
+            {/*</OverlayTrigger>*/}
 
             <main className={styles.main}>
                 <div className={classes.links}>
@@ -78,7 +99,7 @@ export default function SensorLayout({sensors, texts, dev}: Props) {
                 <h1 className={styles.title}>
                     <a href="/"><span className={classes.titlePart}>COMPARE</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
                 </h1>
-                <SensorComparison sensors={sensors} texts={texts}/>
+                <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
                 <div>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">Contact</a>
 

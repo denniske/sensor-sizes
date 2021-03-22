@@ -9,7 +9,7 @@ export const getSensorsFromSheet = async () => {
     await doc.loadInfo(); // loads document properties and worksheets
     console.log(doc.title);
 
-    const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+    const sheet = doc.sheetsById['0']; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
     console.log(sheet.title);
     console.log(sheet.rowCount);
 
@@ -54,7 +54,7 @@ export const getTextsFromSheet = async () => {
     await doc.loadInfo();
     console.log(doc.title);
 
-    const sheet = doc.sheetsByIndex[1];
+    const sheet = doc.sheetsById['1209564769'];
     console.log(sheet.title);
     console.log(sheet.rowCount);
 
@@ -73,4 +73,31 @@ export const getTextsFromSheet = async () => {
         cropFactor: textRow.cropFactor,
         density: textRow.density,
     };
+};
+
+
+export const getLensesFromSheet = async () => {
+    const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
+
+    await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY);
+
+    await doc.loadInfo(); // loads document properties and worksheets
+    console.log(doc.title);
+
+    const sheet = doc.sheetsById['2136751308']; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+    console.log(sheet.title);
+    console.log(sheet.rowCount);
+
+    const rows = await sheet.getRows();
+    // console.log(rows);
+
+    const allRows = rows.map(r => {
+        return ({
+            model: r.model,
+            logo: r.logo,
+            imageCircle: parseFloat(r.imageCircle),
+        });
+    });
+
+    return allRows;//.filter(r => r.enabled);
 };

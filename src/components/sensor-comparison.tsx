@@ -1,12 +1,17 @@
 import { maxBy, min, orderBy } from 'lodash';
 import {createStylesheet} from '../helper/styles';
-import {ISensor, ITexts} from './sensor.type';
+import {ILense, ISensor, ITexts} from './sensor.type';
 import React, {useEffect, useState} from 'react';
 import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
 import {noop} from '@babel/types';
 import {faArrowDown, faArrowUp, faCoffee, faCross, faTimes} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    Link, Tooltip, Button, withStyles, FormControl, InputLabel, Select, Input, MenuItem, Checkbox, ListItemText,
+    useTheme
+} from '@material-ui/core';
+import CustomCheckbox from './custom-checkbox';
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -42,10 +47,11 @@ const useStyles = createStylesheet((theme) => ({
         flexDirection: 'row',
         fontSize: 14,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
     },
     optionsLabel: {
         marginLeft: 10,
+        width: 190,
     },
     optionsText: {
         marginLeft: 20,
@@ -71,6 +77,17 @@ const useStyles = createStylesheet((theme) => ({
         alignItems: 'end',
         justifyContent: 'center',
         overflow: 'hidden',
+    },
+    box2: {
+        position: 'absolute',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#AAA',
+        transitionDuration: '300ms',
+        transitionProperty: 'width, height, left, top, display, opacity',
+        display: 'flex',
+        alignItems: 'end',
+        justifyContent: 'center',
     },
     model: {
         fontSize: '0.85rem',
@@ -180,9 +197,65 @@ const useStyles = createStylesheet((theme) => ({
     tableSelected: {
         marginBottom: 6,
     },
+    heading: {
+        marginLeft: 180,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginTop: 40,
+    },
+    options2: {
+        flexDirection: 'row',
+        fontSize: 14,
+        // justifyContent: 'center',
+        alignItems: 'flex-end',
+        marginLeft: 180,
+        // marginTop: 50,
+    },
+    formControl: {
+        width: 400,
+    },
+    chips: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    chip: {
+        margin: 2,
+    },
+    noLabel: {
+        marginTop: theme.spacing(3),
+    },
 }));
 
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+    variant: "menu",
+    getContentAnchorEl: null,
+};
+
+
+const names = [
+    'Oliver Hansen',
+    'Van Henry',
+    'April Tucker',
+    'Ralph Hubbard',
+    'Omar Alexander',
+    'Carlos Abbott',
+    'Miriam Wagner',
+    'Bradley Wilkerson',
+    'Virginia Andrews',
+    'Kelly Snyder',
+];
+
 interface Props {
+    lenses: ILense[];
     sensors: ISensor[];
     texts: ITexts;
 }
@@ -197,7 +270,22 @@ function sortSensors(selectedSensors: ISensor[], sensors: ISensor[]) {
 
 const offset = 50;
 
-export function SensorComparison({sensors, texts}: Props) {
+const LightTooltip = withStyles((theme) => ({
+    tooltip: {
+        backgroundColor: theme.palette.common.white,
+        color: 'rgba(0, 0, 0, 0.87)',
+        boxShadow: theme.shadows[1],
+        fontSize: 13,
+        fontWeight: 'normal',
+        maxWidth: 1000,
+        padding: 12,
+    },
+    arrow: {
+        color: theme.palette.common.white,
+    },
+}))(Tooltip);
+
+export function SensorComparison({lenses, sensors, texts}: Props) {
     const windowDimensions = useWindowDimensions();
     const loaded = useClientLoaded();
     const classes = useStyles();
@@ -218,14 +306,37 @@ export function SensorComparison({sensors, texts}: Props) {
     const [filteredSensors, setFilteredSensors] = useState<ISensor[]>(sensors);
     const [showLogo, setShowLogo] = useState(true);
     const [hoveredSensor, setHoveredSensor] = useState(null);
+    const [hoveredLense, setHoveredLense] = useState(null);
     const [hoveredSensorAll, setHoveredSensorAll] = useState(null);
     const [filteredSelectedSensors, setFilteredSelectedSensors] = useState<ISensor[]>(selectedSensors);
+
+    const [selectedLensesStr, setSelectedLensesStr] = React.useState([]);
+    const [selectedLenses, setSelectedLenses] = React.useState([...lenses.filter((l, i) => i < 2)]);
+
+    const handleChange = (event) => {
+        // console.log('handleChange', event.target.value);
+        setSelectedLensesStr(event.target.value);
+        setSelectedLenses(lenses.filter(l => event.target.value.includes(l.model)));
+    };
+
+    // const handleChangeMultiple = (event) => {
+    //     const { options } = event.target;
+    //     const value = [];
+    //     for (let i = 0, l = options.length; i < l; i += 1) {
+    //         if (options[i].selected) {
+    //             value.push(options[i].value);
+    //         }
+    //     }
+    //     setSelectedLenses(value);
+    // };
 
     const maxWidth = windowDimensions.width - offset*2;
     const maxHeight = 700;
 
-    const maxSensorWidth = maxBy(selectedSensors, s => s.width);
-    const maxSensorHeight = maxBy(selectedSensors, s => s.height);
+    const selectedLensesAdded = selectedLenses.map(l => ({width: l.imageCircle, height: l.imageCircle}));
+
+    const maxSensorWidth = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircle, height: imageCircle }], s => s.width);
+    const maxSensorHeight = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircle, height: imageCircle }], s => s.height);
 
     let factor = 1;
     if (maxSensorWidth != null) {
@@ -441,6 +552,15 @@ export function SensorComparison({sensors, texts}: Props) {
         'cinemeridian': 'cinemeridian.png',
     };
 
+    const onMouseEnterLeaveProps2 = (lense: ILense) => ({
+        onMouseEnter: () => {
+            setHoveredLense(lense);
+        },
+        onMouseLeave: () => {
+            setHoveredLense(null);
+        },
+    });
+
     const onMouseEnterLeaveProps = (sensor: ISensor) => ({
         onMouseEnter: () => {
             setHoveredSensor(sensor);
@@ -458,6 +578,8 @@ export function SensorComparison({sensors, texts}: Props) {
             setHoveredSensorAll(null);
         },
     });
+
+    console.log('selectedLenses', selectedLenses);
 
     return (
         <div className={classes.outer}>
@@ -488,7 +610,7 @@ export function SensorComparison({sensors, texts}: Props) {
                         ))
                     }
                     {
-                        imageCircleVisible &&
+                        loaded && imageCircle &&
                         <div style={{
                             width: imageCircle*factor,
                             height: imageCircle*factor,
@@ -500,6 +622,31 @@ export function SensorComparison({sensors, texts}: Props) {
                             borderRadius: '50%',
                         }} className={classes.box}>
                         </div>
+                    }
+                    {
+                        loaded && orderBy(selectedLenses, l => l.imageCircle).map((lense, i) =>
+                            <div key={lense.model} style={{
+                                width: lense.imageCircle*factor,
+                                height: lense.imageCircle*factor,
+                                left: centerX-(lense.imageCircle*factor)/2,
+                                top: maxHeight/2-(lense.imageCircle*factor)/2,
+                                borderColor: 'white',
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
+                                opacity: 1,
+                                zIndex: hoveredLense == lense ? 100 : 'inherit',
+                                borderRadius: '50%',
+                            }} className={classes.box2}>
+                                <div className={classes.model} {...onMouseEnterLeaveProps2(lense)} style={{
+                                    cursor: 'default',
+                                    transform: `translate(99.5%) rotate(${i*-5}deg)`,
+                                    marginLeft: -1,
+                                    transformOrigin: -lense.imageCircle*factor/2,
+                                    color: hoveredLense == lense ? 'orange' : 'black',
+                                    backgroundColor: hoveredLense == lense ? 'white' : 'white',
+                                }}>{lense.logo} {lense.model}</div>
+                            </div>
+                        )
                     }
                 </div>
             </div>
@@ -514,10 +661,52 @@ export function SensorComparison({sensors, texts}: Props) {
                         <div><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>
                     </div>
 
-                    <div className={classes.options}>
-                        <input className={classes.pointer} type="checkbox" checked={imageCircleVisible} onChange={onToggleImageCircle} />
-                        <div data-tip={texts.realPhysicalSensorSize} className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleImageCircle}>Image circle</div>
-                        <div className={`${classes.optionsText}`}>Your image circle (mm)</div>
+                    {/*<div className={classes.options}>*/}
+                    {/*    <input className={classes.pointer} type="checkbox" checked={imageCircleVisible} onChange={onToggleImageCircle} />*/}
+                    {/*    <div data-tip={texts.realPhysicalSensorSize} className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleImageCircle}>Lens Image circle</div>*/}
+                    {/*    <div className={`${classes.optionsText}`}>Your image circle (mm)</div>*/}
+                    {/*    <div><input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={onImageCircleChange} /></div>*/}
+                    {/*</div>*/}
+
+
+                    <div className={classes.heading}>
+                        Selected Lenses
+                    </div>
+                    <div className={classes.options2}>
+                        <FormControl className={classes.formControl}>
+                            {/*<InputLabel id="demo-mutiple-checkbox-label">Selected lenses</InputLabel>*/}
+                            <Select
+
+                                labelId="demo-mutiple-checkbox-label"
+                                id="demo-mutiple-checkbox"
+                                multiple
+                                value={selectedLensesStr}
+                                onChange={handleChange}
+                                input={<Input />}
+                                //renderValue={(selected) => selected.join(', ')}
+
+                                displayEmpty={true}
+
+                                renderValue={(selected) => selected?.length + ' selected'}
+
+                                /*renderValue={(selected) => (
+                                  <div className={classes.chips}>
+                                    {selected.map((value) => (
+                                      <Chip key={value} label={value} className={classes.chip} />
+                                    ))}
+                                  </div>
+                                )}*/
+                                MenuProps={MenuProps as any}
+                            >
+                                {lenses.map(lense => (
+                                    <MenuItem key={lense.model} value={lense.model}>
+                                        <CustomCheckbox checked={selectedLenses.includes(lense)} />
+                                        <ListItemText primary={`${lense.model} (${lense.imageCircle.toFixed(2)} mm)`} />
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <div className={`${classes.optionsText}`}>Individual image circle (mm)</div>
                         <div><input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={onImageCircleChange} /></div>
                     </div>
 
@@ -541,26 +730,38 @@ export function SensorComparison({sensors, texts}: Props) {
                                 <th className={classes.cellLogo}/>
                                 <th className={classes.cellCheckbox}/>
                                 <th className={classes.cellModel}>Selected Models</th>
-                                <th colSpan={3} data-tip={texts.dimensions} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('width', 'height')}>
-                                    Dimensions (mm)
-                                    {
-                                        selectedSortColumn === 'width' &&
-                                        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                    }
+                                <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('width', 'height')}>
+                                    <LightTooltip arrow title={texts.dimensions} placement="top">
+                                        <div>
+                                            Dimensions (mm)
+                                            {
+                                                selectedSortColumn === 'width' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </div>
+                                    </LightTooltip>
                                 </th>
-                                <th data-tip={texts.aspectRatio} className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSelectedSort('aspectRatio')}>
-                                    Aspect Ratio
-                                    {
-                                        selectedSortColumn === 'aspectRatio' &&
-                                        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                    }
+                                <th className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSelectedSort('aspectRatio')}>
+                                    <LightTooltip arrow title={texts.aspectRatio} placement="top">
+                                        <div>
+                                            Aspect Ratio
+                                            {
+                                                selectedSortColumn === 'aspectRatio' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </div>
+                                    </LightTooltip>
                                 </th>
-                                <th data-tip={texts.diagonal} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('diagonal')}>
-                                    Diagonal (mm)
-                                    {
-                                        selectedSortColumn === 'diagonal' &&
-                                        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                    }
+                                <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('diagonal')}>
+                                    <LightTooltip arrow title={texts.diagonal} placement="top">
+                                        <div>
+                                            Diagonal (mm)
+                                            {
+                                                selectedSortColumn === 'diagonal' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </div>
+                                    </LightTooltip>
                                 </th>
                                 {/*<th className={`${classes.cellArea} ${classes.pointer}`} onClick={() => changeSelectedSort('area')}>*/}
                                 {/*    Area (mm²)*/}
@@ -569,28 +770,40 @@ export function SensorComparison({sensors, texts}: Props) {
                                 {/*        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />*/}
                                 {/*    }*/}
                                 {/*</th>*/}
-                                <th  data-tip={texts.resolution} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('resolutionX', 'resolutionY')}>
-                                    Resolution (px)
-                                    {
-                                        selectedSortColumn === 'resolutionX' &&
-                                        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                    }
+                                <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('resolutionX', 'resolutionY')}>
+                                    <LightTooltip arrow title={texts.resolution} placement="top">
+                                        <div>
+                                            Resolution (px)
+                                            {
+                                                selectedSortColumn === 'resolutionX' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </div>
+                                    </LightTooltip>
                                 </th>
-                                <th data-tip={texts.cropFactor} className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('cropFactor')}>
-                                    {'\u00A0\u00A0\u00A0\u00A0'}
-                                    Crop Factor (S35)
-                                    {
-                                        selectedSortColumn === 'cropFactor' &&
-                                        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                    }
+                                <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('cropFactor')}>
+                                    <LightTooltip arrow title={texts.cropFactor} placement="top">
+                                        <div>
+                                            {'\u00A0\u00A0\u00A0\u00A0'}
+                                            Crop Factor (S35)
+                                            {
+                                                selectedSortColumn === 'cropFactor' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </div>
+                                    </LightTooltip>
                                 </th>
-                                <th data-tip={texts.density} className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('photositeDensity')}>
-                                    {'\u00A0\u00A0\u00A0\u00A0'}
-                                    Density (px/mm²)
-                                    {
-                                        selectedSortColumn === 'photositeDensity' &&
-                                        <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
-                                    }
+                                <th className={`${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSelectedSort('photositeDensity')}>
+                                    <LightTooltip arrow title={texts.density} placement="top">
+                                        <div>
+                                            {'\u00A0\u00A0\u00A0\u00A0'}
+                                            Density (px/mm²)
+                                            {
+                                                selectedSortColumn === 'photositeDensity' &&
+                                                <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
+                                            }
+                                        </div>
+                                    </LightTooltip>
                                 </th>
                             </tr>
                             </thead>

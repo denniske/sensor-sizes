@@ -22,3 +22,12 @@ x zeilen hervorheben
 x paypal button fertig machen
 
 - units smaller in header
+
+
+lenses table
+
+- use material ui checkbox everywhere?
+
+x lenses name on round border possible?
+- lense color / textColor
+
