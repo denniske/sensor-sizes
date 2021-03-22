@@ -687,7 +687,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
                                 displayEmpty={true}
 
-                                renderValue={(selected) => selected?.length + ' selected'}
+                                renderValue={(selected: string[] | null) => selected?.length + ' selected'}
 
                                 /*renderValue={(selected) => (
                                   <div className={classes.chips}>

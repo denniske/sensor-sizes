@@ -31,3 +31,6 @@ lenses table
 x lenses name on round border possible?
 - lense color / textColor
 
+
+select multiselect demo
+https://stackblitz.com/edit/tpxayh?file=demo.js
