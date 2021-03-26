@@ -640,7 +640,11 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 ))}
                             </Select>
                         </FormControl>
-                        <div className={`${classes.optionsText}`}>Individual image circle (mm)</div>
+                        <div className={`${classes.optionsText}`}>
+                            <CustomTooltip title={texts.individualImageCircle}>
+                                Individual image circle (mm)
+                            </CustomTooltip>
+                        </div>
                         <div><input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={onImageCircleChange} /></div>
                     </div>
 

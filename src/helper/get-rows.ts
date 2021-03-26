@@ -65,6 +65,7 @@ export const getTextsFromSheet = async () => {
     const textRow = rows[1];
 
     return {
+        individualImageCircle: textRow.individualImageCircle,
         realPhysicalSensorSize: textRow.realPhysicalSensorSize,
         dimensions: textRow.dimensions,
         aspectRatio: textRow.aspectRatio,

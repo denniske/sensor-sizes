@@ -27,6 +27,7 @@ export interface ILense {
 }
 
 export interface ITexts {
+    individualImageCircle: string;
     realPhysicalSensorSize: string;
     dimensions: string;
     aspectRatio: string;
