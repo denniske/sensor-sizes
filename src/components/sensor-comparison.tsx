@@ -293,13 +293,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         individualImageCircleLense.model = `Individual Image Circle (${imageCircle.toFixed(2)} mm)`;
         individualImageCircleLense.imageCircle = imageCircle;
         visibleLenses.push(individualImageCircleLense);
-        // visibleLenses.push({
-        //     logo: '',
-        //     model: `Individual Image Circle (${imageCircle.toFixed(2)} mm)`,
-        //     imageCircle,
-        //     color: '#cccccc',
-        //     textColor: 'black',
-        // });
     }
 
     const handleChange = (event) => {
@@ -584,20 +577,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                             </div>
                         ))
                     }
-                    {/*{*/}
-                    {/*    loaded && imageCircle > 0 &&*/}
-                    {/*    <div style={{*/}
-                    {/*        width: imageCircle*factor,*/}
-                    {/*        height: imageCircle*factor,*/}
-                    {/*        left: centerX-(imageCircle*factor)/2,*/}
-                    {/*        top: maxHeight/2-(imageCircle*factor)/2,*/}
-                    {/*        borderColor: 'white',*/}
-                    {/*        opacity: 1,*/}
-                    {/*        zIndex: 200,*/}
-                    {/*        borderRadius: '50%',*/}
-                    {/*    }} className={classes.box}>*/}
-                    {/*    </div>*/}
-                    {/*}*/}
                     {
                         loaded && orderBy(visibleLenses, l => l.imageCircle).map((lense, i) =>
                             <div key={lense.model} style={{
