@@ -96,6 +96,7 @@ const useStyles = createStylesheet((theme) => ({
         paddingVertical: 3,
         backgroundColor: '#AAA',
         zIndex: 10,
+        whiteSpace: 'nowrap',
     },
     row: {
         height: 30
@@ -251,6 +252,14 @@ function sortSensors(selectedSensors: ISensor[], sensors: ISensor[]) {
 
 const offset = 50;
 
+const individualImageCircleLense = {
+    logo: '',
+    model: `Individual Image Circle`,
+    imageCircle: 0,
+    color: '#cccccc',
+    textColor: 'black',
+};
+
 export function SensorComparison({lenses, sensors, texts}: Props) {
     const windowDimensions = useWindowDimensions();
     const loaded = useClientLoaded();
@@ -278,6 +287,20 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
     const [selectedLensesStr, setSelectedLensesStr] = React.useState([]);
     const [selectedLenses, setSelectedLenses] = React.useState([]); // ...lenses.filter((l, i) => i < 2)
+
+    const visibleLenses = [...selectedLenses];
+    if (imageCircle > 0) {
+        individualImageCircleLense.model = `Individual Image Circle (${imageCircle.toFixed(2)} mm)`;
+        individualImageCircleLense.imageCircle = imageCircle;
+        visibleLenses.push(individualImageCircleLense);
+        // visibleLenses.push({
+        //     logo: '',
+        //     model: `Individual Image Circle (${imageCircle.toFixed(2)} mm)`,
+        //     imageCircle,
+        //     color: '#cccccc',
+        //     textColor: 'black',
+        // });
+    }
 
     const handleChange = (event) => {
         setSelectedLensesStr(event.target.value);
@@ -561,22 +584,22 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                             </div>
                         ))
                     }
+                    {/*{*/}
+                    {/*    loaded && imageCircle > 0 &&*/}
+                    {/*    <div style={{*/}
+                    {/*        width: imageCircle*factor,*/}
+                    {/*        height: imageCircle*factor,*/}
+                    {/*        left: centerX-(imageCircle*factor)/2,*/}
+                    {/*        top: maxHeight/2-(imageCircle*factor)/2,*/}
+                    {/*        borderColor: 'white',*/}
+                    {/*        opacity: 1,*/}
+                    {/*        zIndex: 200,*/}
+                    {/*        borderRadius: '50%',*/}
+                    {/*    }} className={classes.box}>*/}
+                    {/*    </div>*/}
+                    {/*}*/}
                     {
-                        loaded && imageCircle > 0 &&
-                        <div style={{
-                            width: imageCircle*factor,
-                            height: imageCircle*factor,
-                            left: centerX-(imageCircle*factor)/2,
-                            top: maxHeight/2-(imageCircle*factor)/2,
-                            borderColor: 'white',
-                            opacity: 1,
-                            zIndex: 200,
-                            borderRadius: '50%',
-                        }} className={classes.box}>
-                        </div>
-                    }
-                    {
-                        loaded && orderBy(selectedLenses, l => l.imageCircle).map((lense, i) =>
+                        loaded && orderBy(visibleLenses, l => l.imageCircle).map((lense, i) =>
                             <div key={lense.model} style={{
                                 width: lense.imageCircle*factor,
                                 height: lense.imageCircle*factor,
