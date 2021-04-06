@@ -33,7 +33,6 @@ const useStyles = createStylesheet((theme) => ({
         backgroundColor: '#111',
         width: '100vw',
         height: 700,
-        overflow: 'hidden',
         marginVertical: 60,
     },
     surface: {
@@ -191,7 +190,7 @@ const useStyles = createStylesheet((theme) => ({
     title: {
     },
     tableAll: {
-        minHeight: 1850,
+        minHeight: 1950,
     },
     tableSelected: {
         marginBottom: 6,
@@ -637,7 +636,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 {lenses.map(lense => (
                                     <MenuItem key={lense.model} value={lense.model}>
                                         <CustomCheckbox checked={selectedLenses.includes(lense)} />
-                                        <ListItemText primary={`${lense.logo} ${lense.model} (${lense.imageCircle.toFixed(2)} mm)`} />
+                                        <ListItemText primary={`${lense.logo} ${lense.model} (⌀ ${lense.imageCircle.toFixed(2)} mm)`} />
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -649,6 +648,22 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                         </div>
                         <div><input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={onImageCircleChange} /></div>
                     </div>
+
+                    <br/>
+                    <table className="table-no-select">
+                        <thead>
+                        <tr>
+                            <th className={classes.cellLogo}/>
+                            <th className={classes.cellCheckbox}/>
+                            <td>
+                                <button disabled={selectedSensors.length === 0} className={classes.button} onClick={() => {
+                                    setSelectedLensesStr([]);
+                                    setSelectedLenses([]);
+                                }}>Clear selection</button>
+                            </td>
+                        </tr>
+                        </thead>
+                    </table>
 
                     <h3 className={classes.title}>{'\u00A0'}</h3>
                     <div className={classes.tableSelected}>
@@ -750,6 +765,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                         <thead>
                         <tr>
                             <th className={classes.cellLogo}/>
+                            <th className={classes.cellCheckbox}/>
                             <td>
                                 <button disabled={selectedSensors.length === 0} className={classes.button} onClick={() => setSelectedSensors([])}>Clear selection</button>
                                 <button disabled={selectedSensors.length === 0} className={classes.button} onClick={copySelectionToClipboard}>Copy selection to clipboard</button>

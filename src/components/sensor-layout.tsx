@@ -3,7 +3,8 @@ import styles from '../../styles/Home.module.css'
 import {createStylesheet} from '../helper/styles';
 import {SensorComparison} from './sensor-comparison';
 import {Link} from '@material-ui/core';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {CustomTooltip} from './light-tooltip';
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -19,6 +20,12 @@ const useStyles = createStylesheet((theme) => ({
     },
     linkImage: {
         height: 18,
+    },
+    footerLinks: {
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'flex-end',
+        flexDirection: 'row',
     },
     footerLink: {
         color: '#CCC',
@@ -48,6 +55,7 @@ export default function SensorLayout({lenses, sensors, texts, dev}: Props) {
         <div className={styles.container}>
             <Head>
                 <title>Compare Sensor Sizes</title>
+                <meta name="description" content="This sites compares many camera sensors."/>
                 <link rel="icon" href="/favicon.png"/>
             </Head>
 
@@ -74,8 +82,10 @@ export default function SensorLayout({lenses, sensors, texts, dev}: Props) {
                     <a href="/"><span className={classes.titlePart}>COMPARE</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
                 </h1>
                 <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
-                <div>
-                    <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">Contact</a>
+                <div className={classes.footerLinks}>
+                    <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">
+                        <CustomTooltip title={texts.contact}>Contact</CustomTooltip>
+                    </a>
 
                     <Link href="/privacy" className={classes.footerLink}>Privacy Policy</Link>
                 </div>

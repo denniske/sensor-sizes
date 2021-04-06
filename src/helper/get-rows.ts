@@ -73,6 +73,7 @@ export const getTextsFromSheet = async () => {
         resolution: textRow.resolution,
         cropFactor: textRow.cropFactor,
         density: textRow.density,
+        contact: textRow.contact,
     };
 };
 

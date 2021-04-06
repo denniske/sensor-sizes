@@ -23,12 +23,12 @@ x paypal button fertig machen
 
 lenses table
 
-- deselect all lenses
 - select all lenses?
 - autocomplete?
 
 - use material ui checkbox everywhere?
 
+x deselect all lenses
 x lenses name on round border possible?
 x lense color / textColor
 x disable scroll when multiselect is open
