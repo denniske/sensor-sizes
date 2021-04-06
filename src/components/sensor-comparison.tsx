@@ -593,7 +593,9 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 {
                                     !realPhysicalSensorSize &&
                                     <div className={classes.model} {...onMouseEnterLeaveLenseProps(lense)} style={{
+                                        zIndex: 30,
                                         cursor: 'default',
+                                        // transform: `translate(-0.5%) rotate(${i * -5}deg)`,
                                         transform: `translate(99.5%) rotate(${i * -5}deg)`,
                                         marginLeft: -1,
                                         transformOrigin: -lense.imageCircle * factor / 2,
@@ -656,7 +658,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                             <th className={classes.cellLogo}/>
                             <th className={classes.cellCheckbox}/>
                             <td>
-                                <button disabled={selectedSensors.length === 0} className={classes.button} onClick={() => {
+                                <button disabled={selectedLenses.length === 0} className={classes.button} onClick={() => {
                                     setSelectedLensesStr([]);
                                     setSelectedLenses([]);
                                 }}>Clear selection</button>

@@ -14,6 +14,7 @@ const useStyles = createStylesheet((theme) => ({
         flexDirection: 'row',
         // marginTop: 25,
         marginBottom: 60,
+        zIndex: 20,
     },
     link: {
         marginHorizontal: 10,

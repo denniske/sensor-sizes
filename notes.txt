@@ -18,6 +18,14 @@ x zeilen hervorheben
 x paypal button fertig machen
 
 
+
+mobile:
+- fix visualization of sensors + lenses & make lense label inwards)
+- density & crop factor nur bei landscape
+
+- impressum von abi-physik kopieren
+
+
 - units smaller in header?
 
 
