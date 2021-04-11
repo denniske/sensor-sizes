@@ -64,7 +64,21 @@ export const getTextsFromSheet = async () => {
     const titleRow = rows[0];
     const textRow = rows[1];
 
-    return {
+    return [{
+        individualImageCircle: titleRow.individualImageCircle || '',
+        realPhysicalSensorSize: titleRow.realPhysicalSensorSize || '',
+        dimensions: titleRow.dimensions || '',
+        aspectRatio: titleRow.aspectRatio || '',
+        diagonal: titleRow.diagonal || '',
+        resolution: titleRow.resolution || '',
+        cropFactor: titleRow.cropFactor || '',
+        density: titleRow.density || '',
+        contact: titleRow.contact || '',
+        metaTitle: titleRow.metaTitle || '',
+        metaDescription: titleRow.metaDescription || '',
+        metaTags: titleRow.metaTags || '',
+        explanationText: titleRow.explanationText || '',
+    }, {
         individualImageCircle: textRow.individualImageCircle,
         realPhysicalSensorSize: textRow.realPhysicalSensorSize,
         dimensions: textRow.dimensions,
@@ -74,7 +88,11 @@ export const getTextsFromSheet = async () => {
         cropFactor: textRow.cropFactor,
         density: textRow.density,
         contact: textRow.contact,
-    };
+        metaTitle: textRow.metaTitle,
+        metaDescription: textRow.metaDescription,
+        metaTags: textRow.metaTags,
+        explanationText: textRow.explanationText,
+    }];
 };
 
 

@@ -27,6 +27,7 @@ const useStyles = createStylesheet((theme) => ({
         flex: 1,
         justifyContent: 'flex-end',
         flexDirection: 'row',
+        marginTop: 50,
     },
     footerLink: {
         color: '#CCC',
@@ -35,16 +36,23 @@ const useStyles = createStylesheet((theme) => ({
     titlePart: {
         marginHorizontal: 2,
     },
+    explanationTitle: {
+    },
+    explanationText: {
+        maxWidth: 700,
+        textAlign: 'justify',
+    },
 }));
 
 interface Props {
     lenses: any;
     sensors: any;
     texts: any;
+    titles: any;
     dev?: boolean;
 }
 
-export default function SensorLayout({lenses, sensors, texts, dev}: Props) {
+export default function SensorLayout({lenses, sensors, texts, titles, dev}: Props) {
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
@@ -55,40 +63,72 @@ export default function SensorLayout({lenses, sensors, texts, dev}: Props) {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Compare Sensor Sizes</title>
-                <meta name="description" content="This sites compares many camera sensors."/>
                 <link rel="icon" href="/favicon.png"/>
+
+                <title>{texts.metaTitle}</title>
+                <meta name="title" content="Compare Sensor Sizes – Camera Sensor Size Comparison Tool"/>
+                <meta name="description" content={texts.metaDescription}/>
+                <meta name="keywords" content={texts.metaTags} />
+
+                <meta property="og:type" content="website"/>
+                <meta property="og:url" content="https://sensorsizes.com/"/>
+                <meta property="og:title" content={texts.metaTitle}/>
+                <meta property="og:description" content={texts.metaDescription}/>
+                <meta property="og:image" content="https://sensorsizes.com/social.png"/>
+
+                <meta property="twitter:card" content="summary_large_image"/>
+                <meta property="twitter:url" content="https://sensorsizes.com/"/>
+                <meta property="twitter:title" content={texts.metaTitle}/>
+                <meta property="twitter:description" content={texts.metaDescription}/>
+                <meta property="twitter:image" content="https://sensorsizes.com/social.png"/>
             </Head>
 
             <main className={styles.main}>
                 <div className={classes.links}>
                     <a className={classes.link} href="https://github.com/denniske/sensor-sizes" target="_blank">
-                        <img className={classes.linkImage} src="https://img.shields.io/badge/github-sensor--sizes-green?label=Github&logo=github&labelColor=00AA00&color=444"/>
+                        <img className={classes.linkImage}
+                             src="https://img.shields.io/badge/github-sensor--sizes-green?label=Github&logo=github&labelColor=00AA00&color=444"/>
                     </a>
                     <a className={classes.link} href="https://www.buymeacoffee.com/sensorsizes" target="_blank">
-                        <img className={classes.linkImage} src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshields-io-buymeacoffee.vercel.app%2Fapi%3Fusername%3Dsensorsizes&color=444"/>
+                        <img className={classes.linkImage}
+                             src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshields-io-buymeacoffee.vercel.app%2Fapi%3Fusername%3Dsensorsizes&color=444"/>
                     </a>
-                    <a className={classes.link} href="https://www.paypal.com/donate?business=hello%40sensorsizes.com&item_name=Compare+Sensor+Sizes&currency_code=EUR" target="_blank">
-                        <img className={classes.linkImage} src="https://img.shields.io/static/v1?label=Paypal&message=donate&color=444&labelColor=CCC&logo=paypal&logoColor=violet"/>
+                    <a className={classes.link}
+                       href="https://www.paypal.com/donate?business=hello%40sensorsizes.com&item_name=Compare+Sensor+Sizes&currency_code=EUR"
+                       target="_blank">
+                        <img className={classes.linkImage}
+                             src="https://img.shields.io/static/v1?label=Paypal&message=donate&color=444&labelColor=CCC&logo=paypal&logoColor=violet"/>
                     </a>
                     {
                         dev &&
-                        <a className={classes.link} href="https://vercel.com/denniske/sensor-sizes/deployments" target="_blank">
+                        <a className={classes.link} href="https://vercel.com/denniske/sensor-sizes/deployments"
+                           target="_blank">
                             <img src="https://vercel-badge-azure.vercel.app/api/denniske/sensor-sizes"/>
                         </a>
                     }
                 </div>
 
                 <h1 className={styles.title}>
-                    <a href="/"><span className={classes.titlePart}>COMPARE</span> <span className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
+                    <a href="/"><span className={classes.titlePart}>COMPARE</span> <span
+                        className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
                 </h1>
+
                 <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
+
+                <h3 className={classes.explanationTitle}>
+                    {titles.explanationText}
+                </h3>
+                <p className={classes.explanationText}>
+                    {texts.explanationText}
+                </p>
+
                 <div className={classes.footerLinks}>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">
                         <CustomTooltip title={texts.contact}>Contact</CustomTooltip>
                     </a>
 
                     <Link href="/privacy" className={classes.footerLink}>Privacy Policy</Link>
+                    <Link href="/legal-notice" className={classes.footerLink}>Legal Notice</Link>
                 </div>
             </main>
         </div>
