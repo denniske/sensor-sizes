@@ -30,7 +30,7 @@ const useStyles = createStylesheet((theme) => ({
         marginTop: 50,
     },
     footerLink: {
-        color: '#CCC',
+        color: '#EEE',
         marginHorizontal: 20,
     },
     titlePart: {
