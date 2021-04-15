@@ -68,7 +68,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                 <title>{texts.metaTitle}</title>
                 <meta name="title" content="Compare Sensor Sizes – Camera Sensor Size Comparison Tool"/>
                 <meta name="description" content={texts.metaDescription}/>
-                <meta name="keywords" content={texts.metaTags} />
+                <meta name="keywords" content={texts.metaTags}/>
 
                 <meta property="og:type" content="website"/>
                 <meta property="og:url" content="https://sensorsizes.com/"/>
@@ -83,13 +83,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                 <meta property="twitter:image" content="https://sensorsizes.com/social.png"/>
 
                 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1BYHEDKMJ"/>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-X1BYHEDKMJ');
-                </script>
+                <script type="text/javascript" src="/google-analytics.js"/>
             </Head>
 
             <main className={styles.main}>
