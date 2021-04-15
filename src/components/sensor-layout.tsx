@@ -81,6 +81,15 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                 <meta property="twitter:title" content={texts.metaTitle}/>
                 <meta property="twitter:description" content={texts.metaDescription}/>
                 <meta property="twitter:image" content="https://sensorsizes.com/social.png"/>
+
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1BYHEDKMJ"/>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', 'G-X1BYHEDKMJ');
+                </script>
             </Head>
 
             <main className={styles.main}>
