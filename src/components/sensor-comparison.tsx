@@ -903,14 +903,21 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
                                                     {
                                                         !hasPrintedLogo && showLogo &&
-                                                        <td rowSpan={logoCount[sensor.logo]} className={classes.cellWithLogo} style={{verticalAlign: 'top', paddingTop: sensor.logo === 'CINEMERIDIAN' ? 0 : 6}}
+                                                        <td rowSpan={logoCount[sensor.logo]}
+                                                            className={classes.cellWithLogo}
+                                                            style={{cursor: 'default', userSelect: 'none', verticalAlign: 'top', paddingTop: sensor.logo === 'CINEMERIDIAN' ? 0 : 6}}
                                                             onClick={(ev) => {
-                                                                onToggleAllSensorsForLogo(sensor.logo);
                                                                 ev.stopPropagation();
-                                                            }}>
+                                                            }}
+                                                        >
                                                             <img
-                                                            style={{width: 100, filter: 'brightness(0) invert()'}}
-                                                            src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}/>
+                                                                onClick={(ev) => {
+                                                                    onToggleAllSensorsForLogo(sensor.logo);
+                                                                    ev.stopPropagation();
+                                                                }}
+                                                                style={{cursor: 'pointer', width: 100, filter: 'brightness(0) invert()'}}
+                                                                src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}
+                                                            />
                                                         </td>
                                                     }
                                                     {
