@@ -37,10 +37,14 @@ const useStyles = createStylesheet((theme) => ({
         marginHorizontal: 2,
     },
     explanationTitle: {
+        marginTop: 50,
     },
     explanationText: {
+        width: '100%',
         maxWidth: 700,
         textAlign: 'justify',
+        marginVertical: 10,
+        lineHeight: '1.3em',
     },
 }));
 
@@ -119,11 +123,26 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                 <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
 
                 <h3 className={classes.explanationTitle}>
+                    {titles.descriptionText}
+                </h3>
+                {
+                    texts.descriptionText.split('\n').map(text =>
+                        <p className={classes.explanationText}>
+                            {text?.trim()}
+                        </p>
+                    )
+                }
+
+                <h3 className={classes.explanationTitle}>
                     {titles.explanationText}
                 </h3>
-                <p className={classes.explanationText}>
-                    {texts.explanationText}
-                </p>
+                {
+                    texts.explanationText.split('\n').map(text =>
+                        <p className={classes.explanationText}>
+                            {text?.trim()}
+                        </p>
+                    )
+                }
 
                 <div className={classes.footerLinks}>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">
