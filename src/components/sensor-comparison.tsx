@@ -523,6 +523,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         'canon': 'canon.svg',
         'red': 'red.png',
         'blackmagic': 'blackmagic.svg',
+        'kinefinity': 'kinefinity.png',
         'panasonic': 'panasonic.svg',
         'panavision': 'panavision.svg',
         'sony': 'sony.svg',
