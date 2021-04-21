@@ -518,7 +518,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const logoCount: Record<string, number> = {};
 
     const logoAsset = {
-        'analog': 'analog.svg',
+        'analog': 'analog.png',
         'apple': 'apple.svg',
         'arri': 'arri.svg',
         'canon': 'canon.svg',
@@ -529,6 +529,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         'panavision': 'panavision.svg',
         'sony': 'sony.svg',
         'cinemeridian': 'cinemeridian.png',
+        'z cam': 'zcam.png',
     };
 
     const onMouseEnterLeaveLenseProps = (lense: ILense) => ({
@@ -917,7 +918,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                                     onToggleAllSensorsForLogo(sensor.logo);
                                                                     ev.stopPropagation();
                                                                 }}
-                                                                style={{cursor: 'pointer', width: 100, filter: 'brightness(0) invert()'}}
+                                                                style={{cursor: 'pointer', maxWidth: 100, maxHeight: 40, filter: 'brightness(0) invert()'}}
                                                                 src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}
                                                             />
                                                         </td>
