@@ -519,6 +519,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
     const logoAsset = {
         'analog': 'analog.svg',
+        'apple': 'apple.svg',
         'arri': 'arri.svg',
         'canon': 'canon.svg',
         'red': 'red.png',
