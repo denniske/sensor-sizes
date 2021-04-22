@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormControl, Select, Input, MenuItem, ListItemText } from '@material-ui/core';
 import CustomCheckbox from './custom-checkbox';
 import {CustomTooltip} from './light-tooltip';
+import useDimensions from '../hooks/use-dimensions';
 
 
 const useStyles = createStylesheet((theme) => ({
@@ -272,7 +273,6 @@ const mobileCheck = function() {
 export function SensorComparison({lenses, sensors, texts}: Props) {
     const windowDimensions = useWindowDimensions();
     const isMobile = mobileCheck();
-    const loaded = useClientLoaded();
     const classes = useStyles();
     const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s) => s.default));
     const [realPhysicalSensorSize, setRealPhysicalSensorSize] = useState(false);
@@ -294,6 +294,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [hoveredLense, setHoveredLense] = useState(null);
     const [hoveredSensorAll, setHoveredSensorAll] = useState(null);
     const [filteredSelectedSensors, setFilteredSelectedSensors] = useState<ISensor[]>(selectedSensors);
+    const [ref, { x, y, width, height }] = useDimensions();
+    const loaded = useClientLoaded() && width;
 
     const [selectedLensesStr, setSelectedLensesStr] = React.useState([]);
     const [selectedLenses, setSelectedLenses] = React.useState([]); // ...lenses.filter((l, i) => i < 2)
@@ -310,8 +312,14 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         setSelectedLenses(lenses.filter(l => event.target.value.includes(l.model)));
     };
 
-    const maxWidth = windowDimensions.width - offset*2;
+    // const maxWidth = (isMobile ? windowDimensions.width : windowDimensions.width) - offset*2;
+    // const maxWidth = Math.min(700, width) - offset*2;
+    // const maxWidth = (width || windowDimensions?.width) - offset*2;
+    const maxWidth = width - offset*2;
     const maxHeight = 700;
+
+    // console.log('width', width);
+    // console.log('windowDimensions?.width', windowDimensions?.width);
 
     const selectedLensesAdded = selectedLenses.map(l => ({width: l.imageCircle, height: l.imageCircle}));
 
@@ -564,7 +572,19 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
     return (
         <div className={classes.outer}>
-            <div className={classes.container}>
+            {/*<div style={{textAlign: 'center'}}>*/}
+            {/*    {typeof window !== 'undefined' ? window.visualViewport.scale : 999}*/}
+            {/*</div>*/}
+            {/*<div style={{textAlign: 'center'}}>*/}
+            {/*    {windowDimensions?.width} px X {windowDimensions?.height} px @ {windowDimensions?.devicePixelRatio}*/}
+            {/*</div>*/}
+            {/*<div style={{textAlign: 'center'}}>*/}
+            {/*    {windowDimensions?.outerWidth} px X {windowDimensions?.outerHeight} px @ {windowDimensions?.devicePixelRatio}*/}
+            {/*</div>*/}
+            {/*<div style={{textAlign: 'center'}}>*/}
+            {/*    c: {width} px (first {firstWidth} px)*/}
+            {/*</div>*/}
+            <div className={classes.container} ref={ref}>
                 <div className={classes.surface}>
                     {
                         loaded && sensors.map(sensor => (

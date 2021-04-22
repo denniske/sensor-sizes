@@ -3,10 +3,13 @@ import {useEffect, useState} from 'react';
 function getWindowDimensions() {
     if (typeof window === "undefined") return { width: 1000, height: 1000};
 
-    const { innerWidth: width, innerHeight: height } = window;
+    const { innerWidth: width, innerHeight: height, devicePixelRatio, outerWidth, outerHeight } = window;
     return {
         width,
-        height
+        height,
+        devicePixelRatio,
+        outerWidth,
+        outerHeight,
     };
 }
 
