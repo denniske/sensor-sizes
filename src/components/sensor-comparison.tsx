@@ -130,7 +130,7 @@ const useStyles = createStylesheet((theme) => ({
     },
     cellModel: {
         // flexDirection: 'row',
-        width: 265,
+        width: 270,
     },
     cellScreen: {
         width: 200,
@@ -526,7 +526,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         'arri': 'arri.svg',
         'canon': 'canon.svg',
         'red': 'red.png',
-        'blackmagic': 'blackmagic.svg',
+        'blackmagic': 'blackmagic-website.svg',
         'kinefinity': 'kinefinity.png',
         'panasonic': 'panasonic.svg',
         'panavision': 'panavision.png',
@@ -921,7 +921,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                                     onToggleAllSensorsForLogo(sensor.logo);
                                                                     ev.stopPropagation();
                                                                 }}
-                                                                style={{cursor: 'pointer', maxWidth: 100, maxHeight: 40, filter: 'brightness(0) invert()'}}
+                                                                style={{cursor: 'pointer', maxWidth: 100, maxHeight: 40, filter: sensor.logo == 'BLACKMAGIC' ? 'grayscale()' : 'brightness(0) invert()'}}
                                                                 src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}
                                                             />
                                                         </td>
