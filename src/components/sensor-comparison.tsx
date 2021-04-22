@@ -151,6 +151,8 @@ const useStyles = createStylesheet((theme) => ({
         background: 'none !important',
     },
     cellWithLogo: {
+        textAlign: 'right',
+        paddingRight: 15,
         background: 'none !important',
     },
     button: {

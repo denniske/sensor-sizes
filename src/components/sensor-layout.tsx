@@ -126,8 +126,8 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                     {titles.descriptionText}
                 </h3>
                 {
-                    texts.descriptionText.split('\n').map(text =>
-                        <p className={classes.explanationText}>
+                    texts.descriptionText.split('\n').map((text, i) =>
+                        <p key={i} className={classes.explanationText}>
                             {text?.trim()}
                         </p>
                     )
@@ -137,8 +137,8 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                     {titles.explanationText}
                 </h3>
                 {
-                    texts.explanationText.split('\n').map(text =>
-                        <p className={classes.explanationText}>
+                    texts.explanationText.split('\n').map((text, i) =>
+                        <p key={i} className={classes.explanationText}>
                             {text?.trim()}
                         </p>
                     )
