@@ -529,7 +529,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const logoCount: Record<string, number> = {};
 
     const logoAsset = {
-        'analog': 'analog.png',
+        'film': 'film.png',
         'apple': 'apple.svg',
         'arri': 'arri.svg',
         'canon': 'canon.svg',
