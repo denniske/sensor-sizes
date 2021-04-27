@@ -532,6 +532,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         'film': 'film.png',
         'apple': 'apple.svg',
         'arri': 'arri.svg',
+        'astro': 'astro.gif',
         'phantom': 'phantom.svg',
         'canon': 'canon.svg',
         'red': 'red.png',
@@ -542,6 +543,23 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         'sony': 'sony.svg',
         'cinemeridian': 'cinemeridian.png',
         'z cam': 'zcam.png',
+    };
+
+    const logoFilter = {
+        'film': 'brightness(0) invert()',
+        'apple': 'brightness(0) invert()',
+        'astro': undefined,
+        'arri': 'brightness(0) invert()',
+        'phantom': 'brightness(0) invert()',
+        'canon': 'brightness(0) invert()',
+        'red': 'brightness(0) invert()',
+        'blackmagic': 'grayscale()',
+        'kinefinity': 'brightness(0) invert()',
+        'panasonic': 'brightness(0) invert()',
+        'panavision': 'brightness(0) invert()',
+        'sony': 'brightness(0) invert()',
+        'cinemeridian': 'brightness(0) invert()',
+        'z cam': 'brightness(0) invert()',
     };
 
     const onMouseEnterLeaveLenseProps = (lense: ILense) => ({
@@ -987,7 +1005,12 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                                     onToggleAllSensorsForLogo(sensor.logo);
                                                                     ev.stopPropagation();
                                                                 }}
-                                                                style={{cursor: 'pointer', maxWidth: 100, maxHeight: 40, filter: sensor.logo == 'BLACKMAGIC' ? 'grayscale()' : 'brightness(0) invert()'}}
+                                                                style={{
+                                                                    cursor: 'pointer',
+                                                                    maxWidth: 100,
+                                                                    maxHeight: 40,
+                                                                    filter: logoFilter[sensor.logo.toLowerCase()],
+                                                                }}
                                                                 src={`/logo/${logoAsset[sensor.logo.toLowerCase()]}`}
                                                             />
                                                         </td>
