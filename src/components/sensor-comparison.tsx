@@ -591,18 +591,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
     return (
         <div className={classes.outer}>
-            {/*<div style={{textAlign: 'center'}}>*/}
-            {/*    {typeof window !== 'undefined' ? window.visualViewport.scale : 999}*/}
-            {/*</div>*/}
-            {/*<div style={{textAlign: 'center'}}>*/}
-            {/*    {windowDimensions?.width} px X {windowDimensions?.height} px @ {windowDimensions?.devicePixelRatio}*/}
-            {/*</div>*/}
-            {/*<div style={{textAlign: 'center'}}>*/}
-            {/*    {windowDimensions?.outerWidth} px X {windowDimensions?.outerHeight} px @ {windowDimensions?.devicePixelRatio}*/}
-            {/*</div>*/}
-            {/*<div style={{textAlign: 'center'}}>*/}
-            {/*    c: {width} px (first {firstWidth} px)*/}
-            {/*</div>*/}
             <div className={classes.container} ref={ref}>
                 <div className={classes.surface}>
                     {
@@ -623,56 +611,54 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                     }
                     {
                         loaded && sensors.map(sensor => (
-                            <div key={sensor.model} style={{
-                                width: sensor.width*factor,
-                                height: sensor.height*factor,
-                                left: centerX-(sensor.width*factor)/2,
-                                top: maxHeight/2-(sensor.height*factor)/2,
-                                borderColor: 'transparent',
-                                opacity: selectedSensors.includes(sensor) ? 1 : 0,
-                                display: selectedSensors.includes(sensor) || !isMobile ? 'flex' : 'none',
-                                alignItems: getAlignItems(sensor),
-                                justifyContent: getJustifyContent(sensor),
-                                zIndex: hoveredSensor == sensor ? 100 : 'inherit',
-                                overflow: hoveredSensor == sensor ? 'visible' : 'hidden',
-                                borderWidth: 0,
-                            }} className={classes.box}>
-                                {
-                                    !realPhysicalSensorSize &&
-                                    <div className={classes.model} {...onMouseEnterLeaveSensorProps(sensor)} style={{
-                                        cursor: 'default',
-                                        color: 'transparent',
-                                        margin: 0,
-                                        backgroundColor: hoveredSensor == sensor ? 'white' : sensor.color,
-                                    }}>{sensor.logo} {sensor.model}</div>
-                                }
-                            </div>
-                        ))
-                    }
-                    {
-                        loaded && sensors.map(sensor => (
-                            <div key={sensor.model} style={{
-                                width: sensor.width*factor,
-                                height: sensor.height*factor,
-                                left: centerX-(sensor.width*factor)/2,
-                                top: maxHeight/2-(sensor.height*factor)/2,
-                                borderColor: 'transparent',
-                                opacity: selectedSensors.includes(sensor) ? 1 : 0,
-                                display: selectedSensors.includes(sensor) || !isMobile ? 'flex' : 'none',
-                                alignItems: getAlignItems(sensor),
-                                justifyContent: getJustifyContent(sensor),
-                                zIndex: hoveredSensor == sensor ? 100 : 'inherit',
-                                overflow: hoveredSensor == sensor ? 'visible' : 'hidden',
-                            }} className={classes.box}>
-                                {
-                                    !realPhysicalSensorSize &&
-                                    <div className={classes.model} {...onMouseEnterLeaveSensorProps(sensor)} style={{
-                                        cursor: 'default',
-                                        color: hoveredSensor == sensor ? 'black' : sensor.textColor,
-                                        backgroundColor: 'transparent',
-                                    }}>{sensor.logo} {sensor.model}</div>
-                                }
-                            </div>
+                            <>
+                                <div key={sensor.model} style={{
+                                    width: sensor.width*factor,
+                                    height: sensor.height*factor,
+                                    left: centerX-(sensor.width*factor)/2,
+                                    top: maxHeight/2-(sensor.height*factor)/2,
+                                    borderColor: 'transparent',
+                                    opacity: selectedSensors.includes(sensor) ? 1 : 0,
+                                    display: selectedSensors.includes(sensor) || !isMobile ? 'flex' : 'none',
+                                    alignItems: getAlignItems(sensor),
+                                    justifyContent: getJustifyContent(sensor),
+                                    zIndex: hoveredSensor == sensor ? 100 : 'inherit',
+                                    overflow: hoveredSensor == sensor ? 'visible' : 'hidden',
+                                    borderWidth: 0,
+                                }} className={classes.box}>
+                                    {
+                                        !realPhysicalSensorSize &&
+                                        <div className={classes.model} {...onMouseEnterLeaveSensorProps(sensor)} style={{
+                                            cursor: 'default',
+                                            color: 'transparent',
+                                            margin: 0,
+                                            backgroundColor: hoveredSensor == sensor ? 'white' : sensor.color,
+                                        }}>{sensor.logo} {sensor.model}</div>
+                                    }
+                                </div>
+                                <div key={sensor.model} style={{
+                                    width: sensor.width*factor,
+                                    height: sensor.height*factor,
+                                    left: centerX-(sensor.width*factor)/2,
+                                    top: maxHeight/2-(sensor.height*factor)/2,
+                                    borderColor: 'transparent',
+                                    opacity: selectedSensors.includes(sensor) ? 1 : 0,
+                                    display: selectedSensors.includes(sensor) || !isMobile ? 'flex' : 'none',
+                                    alignItems: getAlignItems(sensor),
+                                    justifyContent: getJustifyContent(sensor),
+                                    zIndex: hoveredSensor == sensor ? 100 : 'inherit',
+                                    overflow: hoveredSensor == sensor ? 'visible' : 'hidden',
+                                }} className={classes.box}>
+                                    {
+                                        !realPhysicalSensorSize &&
+                                        <div className={classes.model} {...onMouseEnterLeaveSensorProps(sensor)} style={{
+                                            cursor: 'default',
+                                            color: hoveredSensor == sensor ? 'black' : sensor.textColor,
+                                            backgroundColor: 'transparent',
+                                        }}>{sensor.logo} {sensor.model}</div>
+                                    }
+                                </div>
+                            </>
                         ))
                     }
                     {
