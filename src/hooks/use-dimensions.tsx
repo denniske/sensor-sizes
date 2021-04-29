@@ -1,4 +1,4 @@
-import {useState, useCallback, useLayoutEffect} from "react";
+import {useState, useCallback, useLayoutEffect, useEffect} from "react";
 
 interface DimensionObject {
     width: number;
@@ -53,7 +53,8 @@ function useDimensions({ liveMeasure = true }: UseDimensionsArgs = {}): UseDimen
         setNode(node);
     }, []);
 
-    useLayoutEffect(() => {
+    // useLayoutEffect(() => {
+    useEffect(() => {
         if (node) {
             const measure = () =>
                 window.requestAnimationFrame(() =>
