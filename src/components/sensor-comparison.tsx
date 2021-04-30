@@ -531,6 +531,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const logoAsset = {
         'film': 'film.png',
         'apple': 'apple.svg',
+        'aja': 'aja.svg',
         'arri': 'arri.svg',
         'astro': 'astro.gif',
         'phantom': 'phantom.svg',
@@ -548,8 +549,9 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const logoFilter = {
         'film': 'brightness(0) invert()',
         'apple': 'brightness(0) invert()',
-        'astro': undefined,
+        'aja': 'brightness(0) invert()',
         'arri': 'brightness(0) invert()',
+        'astro': undefined,
         'phantom': 'brightness(0) invert()',
         'canon': 'brightness(0) invert()',
         'red': 'brightness(0) invert()',
