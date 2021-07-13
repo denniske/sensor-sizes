@@ -1,0 +1,2830 @@
+[
+  {
+    "camera": {
+      "value": "ALEXA Classic",
+      "key": "c01",
+      "cameraGroup": "S35",
+      "sensorResolution": "3424x2202",
+      "sensorAreaPitchMm": 0.00825,
+      "sensorAreaPitchInch": 0.00032480315,
+      "sensorMode": [
+        {
+          "value": "16:9",
+          "key": "sm01",
+          "default": true,
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "HD",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "1920x1080",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2880x1620",
+                  "sensorImageAreaMm": "23.76x13.37",
+                  "sensorImageAreaInch": "0.935x0.526",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "2K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2048x1152",
+                  "key": "r02",
+                  "activeSensorResolution": "2868x1614",
+                  "sensorImageAreaMm": "23.66x13.32",
+                  "sensorImageAreaInch": "0.932x0.524",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "4:3",
+          "key": "sm02",
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "2K",
+                  "xmlAspect": "1.33",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2048x1536",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2868x2152",
+                  "sensorImageAreaMm": "23.66x17.75",
+                  "sensorImageAreaInch": "0.932x0.699",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "camera": {
+      "value": "ALEXA XT",
+      "key": "c02",
+      "cameraGroup": "S35",
+      "sensorResolution": "3424x2202",
+      "sensorAreaPitchMm": 0.00825,
+      "sensorAreaPitchInch": 0.00032480315,
+      "sensorMode": [
+        {
+          "value": "16:9",
+          "key": "sm01",
+          "default": true,
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "HD",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "1920x1080",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2880x1620",
+                  "sensorImageAreaMm": "23.76x13.37",
+                  "sensorImageAreaInch": "0.935x0.526",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "2K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2048x1152",
+                  "key": "r02",
+                  "activeSensorResolution": "2868x1614",
+                  "sensorImageAreaMm": "23.66x13.32",
+                  "sensorImageAreaInch": "0.932x0.524",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "3.2K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "3164x1778",
+                  "key": "r03",
+                  "activeSensorResolution": "3168x1782",
+                  "sensorImageAreaMm": "26.14x14.70",
+                  "sensorImageAreaInch": "1.029x0.579",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "resolution": [
+                {
+                  "value": "2.8K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2880x1620",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2880x1620",
+                  "sensorImageAreaMm": "23.76x13.37",
+                  "sensorImageAreaInch": "0.935x0.526",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "4:3",
+          "key": "sm02",
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "2K",
+                  "xmlAspect": "1.33",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2048x1536",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2868x2152",
+                  "sensorImageAreaMm": "23.66x17.75",
+                  "sensorImageAreaInch": "0.932x0.699",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "resolution": [
+                {
+                  "value": "2.8K",
+                  "xmlAspect": "1.33",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2880x2160",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2880x2160",
+                  "sensorImageAreaMm": "23.76x17.82",
+                  "sensorImageAreaInch": "0.935x0.702",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "6:5 (4:3 Cropped)",
+          "key": "sm03",
+          "format": [
+            {
+              "value": "ARRIRAW",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "2.6K",
+                  "xmlAspect": "1.195",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2578x2160",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2578x2160",
+                  "sensorImageAreaMm": "21.27x17.82",
+                  "sensorImageAreaInch": "0.837x0.702",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "disabled": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02",
+                      "disabled": true
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03",
+                      "default": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "Open Gate",
+          "key": "sm04",
+          "format": [
+            {
+              "value": "ARRIRAW",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "3.4K",
+                  "xmlAspect": "1.55",
+                  "xmlSensor": "3.4K",
+                  "recordingResolution": "3414x2198",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "3424x2202",
+                  "sensorImageAreaMm": "28.25x18.17",
+                  "sensorImageAreaInch": "1.112x0.715",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "camera": {
+      "value": "ALEXA SXT",
+      "key": "c03",
+      "cameraGroup": "S35",
+      "sensorResolution": "3424x2202",
+      "sensorAreaPitchMm": 0.00825,
+      "sensorAreaPitchInch": 0.00032480315,
+      "sensorMode": [
+        {
+          "value": "16:9",
+          "key": "sm01",
+          "default": true,
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "resolution": [
+                {
+                  "value": "HD",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "1920x1080",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2880x1620",
+                  "sensorImageAreaMm": "23.76x13.37",
+                  "sensorImageAreaInch": "0.935x0.526",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "2K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2048x1152",
+                  "key": "r02",
+                  "activeSensorResolution": "2880x1620",
+                  "sensorImageAreaMm": "23.76x13.37",
+                  "sensorImageAreaInch": "0.935x0.526",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "3.2K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "3200x1800",
+                  "key": "r03",
+                  "activeSensorResolution": "3200x1800",
+                  "sensorImageAreaMm": "26.40x14.85",
+                  "sensorImageAreaInch": "1.039x0.585",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "4K UHD",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "3840x2160",
+                  "key": "r04",
+                  "activeSensorResolution": "3200x1800",
+                  "sensorImageAreaMm": "26.40x14.85",
+                  "sensorImageAreaInch": "1.039x0.585",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "2.8K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2880x1620",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2880x1620",
+                  "sensorImageAreaMm": "23.76x13.37",
+                  "sensorImageAreaInch": "0.935x0.526",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "3.2K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "3168x1782",
+                  "key": "r02",
+                  "activeSensorResolution": "3168x1782",
+                  "sensorImageAreaMm": "26.14x14.70",
+                  "sensorImageAreaInch": "1.029x0.579",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "6:5",
+          "key": "sm02",
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "resolution": [
+                {
+                  "value": "2K Anamorphic",
+                  "xmlAspect": "1.195",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2048x858",
+                  "key": "r01",
+                  "activeSensorResolution": "2560x2146",
+                  "sensorImageAreaMm": "21.12x17.70",
+                  "sensorImageAreaInch": "0.831x0.697",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "4K Cine Anamorphic",
+                  "xmlAspect": "1.195",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "4096x1716",
+                  "key": "r02",
+                  "activeSensorResolution": "2560x2146",
+                  "sensorImageAreaMm": "21.12x17.70",
+                  "sensorImageAreaInch": "0.831x0.697",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "2.6K",
+                  "xmlAspect": "1.195",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2578x2160",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2592x2160",
+                  "sensorImageAreaMm": "21.38x17.82",
+                  "sensorImageAreaInch": "0.842x0.702",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "4:3",
+          "key": "sm03",
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "resolution": [
+                {
+                  "value": "2.8K",
+                  "xmlAspect": "1.33",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2880x2160",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2880x2160",
+                  "sensorImageAreaMm": "23.76x17.82",
+                  "sensorImageAreaInch": "0.935x0.702",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "2.8K",
+                  "xmlAspect": "1.33",
+                  "xmlSensor": "3K",
+                  "recordingResolution": "2880x2160",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "2880x2160",
+                  "sensorImageAreaMm": "23.76x17.82",
+                  "sensorImageAreaInch": "0.935x0.702",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "Open Gate",
+          "key": "sm04",
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "resolution": [
+                {
+                  "value": "3.4K",
+                  "xmlAspect": "1.55",
+                  "xmlSensor": "3.4K",
+                  "recordingResolution": "3424x2202",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "3424x2202",
+                  "sensorImageAreaMm": "28.25x18.17",
+                  "sensorImageAreaInch": "1.112x0.715",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                },
+                {
+                  "value": "4K Cine",
+                  "xmlAspect": "1.55",
+                  "xmlSensor": "3.4K",
+                  "recordingResolution": "4096x2636",
+                  "key": "r02",
+                  "activeSensorResolution": "3414x2198",
+                  "sensorImageAreaMm": "28.17x18.13",
+                  "sensorImageAreaInch": "1.109x0.714",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "3.4K",
+                  "xmlAspect": "1.55",
+                  "xmlSensor": "3.4K",
+                  "recordingResolution": "3424x2202",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "3424x2202",
+                  "sensorImageAreaMm": "28.25x18.17",
+                  "sensorImageAreaInch": "1.12x0.715",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls03"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "camera": {
+      "value": "ALEXA Mini",
+      "key": "c04",
+      "cameraGroup": "S35",
+      "sensorResolution": "3424x2202",
+      "sensorAreaPitchMm": 0.00825,
+      "sensorAreaPitchInch": 0.00032480315,
+      "sensorMode": null,
+      "format": [
+        {
+          "value": "Apple ProRes",
+          "key": "f01",
+          "default": true,
+          "resolution": [
+            {
+              "value": "S16 HD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "1920x1080",
+              "key": "r01",
+              "activeSensorResolution": "1600x900",
+              "sensorImageAreaMm": "13.20x7.425",
+              "sensorImageAreaInch": "0.520x0.292",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02",
+                  "disabled": true
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "disabled": true
+                }
+              ]
+            },
+            {
+              "value": "HD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "1920x1080",
+              "key": "r02",
+              "default": true,
+              "activeSensorResolution": "2880x1620",
+              "sensorImageAreaMm": "23.76x13.37",
+              "sensorImageAreaInch": "0.935x0.526",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02",
+                  "disabled": true
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "disabled": true
+                }
+              ]
+            },
+            {
+              "value": "HD Ana.",
+              "xmlAspect": "0.88",
+              "xmlSensor": "3K",
+              "recordingResolution": "1920x1080",
+              "key": "r03",
+              "activeSensorResolution": "1920x2160",
+              "sensorImageAreaMm": "15.84x17.82",
+              "sensorImageAreaInch": "0.624x0.702",
+              "isAnamorph": true,
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "disabled": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02",
+                  "disabled": true
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "default": true
+                }
+              ]
+            },
+            {
+              "value": "2K",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "2048x1152",
+              "key": "r04",
+              "activeSensorResolution": "2868x1612",
+              "sensorImageAreaMm": "23.66x13.30",
+              "sensorImageAreaInch": "0.932x0.524",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02",
+                  "disabled": true
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "disabled": true
+                }
+              ]
+            },
+            {
+              "value": "2.39:1 2K Ana.",
+              "xmlAspect": "1.195",
+              "xmlSensor": "3K",
+              "recordingResolution": "2048x858",
+              "key": "r05",
+              "activeSensorResolution": "2560x2145",
+              "sensorImageAreaMm": "21.12x17.70",
+              "sensorImageAreaInch": "0.831x0.697",
+              "isAnamorph": true,
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "disabled": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02",
+                  "disabled": true
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "default": true
+                }
+              ]
+            },
+            {
+              "value": "3.2K",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "3200x1800",
+              "key": "r06",
+              "activeSensorResolution": "3200x1800",
+              "sensorImageAreaMm": "26.40x14.85",
+              "sensorImageAreaInch": "1.039x0.585",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "disabled": true
+                }
+              ]
+            },
+            {
+              "value": "4K UHD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "3840x2160",
+              "key": "r07",
+              "activeSensorResolution": "3200x1800",
+              "sensorImageAreaMm": "26.40x14.85",
+              "sensorImageAreaInch": "1.039x0.585",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "disabled": true
+                }
+              ]
+            },
+            {
+              "value": "4:3 2.8K",
+              "xmlAspect": "1.33",
+              "xmlSensor": "3K",
+              "recordingResolution": "2880x2160",
+              "key": "r08",
+              "activeSensorResolution": "2880x2160",
+              "sensorImageAreaMm": "23.76x17.82",
+              "sensorImageAreaInch": "0.935x0.702",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "ARRIRAW",
+          "key": "f01",
+          "resolution": [
+            {
+              "value": "2.8K",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "2880x1620",
+              "key": "r01",
+              "default": true,
+              "activeSensorResolution": "2880x1620",
+              "sensorImageAreaMm": "23.76x13.37",
+              "sensorImageAreaInch": "0.935x0.526",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                }
+              ]
+            },
+            {
+              "value": "Open Gate 3.4K",
+              "xmlAspect": "1.55",
+              "xmlSensor": "3.4K",
+              "recordingResolution": "3424x2202",
+              "key": "r02",
+              "activeSensorResolution": "3424x2202",
+              "sensorImageAreaMm": "28.25x18.17",
+              "sensorImageAreaInch": "1.112x0.715",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03"
+                }
+              ]
+            },
+            {
+              "value": "4:3 2.8K (OG 3.4K)",
+              "xmlAspect": "1.33",
+              "xmlSensor": "3K",
+              "recordingResolution": "2880x2160",
+              "key": "r03",
+              "activeSensorResolution": "2880x2160",
+              "sensorImageAreaMm": "23.76x17.82",
+              "sensorImageAreaInch": "0.935x0.702",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03"
+                }
+              ]
+            },
+            {
+              "value": "16:9 HD Ana. (OG 3.4K)",
+              "xmlAspect": "0.88",
+              "xmlSensor": "3K",
+              "recordingResolution": "1920x2160",
+              "key": "r04",
+              "activeSensorResolution": "1920x2160",
+              "sensorImageAreaMm": "15.84x17.82",
+              "sensorImageAreaInch": "0.624x0.702",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "disabled": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02",
+                  "disabled": true
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "default": true
+                }
+              ]
+            },
+            {
+              "value": "2.39:1 2K Ana. (OG 3.4K)",
+              "xmlAspect": "1.195",
+              "xmlSensor": "3K",
+              "recordingResolution": "2560x2145",
+              "key": "r05",
+              "activeSensorResolution": "2560x2145",
+              "sensorImageAreaMm": "21.12x17.70",
+              "sensorImageAreaInch": "0.831x0.697",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "disabled": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02",
+                  "disabled": true
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "camera": {
+      "value": "AMIRA",
+      "key": "c05",
+      "cameraGroup": "S35",
+      "sensorResolution": "3200x1800",
+      "sensorAreaPitchMm": 0.00825,
+      "sensorAreaPitchInch": 0.00032480315,
+      "sensorMode": null,
+      "format": [
+        {
+          "value": "Apple ProRes",
+          "key": "f01",
+          "default": true,
+          "resolution": [
+            {
+              "value": "S16 HD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "1920x1080",
+              "key": "r01",
+              "activeSensorResolution": "1600x900",
+              "sensorImageAreaMm": "13.20x7.425",
+              "sensorImageAreaInch": "0.520x0.292",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03"
+                }
+              ]
+            },
+            {
+              "value": "HD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "1920x1080",
+              "key": "r02",
+              "default": true,
+              "activeSensorResolution": "2880x1620",
+              "sensorImageAreaMm": "23.76x13.37",
+              "sensorImageAreaInch": "0.935x0.526",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03"
+                }
+              ]
+            },
+            {
+              "value": "2K",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "2048x1152",
+              "key": "r03",
+              "activeSensorResolution": "2868x1612",
+              "sensorImageAreaMm": "23.66x13.30",
+              "sensorImageAreaInch": "0.932x0.524",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03"
+                }
+              ]
+            },
+            {
+              "value": "3.2K",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "3200x1800",
+              "key": "r04",
+              "activeSensorResolution": "3200x1800",
+              "sensorImageAreaMm": "26.40x14.85",
+              "sensorImageAreaInch": "1.039x0.585",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03"
+                }
+              ]
+            },
+            {
+              "value": "4K UHD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "3840x2160",
+              "key": "r05",
+              "activeSensorResolution": "3200x1800",
+              "sensorImageAreaMm": "26.40x14.85",
+              "sensorImageAreaInch": "1.039x0.585",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls03"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "ARRIRAW",
+          "key": "f02",
+          "resolution": [
+            {
+              "value": "2.8K",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "2880x1620",
+              "key": "r01",
+              "default": true,
+              "activeSensorResolution": "2880x1620",
+              "sensorImageAreaMm": "23.76x13.37",
+              "sensorImageAreaInch": "0.935x0.526",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls02"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "camera": {
+      "value": "ALEXA Mini LF",
+      "key": "c06",
+      "cameraGroup": "Large Format",
+      "sensorResolution": "4448x3096",
+      "sensorAreaPitchMm": 0.00825,
+      "sensorAreaPitchInch": 0.00032480315,
+      "sensorMode": null,
+      "format": [
+        {
+          "value": "Apple ProRes",
+          "key": "f01",
+          "resolution": [
+            {
+              "value": "2.8K S35 16:9 - HD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "1920x1080",
+              "key": "r01",
+              "cameraGroup": "S35",
+              "activeSensorResolution": "2880x1620",
+              "sensorImageAreaMm": "23.76x13.37",
+              "sensorImageAreaInch": "0.935x0.526",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "3.2K S35 16:9 - 3.2K",
+              "xmlAspect": "1.78",
+              "xmlSensor": "3K",
+              "recordingResolution": "3200x1800",
+              "key": "r02",
+              "cameraGroup": "S35",
+              "activeSensorResolution": "3200x1800",
+              "sensorImageAreaMm": "26.40x14.85",
+              "sensorImageAreaInch": "1.039x0.585",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "2.8K S35 4:3 - 2.8K",
+              "xmlAspect": "1.33",
+              "xmlSensor": "3K",
+              "recordingResolution": "2880x2160",
+              "key": "r03",
+              "cameraGroup": "S35",
+              "activeSensorResolution": "2880x2160",
+              "sensorImageAreaMm": "23.76x17.82",
+              "sensorImageAreaInch": "0.935x0.702",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "2.8K LF 1:1 - 2.8K",
+              "xmlAspect": "1.00",
+              "xmlSensor": "3K",
+              "recordingResolution": "2880x2880",
+              "key": "r04",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "2880x2880",
+              "sensorImageAreaMm": "23.76x23.76",
+              "sensorImageAreaInch": "0.935x0.935",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "3.8K LF 16:9 - HD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "4K",
+              "recordingResolution": "1920x1080",
+              "key": "r05",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "3840x2160",
+              "sensorImageAreaMm": "31.68x17.82",
+              "sensorImageAreaInch": "1.247x0.702",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "3.8K LF 16:9 - 2K",
+              "xmlAspect": "1.78",
+              "xmlSensor": "4K",
+              "recordingResolution": "2048x1152",
+              "key": "r06",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "3840x2160",
+              "sensorImageAreaMm": "31.68x17.82",
+              "sensorImageAreaInch": "1.247x0.702",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "3.8K LF 16:9 - UHD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "4K",
+              "recordingResolution": "3840x2160",
+              "key": "r07",
+              "default": true,
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "3840x2160",
+              "sensorImageAreaMm": "31.68x17.82",
+              "sensorImageAreaInch": "1.247x0.702",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "4.5K LF 2.39:1 - 4.5K",
+              "xmlAspect": "2.39",
+              "xmlSensor": "4.5K",
+              "recordingResolution": "4448x1856",
+              "key": "r08",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "4448x1856",
+              "sensorImageAreaMm": "36.70x15.31",
+              "sensorImageAreaInch": "1.445x0.603",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "4.3K LF 16:9 - HD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "4.5K",
+              "recordingResolution": "1920x1080",
+              "key": "r09",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "4320x2430",
+              "sensorImageAreaMm": "35.64x20.05",
+              "sensorImageAreaInch": "1.403x0.789",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "4.3K LF 16:9 - UHD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "4.5K",
+              "recordingResolution": "3840x2160",
+              "key": "r10",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "4320x2430",
+              "sensorImageAreaMm": "35.64x20.05",
+              "sensorImageAreaInch": "1.403x0.789",
+              "resize": true,
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "4.5K LF 3:2 Open Gate - 4.5K",
+              "xmlAspect": "1.44",
+              "xmlSensor": "4.5K",
+              "recordingResolution": "4448x3096",
+              "key": "r11",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "4448x3096",
+              "sensorImageAreaMm": "36.70x25.54",
+              "sensorImageAreaInch": "1.445x1.006",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "ARRIRAW",
+          "key": "f02",
+          "default": true,
+          "resolution": [
+            {
+              "value": "3.4K S35 3:2 - 3.4K",
+              "xmlAspect": "1.55",
+              "xmlSensor": "3.4K",
+              "recordingResolution": "3424x2202",
+              "key": "r01",
+              "cameraGroup": "S35",
+              "activeSensorResolution": "3424x2202",
+              "sensorImageAreaMm": "28.25x18.17",
+              "sensorImageAreaInch": "1.112x0.715",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "2.8K LF 1:1 - 2.8K",
+              "xmlAspect": "1.00",
+              "xmlSensor": "3K",
+              "recordingResolution": "2880x2880",
+              "key": "r02",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "2880x2880",
+              "sensorImageAreaMm": "23.76x23.76",
+              "sensorImageAreaInch": "0.935x0.935",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "3.8K LF 16:9 - UHD",
+              "xmlAspect": "1.78",
+              "xmlSensor": "4K",
+              "recordingResolution": "3840x2160",
+              "key": "r03",
+              "default": true,
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "3840x2160",
+              "sensorImageAreaMm": "31.68x17.82",
+              "sensorImageAreaInch": "1.247x0.702",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "4.5K LF 2.39:1 - 4.5K",
+              "xmlAspect": "2.39",
+              "xmlSensor": "4.5K",
+              "recordingResolution": "4448x1856",
+              "key": "r04",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "4448x1856",
+              "sensorImageAreaMm": "36.70x15.31",
+              "sensorImageAreaInch": "1.445x0.603",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            },
+            {
+              "value": "4.5K LF 3:2 Open Gate - 4.5K",
+              "xmlAspect": "1.44",
+              "xmlSensor": "4.5K",
+              "recordingResolution": "4448x3096",
+              "key": "r05",
+              "cameraGroup": "Large Format",
+              "activeSensorResolution": "4448x3096",
+              "sensorImageAreaMm": "36.70x25.54",
+              "sensorImageAreaInch": "1.445x1.006",
+              "lensSqueeze": [
+                {
+                  "value": "1.0",
+                  "key": "ls01",
+                  "default": true
+                },
+                {
+                  "value": "1.25",
+                  "key": "ls02"
+                },
+                {
+                  "value": "1.3",
+                  "key": "ls03"
+                },
+                {
+                  "value": "1.5",
+                  "key": "ls04"
+                },
+                {
+                  "value": "1.65",
+                  "key": "ls05"
+                },
+                {
+                  "value": "1.8",
+                  "key": "ls06"
+                },
+                {
+                  "value": "2.0",
+                  "key": "ls07"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "camera": {
+      "value": "ALEXA LF",
+      "key": "c07",
+      "cameraGroup": "Large Format",
+      "sensorResolution": "4448x3096",
+      "sensorAreaPitchMm": 0.00825,
+      "sensorAreaPitchInch": 0.00032480315,
+      "sensorMode": [
+        {
+          "value": "LF 16:9",
+          "key": "sm01",
+          "default": true,
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "resolution": [
+                {
+                  "value": "HD",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "4K",
+                  "recordingResolution": "1920x1080",
+                  "key": "r01",
+                  "activeSensorResolution": "3840x2160",
+                  "sensorImageAreaMm": "31.68x17.82",
+                  "sensorImageAreaInch": "1.247x0.702",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls07"
+                    }
+                  ]
+                },
+                {
+                  "value": "2K",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "4K",
+                  "recordingResolution": "2048x1152",
+                  "key": "r02",
+                  "activeSensorResolution": "3840x2160",
+                  "sensorImageAreaMm": "31.68x17.82",
+                  "sensorImageAreaInch": "1.247x0.702",
+                  "resize": true,
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls07"
+                    }
+                  ]
+                },
+                {
+                  "value": "4K UHD",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "4K",
+                  "recordingResolution": "3840x2160",
+                  "key": "r03",
+                  "default": true,
+                  "activeSensorResolution": "3840x2160",
+                  "sensorImageAreaMm": "31.68x17.82",
+                  "sensorImageAreaInch": "1.247x0.702",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls07"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "4K UHD",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "4K",
+                  "recordingResolution": "3840x2160",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "3840x2160",
+                  "sensorImageAreaMm": "31.68x17.82",
+                  "sensorImageAreaInch": "1.247x0.702",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls07"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "LF 2.39:1",
+          "key": "sm02",
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "resolution": [
+                {
+                  "value": "4.5K",
+                  "xmlAspect": "2.39",
+                  "xmlSensor": "4.5K",
+                  "recordingResolution": "4448x1856",
+                  "key": "r01",
+                  "activeSensorResolution": "4448x1856",
+                  "sensorImageAreaMm": "36.70x15.31",
+                  "sensorImageAreaInch": "1.445x0.603",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls07"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "4.5K",
+                  "xmlAspect": "2.39",
+                  "xmlSensor": "4.5K",
+                  "recordingResolution": "4448x1856",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "4448x1856",
+                  "sensorImageAreaMm": "36.70x15.31",
+                  "sensorImageAreaInch": "1.445x0.603",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls07"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "LF Open Gate",
+          "key": "sm03",
+          "format": [
+            {
+              "value": "Apple ProRes",
+              "key": "f01",
+              "resolution": [
+                {
+                  "value": "4.5K",
+                  "xmlAspect": "1.44",
+                  "xmlSensor": "4.5K",
+                  "recordingResolution": "4448x3096",
+                  "key": "r01",
+                  "activeSensorResolution": "4448x3096",
+                  "sensorImageAreaMm": "36.70x25.54",
+                  "sensorImageAreaInch": "1.445x1.006",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls07"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "value": "ARRIRAW",
+              "key": "f02",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "4.5K",
+                  "xmlAspect": "1.44",
+                  "xmlSensor": "4.5K",
+                  "recordingResolution": "4448x3096",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "4448x3096",
+                  "sensorImageAreaMm": "36.70x25.54",
+                  "sensorImageAreaInch": "1.445x1.006",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls07"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "camera": {
+      "value": "ALEXA 65",
+      "key": "c08",
+      "cameraGroup": "Large Format",
+      "sensorResolution": "6560x3100",
+      "sensorAreaPitchMm": 0.00825,
+      "sensorAreaPitchInch": 0.00032480315,
+      "noLig": true,
+      "sensorMode": [
+        {
+          "value": "Open Gate",
+          "key": "sm01",
+          "default": true,
+          "format": [
+            {
+              "value": "ARRIRAW",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "6560x3100",
+                  "xmlAspect": "2.11",
+                  "xmlSensor": "6.5K",
+                  "recordingResolution": "6560x3100",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "6560x3100",
+                  "sensorImageAreaMm": "54.12x25.58",
+                  "sensorImageAreaInch": "2.131x1.007",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.33",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls07"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls08"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "5.1K",
+          "key": "sm02",
+          "format": [
+            {
+              "value": "ARRIRAW",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "5120x2880",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "5K",
+                  "recordingResolution": "5120x2880",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "5120x2880",
+                  "sensorImageAreaMm": "42.24x23.76",
+                  "sensorImageAreaInch": "1.663x0.935",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.33",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls07"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls08"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "4.3K",
+          "key": "sm03",
+          "format": [
+            {
+              "value": "ARRIRAW",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "4320x2880",
+                  "xmlAspect": "1.50",
+                  "xmlSensor": "4K",
+                  "recordingResolution": "4320x2880",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "4320x2880",
+                  "sensorImageAreaMm": "35.64x23.76",
+                  "sensorImageAreaInch": "1.403x0.935",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.33",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls07"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls08"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "4K UHD",
+          "key": "sm04",
+          "format": [
+            {
+              "value": "ARRIRAW",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "3840x2160",
+                  "xmlAspect": "1.78",
+                  "xmlSensor": "4K",
+                  "recordingResolution": "3840x2160",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "3840x2160",
+                  "sensorImageAreaMm": "31.68x17.82",
+                  "sensorImageAreaInch": "1.247x0.702",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.33",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls07"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls08"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "value": "LF Open Gate",
+          "key": "sm05",
+          "format": [
+            {
+              "value": "ARRIRAW",
+              "key": "f01",
+              "default": true,
+              "resolution": [
+                {
+                  "value": "4448x3096",
+                  "xmlAspect": "1.44",
+                  "xmlSensor": "4.5K",
+                  "recordingResolution": "4448x3096",
+                  "key": "r01",
+                  "default": true,
+                  "activeSensorResolution": "4448x3096",
+                  "sensorImageAreaMm": "36.70x25.54",
+                  "sensorImageAreaInch": "1.44x1.01",
+                  "lensSqueeze": [
+                    {
+                      "value": "1.0",
+                      "key": "ls01",
+                      "default": true
+                    },
+                    {
+                      "value": "1.25",
+                      "key": "ls02"
+                    },
+                    {
+                      "value": "1.3",
+                      "key": "ls03"
+                    },
+                    {
+                      "value": "1.33",
+                      "key": "ls04"
+                    },
+                    {
+                      "value": "1.5",
+                      "key": "ls05"
+                    },
+                    {
+                      "value": "1.65",
+                      "key": "ls06"
+                    },
+                    {
+                      "value": "1.8",
+                      "key": "ls07"
+                    },
+                    {
+                      "value": "2.0",
+                      "key": "ls08"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
