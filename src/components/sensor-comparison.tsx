@@ -597,6 +597,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                 <div className={classes.surface}>
                     {
                         loaded && sensors.map(sensor => (
+                            // BORDER
                             <div key={sensor.model} style={{
                                 width: sensor.width * factor,
                                 height: sensor.height * factor,
@@ -608,11 +609,14 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 alignItems: getAlignItems(sensor),
                                 justifyContent: getJustifyContent(sensor),
                                 zIndex: hoveredSensor == sensor ? 100 : 'inherit',
+                                // background: 'rgb(255,255,255)',
+                                background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(105,105,105,1) 71%, rgba(0,0,0,1) 80%)',
                             }} className={classes.box}/>
                         ))
                     }
                     {
                         loaded && sensors.map(sensor => (
+                            // LABEL BACKGROUND & TEXT
                             <>
                                 <div key={sensor.model} style={{
                                     width: sensor.width*factor,
@@ -665,6 +669,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                     }
                     {
                         loaded && orderBy(visibleLenses, l => l.imageCircle).map((lense, i) =>
+                            // LENSE
                             <div key={lense.model} style={{
                                 width: lense.imageCircle*factor,
                                 height: lense.imageCircle*factor,
