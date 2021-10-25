@@ -131,7 +131,7 @@ const useStyles = createStylesheet((theme) => ({
     },
     cellModel: {
         // flexDirection: 'row',
-        width: 270,
+        width: 285,
     },
     cellScreen: {
         width: 200,
