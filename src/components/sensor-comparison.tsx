@@ -1,7 +1,7 @@
 import { maxBy, min, orderBy } from 'lodash';
 import {createStylesheet} from '../helper/styles';
 import {ILense, ISensor, ITexts} from './sensor.type';
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
 import {noop} from '@babel/types';
@@ -599,7 +599,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                 <div className={classes.surface}>
                     {
                         loaded && sensors.map(sensor => (
-                            <div key={sensor.model} style={{
+                            <div key={sensor.model + '-1'} style={{
                                 width: sensor.width * factor,
                                 height: sensor.height * factor,
                                 left: centerX - (sensor.width * factor) / 2,
@@ -615,8 +615,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                     }
                     {
                         loaded && sensors.map(sensor => (
-                            <>
-                                <div key={sensor.model} style={{
+                            <Fragment key={sensor.model + '-2'}>
+                                <div style={{
                                     width: sensor.width*factor,
                                     height: sensor.height*factor,
                                     left: centerX-(sensor.width*factor)/2,
@@ -640,7 +640,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         }}>{sensor.logo} {sensor.model}</div>
                                     }
                                 </div>
-                                <div key={sensor.model} style={{
+                                <div style={{
                                     width: sensor.width*factor,
                                     height: sensor.height*factor,
                                     left: centerX-(sensor.width*factor)/2,
@@ -662,7 +662,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         }}>{sensor.logo} {sensor.model}</div>
                                     }
                                 </div>
-                            </>
+                            </Fragment>
                         ))
                     }
                     {
