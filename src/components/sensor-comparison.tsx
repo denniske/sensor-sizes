@@ -376,38 +376,40 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         setFilteredSelectedSensors(list);
     }, [selectedSensors, selectedSortColumn, selectedSortDirection]);
 
-
     const router = useRouter();
-    console.log(router.query);
-    console.log(selectedSensors);
+    // console.log(router.query);
+    // console.log(selectedSensors);
 
     useEffect(() => {
         if (router.query.sensors || router.query.lenses) {
-            setSelectedSensors(sensors.filter(s => JSON.parse((router.query.sensors || '[]') as string).includes(s.model)));
-            setSelectedLenses(lenses.filter(s => JSON.parse((router.query.lenses || '[]') as string).includes(s.model)));
+            setSelectedSensors(sensors.filter(s => JSON.parse((router.query.sensors || '[]') as string).includes(s.id)));
+
+            const newLenses = lenses.filter(s => JSON.parse((router.query.lenses || '[]') as string).includes(s.id));
+            setSelectedLenses(newLenses);
+            setSelectedLensesStr(newLenses.map(l => l.model));
+
             console.log('applied query params', router.query);
             router.push('/', undefined, { shallow: true });
         }
     }, [router.query]);
 
-    // const shareTitle = shared ? 'Copied ' : 'Share (Copy link to clipboard)';
-
     const share = () => {
         const data = {
-            sensors: JSON.stringify(selectedSensors.map(s => s.model)),
-            lenses: JSON.stringify(selectedLenses.map(l => l.model)),
+            sensors: JSON.stringify(selectedSensors.map(s => s.id)),
+            lenses: JSON.stringify(selectedLenses.map(l => l.id)),
         };
 
-        // const searchParams = new URLSearchParams(data);
-        // window.open('https://sensorsizes.com?' + searchParams);
-
         const link = `${location.origin}?sensors=${data.sensors}&lenses=${data.lenses}`;
+
         // console.log(link)
         // window.open(link);
+
         copyTextToClipboard(link);
+
         if (shared) {
             clearTimeout(shared);
         }
+
         setShared(
             setTimeout(() => {
                 setShared(null);

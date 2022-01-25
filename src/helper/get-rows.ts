@@ -24,6 +24,7 @@ export const getSensorsFromSheet = async () => {
 
     const allRows = rows.map(r => {
         return ({
+            id: r.id,
             model: r.model,
             logo: r.logo,
             aspectRatio: parseAspectRatio(r.aspectRatio),
@@ -115,6 +116,7 @@ export const getLensesFromSheet = async () => {
 
     const allRows = rows.map(r => {
         return ({
+            id: r.id,
             model: r.model,
             logo: r.logo,
             imageCircle: parseFloat(r.imageCircle),

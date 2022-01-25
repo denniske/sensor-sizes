@@ -1,5 +1,6 @@
 
 export interface ISensor {
+    id: string;
     logo: string;
     model: string;
     aspectRatio: string;
@@ -19,6 +20,7 @@ export interface ISensor {
 }
 
 export interface ILense {
+    id: string;
     model: string;
     logo: string;
     imageCircle: number;
