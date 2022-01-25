@@ -746,15 +746,9 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
             </div>
             <div className={classes.wrapper}>
                 <div>
-                    {/*<div className={classes.options}>*/}
-                    {/*    <div className={classes.shareCopiedLink}>{ shared ? 'Copied link to clipboard!' : '\u00A0' }</div>*/}
-                    {/*</div>*/}
-                    {/*<br/>*/}
                     <div className={classes.options} style={{position: "relative"}}>
                         <div className={classes.shareCopiedLink}>{ shared ? 'Copied link to clipboard!' : '\u00A0' }</div>
-
-                        {/*<div className={classes.shareCopiedLink}>Copied link to clipboard!</div>*/}
-                        <button disabled={selectedSensors.length === 0} className={classes.button} onClick={share}>Share</button>
+                        <button disabled={selectedSensors.length === 0 && selectedLenses.length === 0} className={classes.button} onClick={share}>Share</button>
                     </div>
                     <br/>
                     <div className={classes.options}>
