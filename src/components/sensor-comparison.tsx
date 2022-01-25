@@ -11,6 +11,7 @@ import { FormControl, Select, Input, MenuItem, ListItemText } from '@material-ui
 import CustomCheckbox from './custom-checkbox';
 import {CustomTooltip} from './light-tooltip';
 import useDimensions from '../hooks/use-dimensions';
+import {useRouter} from "next/router";
 
 
 const useStyles = createStylesheet((theme) => ({
@@ -41,6 +42,11 @@ const useStyles = createStylesheet((theme) => ({
         position: 'relative',
         width: 0,
         height: 700,
+    },
+    shareCopiedLink: {
+        position: 'absolute',
+        top: -30,
+        // background: "yellow",
     },
     options: {
         flexDirection: 'row',
@@ -296,6 +302,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [filteredSelectedSensors, setFilteredSelectedSensors] = useState<ISensor[]>(selectedSensors);
     const [ref, { x, y, width, height }] = useDimensions();
     const loaded = useClientLoaded() && width;
+    const [shared, setShared] = useState<any>(null);
 
     const [selectedLensesStr, setSelectedLensesStr] = React.useState([]);
     const [selectedLenses, setSelectedLenses] = React.useState([]); // ...lenses.filter((l, i) => i < 2)
@@ -368,6 +375,45 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         }
         setFilteredSelectedSensors(list);
     }, [selectedSensors, selectedSortColumn, selectedSortDirection]);
+
+
+    const router = useRouter();
+    console.log(router.query);
+    console.log(selectedSensors);
+
+    useEffect(() => {
+        if (router.query.sensors || router.query.lenses) {
+            setSelectedSensors(sensors.filter(s => JSON.parse((router.query.sensors || '[]') as string).includes(s.model)));
+            setSelectedLenses(lenses.filter(s => JSON.parse((router.query.lenses || '[]') as string).includes(s.model)));
+            console.log('applied query params', router.query);
+            router.push('/', undefined, { shallow: true });
+        }
+    }, [router.query]);
+
+    // const shareTitle = shared ? 'Copied ' : 'Share (Copy link to clipboard)';
+
+    const share = () => {
+        const data = {
+            sensors: JSON.stringify(selectedSensors.map(s => s.model)),
+            lenses: JSON.stringify(selectedLenses.map(l => l.model)),
+        };
+
+        // const searchParams = new URLSearchParams(data);
+        // window.open('https://sensorsizes.com?' + searchParams);
+
+        const link = `${location.origin}?sensors=${data.sensors}&lenses=${data.lenses}`;
+        // console.log(link)
+        // window.open(link);
+        copyTextToClipboard(link);
+        if (shared) {
+            clearTimeout(shared);
+        }
+        setShared(
+            setTimeout(() => {
+                setShared(null);
+            }, 4000)
+        );
+    };
 
     const changeSort = (column: string, column2: string = null) => {
         if (sortColumn !== column) {
@@ -499,7 +545,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
             console.error('Async: Could not copy text: ', err);
         });
     }
-
     const copySelectionToClipboard = () => {
         const data = [
             [
@@ -699,6 +744,17 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
             </div>
             <div className={classes.wrapper}>
                 <div>
+                    {/*<div className={classes.options}>*/}
+                    {/*    <div className={classes.shareCopiedLink}>{ shared ? 'Copied link to clipboard!' : '\u00A0' }</div>*/}
+                    {/*</div>*/}
+                    {/*<br/>*/}
+                    <div className={classes.options} style={{position: "relative"}}>
+                        <div className={classes.shareCopiedLink}>{ shared ? 'Copied link to clipboard!' : '\u00A0' }</div>
+
+                        {/*<div className={classes.shareCopiedLink}>Copied link to clipboard!</div>*/}
+                        <button disabled={selectedSensors.length === 0} className={classes.button} onClick={share}>Share</button>
+                    </div>
+                    <br/>
                     <div className={classes.options}>
                         <input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} />
                         <div className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>
