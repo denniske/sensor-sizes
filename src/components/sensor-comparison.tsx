@@ -4,7 +4,6 @@ import {ILense, ISensor, ITexts} from './sensor.type';
 import React, {Fragment, useEffect, useState} from 'react';
 import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
-import {noop} from '@babel/types';
 import {faArrowDown, faArrowUp, faCoffee, faCross, faTimes} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormControl, Select, Input, MenuItem, ListItemText } from '@material-ui/core';
@@ -892,7 +891,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                 sensor.model !== 'temp' &&
                                                     <>
                                                         <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellCheckbox}>
-                                                            <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
+                                                            <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => {}}/>
                                                         </td>
                                                         <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellModel}>{sensor.model}</td>
                                                         <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
@@ -1063,7 +1062,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                     }
 
                                                     <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellCheckbox}>
-                                                        <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => noop}/>
+                                                        <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => {}}/>
                                                     </td>
                                                     <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellModel}>{sensor.model}</td>
                                                     <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
