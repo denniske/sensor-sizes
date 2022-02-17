@@ -1,5 +1,4 @@
 import {GoogleSpreadsheet} from 'google-spreadsheet';
-import {merge} from '@hapi/hoek';
 
 export const getSensorsFromSheet = async () => {
     const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
