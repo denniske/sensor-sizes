@@ -91,7 +91,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
             </Head>
 
             <main className={styles.main}>
-                <div className={classes.links}>
+                <div className={classes.links} data-nosnippet>
                     <a className={classes.link} href="https://github.com/denniske/sensor-sizes" target="_blank">
                         <img className={classes.linkImage}
                              src="https://img.shields.io/badge/github-sensor--sizes-green?label=Github&logo=github&labelColor=00AA00&color=444"/>
@@ -144,7 +144,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                     )
                 }
 
-                <div className={classes.footerLinks}>
+                <div className={classes.footerLinks} data-nosnippet>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">
                         <CustomTooltip title={texts.contact}>Contact</CustomTooltip>
                     </a>

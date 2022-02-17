@@ -276,7 +276,7 @@ const mobileCheck = function() {
 };
 
 export function SensorComparison({lenses, sensors, texts}: Props) {
-    const windowDimensions = useWindowDimensions();
+    // const windowDimensions = useWindowDimensions();
     const isMobile = mobileCheck();
     const classes = useStyles();
     const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s) => s.default));
@@ -640,7 +640,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     });
 
     return (
-        <div className={classes.outer}>
+        <div className={classes.outer} data-nosnippet>
             <div className={classes.container} ref={ref}>
                 <div className={classes.surface}>
                     {
