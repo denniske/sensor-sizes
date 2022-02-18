@@ -1,4 +1,4 @@
-import {getLensesFromSheet, getSensorsFromSheet, getTextsFromSheet} from '../src/helper/get-rows';
+import {getLensesFromSheet, getSensorsFromSheet, getSheet, getTextsFromSheet} from '../src/helper/get-rows';
 import SensorLayout from '../src/components/sensor-layout';
 
 
@@ -9,11 +9,14 @@ export default function Home({lenses, sensors, texts, titles}) {
 }
 
 export async function getStaticProps() {
-    const lenses = await getLensesFromSheet();
-    const sensors = await getSensorsFromSheet();
-    const [titles, texts] = await getTextsFromSheet();
-    // console.log(sensors);
-    // console.log(texts);
+    const doc = await getSheet();
+
+    const [lenses, sensors, [titles, texts]] = await Promise.all([
+        getLensesFromSheet(doc),
+        getSensorsFromSheet(doc),
+        getTextsFromSheet(doc),
+    ]);
+
     return {
         props: {
             lenses,

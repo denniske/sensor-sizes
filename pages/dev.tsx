@@ -19,10 +19,6 @@ export async function getServerSideProps() {
         getTextsFromSheet(doc),
     ]);
 
-    // const lenses = await getLensesFromSheet();
-    // const sensors = await getSensorsFromSheet(doc);
-    // const [titles, texts] = await getTextsFromSheet();
-
     return {
         props: {
             lenses,
