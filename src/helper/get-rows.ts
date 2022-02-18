@@ -1,19 +1,34 @@
 import {GoogleSpreadsheet} from 'google-spreadsheet';
+import {start} from "repl";
 
-export const getSensorsFromSheet = async () => {
+export const getSheet = async () => {
+    console.log('getSheet');
+    let started = new Date();
     const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
 
     await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY);
 
     await doc.loadInfo(); // loads document properties and worksheets
-    console.log(doc.title);
+    started = timer(3, started);
+    return doc;
+}
+
+function timer(num: number, started: Date) {
+    console.log(num, ' - ', new Date().getTime() - started.getTime());
+    return new Date();
+}
+
+
+export const getSensorsFromSheet = async (doc: GoogleSpreadsheet) => {
+    console.log('getSensorsFromSheet');
+    let started = new Date();
 
     const sheet = doc.sheetsById['0']; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
     console.log(sheet.title);
-    console.log(sheet.rowCount);
 
     const rows = await sheet.getRows();
     // console.log(rows);
+    started = timer(5, started);
 
     const parseAspectRatio = (aspectRatio: string) => {
         if (!aspectRatio) return;
@@ -46,17 +61,9 @@ export const getSensorsFromSheet = async () => {
     return allRows.filter(r => r.enabled);
 };
 
-export const getTextsFromSheet = async () => {
-    const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
-
-    await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY);
-
-    await doc.loadInfo();
-    console.log(doc.title);
-
+export const getTextsFromSheet = async (doc: GoogleSpreadsheet) => {
     const sheet = doc.sheetsById['1209564769'];
     console.log(sheet.title);
-    console.log(sheet.rowCount);
 
     const rows = await sheet.getRows();
     // console.log(rows);
@@ -98,17 +105,9 @@ export const getTextsFromSheet = async () => {
 };
 
 
-export const getLensesFromSheet = async () => {
-    const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
-
-    await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY);
-
-    await doc.loadInfo(); // loads document properties and worksheets
-    console.log(doc.title);
-
+export const getLensesFromSheet = async (doc: GoogleSpreadsheet) => {
     const sheet = doc.sheetsById['2136751308']; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
     console.log(sheet.title);
-    console.log(sheet.rowCount);
 
     const rows = await sheet.getRows();
     // console.log(rows);

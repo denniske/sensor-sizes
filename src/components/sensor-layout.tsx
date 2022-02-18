@@ -5,6 +5,7 @@ import {SensorComparison} from './sensor-comparison';
 import {Link} from '@material-ui/core';
 import React, {useEffect, useState} from 'react';
 import {CustomTooltip} from './light-tooltip';
+import Script from 'next/script'
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -86,9 +87,12 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                 <meta property="twitter:description" content={texts.metaDescription}/>
                 <meta property="twitter:image" content="https://sensorsizes.com/social.png"/>
 
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1BYHEDKMJ"/>
-                <script type="text/javascript" src="/google-analytics.js"/>
+                {/*<script async src="https://www.googletagmanager.com/gtag/js?id=G-X1BYHEDKMJ"/>*/}
+                {/*<script type="text/javascript" src="/google-analytics.js"/>*/}
             </Head>
+
+            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-X1BYHEDKMJ"></Script>
+            <Script type="text/javascript" src="/google-analytics.js"></Script>
 
             <main className={styles.main}>
                 <div className={classes.links} data-nosnippet>

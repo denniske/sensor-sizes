@@ -1,5 +1,5 @@
 import SensorLayout from '../src/components/sensor-layout';
-import {getLensesFromSheet, getSensorsFromSheet, getTextsFromSheet} from '../src/helper/get-rows';
+import {getLensesFromSheet, getSensorsFromSheet, getSheet, getTextsFromSheet} from '../src/helper/get-rows';
 
 
 export default function Home({lenses, sensors, texts, titles}) {
@@ -9,11 +9,20 @@ export default function Home({lenses, sensors, texts, titles}) {
 }
 
 export async function getServerSideProps() {
-    const lenses = await getLensesFromSheet();
-    const sensors = await getSensorsFromSheet();
-    const [titles, texts] = await getTextsFromSheet();
-    console.log(sensors);
-    console.log(texts);
+    console.log('getServerSideProps');
+
+    const doc = await getSheet();
+
+    const [lenses, sensors, [titles, texts]] = await Promise.all([
+        getLensesFromSheet(doc),
+        getSensorsFromSheet(doc),
+        getTextsFromSheet(doc),
+    ]);
+
+    // const lenses = await getLensesFromSheet();
+    // const sensors = await getSensorsFromSheet(doc);
+    // const [titles, texts] = await getTextsFromSheet();
+
     return {
         props: {
             lenses,
