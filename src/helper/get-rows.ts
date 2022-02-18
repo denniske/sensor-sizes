@@ -1,34 +1,17 @@
 import {GoogleSpreadsheet} from 'google-spreadsheet';
-import {start} from "repl";
 
 export const getSheet = async () => {
-    console.log('getSheet');
-    let started = new Date();
     const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
-
     await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY);
-
-    await doc.loadInfo(); // loads document properties and worksheets
-    started = timer(3, started);
+    await doc.loadInfo();
     return doc;
 }
 
-function timer(num: number, started: Date) {
-    console.log(num, ' - ', new Date().getTime() - started.getTime());
-    return new Date();
-}
-
-
 export const getSensorsFromSheet = async (doc: GoogleSpreadsheet) => {
-    console.log('getSensorsFromSheet');
-    let started = new Date();
-
-    const sheet = doc.sheetsById['0']; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+    const sheet = doc.sheetsById['0'];
     console.log(sheet.title);
 
     const rows = await sheet.getRows();
-    // console.log(rows);
-    started = timer(5, started);
 
     const parseAspectRatio = (aspectRatio: string) => {
         if (!aspectRatio) return;
@@ -66,7 +49,6 @@ export const getTextsFromSheet = async (doc: GoogleSpreadsheet) => {
     console.log(sheet.title);
 
     const rows = await sheet.getRows();
-    // console.log(rows);
 
     const titleRow = rows[0];
     const textRow = rows[1];
@@ -106,11 +88,10 @@ export const getTextsFromSheet = async (doc: GoogleSpreadsheet) => {
 
 
 export const getLensesFromSheet = async (doc: GoogleSpreadsheet) => {
-    const sheet = doc.sheetsById['2136751308']; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+    const sheet = doc.sheetsById['2136751308'];
     console.log(sheet.title);
 
     const rows = await sheet.getRows();
-    // console.log(rows);
 
     const allRows = rows.map(r => {
         return ({
