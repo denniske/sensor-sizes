@@ -276,7 +276,6 @@ const mobileCheck = function() {
 };
 
 export function SensorComparison({lenses, sensors, texts}: Props) {
-    // const windowDimensions = useWindowDimensions();
     const isMobile = mobileCheck();
     const classes = useStyles();
     const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s) => s.default));
@@ -304,7 +303,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [shared, setShared] = useState<any>(null);
 
     const [selectedLensesStr, setSelectedLensesStr] = React.useState([]);
-    const [selectedLenses, setSelectedLenses] = React.useState([]); // ...lenses.filter((l, i) => i < 2)
+    const [selectedLenses, setSelectedLenses] = React.useState([]);
 
     const visibleLenses = [...selectedLenses];
     if (imageCircle > 0) {
@@ -318,14 +317,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         setSelectedLenses(lenses.filter(l => event.target.value.includes(l.model)));
     };
 
-    // const maxWidth = (isMobile ? windowDimensions.width : windowDimensions.width) - offset*2;
-    // const maxWidth = Math.min(700, width) - offset*2;
-    // const maxWidth = (width || windowDimensions?.width) - offset*2;
     const maxWidth = width - offset*2;
     const maxHeight = 700;
-
-    // console.log('width', width);
-    // console.log('windowDimensions?.width', windowDimensions?.width);
 
     const selectedLensesAdded = selectedLenses.map(l => ({width: l.imageCircle, height: l.imageCircle}));
 
@@ -376,8 +369,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     }, [selectedSensors, selectedSortColumn, selectedSortDirection]);
 
     const router = useRouter();
-    // console.log(router.query);
-    // console.log(selectedSensors);
 
     useEffect(() => {
         if (router.query.sensors || router.query.lenses) {
@@ -399,9 +390,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         };
 
         const link = `${location.origin}?sensors=${data.sensors}&lenses=${data.lenses}`;
-
-        // console.log(link)
-        // window.open(link);
 
         copyTextToClipboard(link);
 
@@ -899,7 +887,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                         <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
                                                         <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
                                                         <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
-                                                        {/*<td {...onMouseEnterLeaveProps(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>*/}
                                                         <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
 
                                                         {
@@ -1070,7 +1057,6 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                     <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
                                                     <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
                                                     <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
-                                                    {/*<td {...onMouseEnterLeavePropsAll(sensor)} className={classes.cellArea}>{getArea(sensor)}</td>*/}
                                                     <td {...onMouseEnterLeaveSensorPropsAll(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
                                                     {
                                                         !isMobile &&
