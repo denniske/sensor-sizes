@@ -561,11 +561,17 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         return sensor.photositeDensity ? sensor.photositeDensity.toLocaleString('en') : '-';
     };
 
+    const getDimensions = (sensor: ISensor) => {
+        if (!sensor.width || !sensor.height) return '-';
+        return `${sensor.width?.toFixed(2)} x ${sensor.height?.toFixed(2)}`;
+    };
+
     const getArea = (sensor: ISensor) => {
         return `${sensor.area.toFixed(2)}`;
     };
 
     const getDiagonal = (sensor: ISensor) => {
+        if (!sensor.diagonal) return '-';
         return `${sensor.diagonal.toFixed(2)}`;
     };
 
@@ -592,9 +598,9 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                 'Crop Factor (S35)',
                 'Density (px/mm²)',
             ].join('\t'),
-            ...filteredSelectedSensors.map(sensor => [
+            ...filteredSelectedSensors.filter(s => s.model !== 'temp').map(sensor => [
                 `${sensor.model}`,
-                `${sensor.width.toFixed(2)} x ${sensor.height.toFixed(2)}`,
+                `${getDimensions(sensor)}`,
                 `${getAspectRatio(sensor.aspectRatio)}`,
                 `${getDiagonal(sensor)}`,
                 `${getArea(sensor)}`,
