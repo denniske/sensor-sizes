@@ -67,7 +67,7 @@ const useStyles = createStylesheet((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        zIndex: 10,
+        zIndex: 1000,
         marginHorizontal: 15,
     },
     box: {
@@ -115,17 +115,17 @@ const useStyles = createStylesheet((theme) => ({
         textAlign: 'right',
     },
     cellX: {
-        width: 20,
+        // width: 20,
         paddingVertical: 2,
         textAlign: 'center',
     },
     cellW: {
-        width: 90,
+        // width: 90,
         paddingVertical: 2,
         textAlign: 'right',
     },
     cellH: {
-        width: 40,
+        // width: 50,
         paddingVertical: 2,
         textAlign: 'right',
     },
@@ -135,7 +135,7 @@ const useStyles = createStylesheet((theme) => ({
         textAlign: 'right',
     },
     cellModel: {
-        // flexDirection: 'row',
+        textAlign: 'left !important' as any,
         width: 285,
     },
     cellScreen: {
@@ -150,7 +150,7 @@ const useStyles = createStylesheet((theme) => ({
         textAlign: 'right',
     },
     cellCheckbox: {
-        width: 30,
+        // width: 30,
     },
     cellLogo: {
         width: 150,
@@ -167,6 +167,9 @@ const useStyles = createStylesheet((theme) => ({
     },
     pointer: {
         cursor: 'pointer',
+    },
+    cellHovered: {
+        background: '#333',
     },
     sortIcon: {
         marginLeft: 5,
@@ -229,6 +232,29 @@ const useStyles = createStylesheet((theme) => ({
     noLabel: {
         marginTop: theme.spacing(3),
     },
+    grid: {
+        display: 'grid',
+        gridTemplateColumns: 'auto 30px auto 90px 20px 50px auto auto auto auto auto',
+    },
+    gridMobile: {
+        display: 'grid',
+        gridTemplateColumns: 'auto 30px auto 90px 20px 50px auto auto auto',
+    },
+    cellHead: {
+        padding: '2px 3px',
+        paddingBottom: '10px',
+        lineHeight: 1.5,
+        fontWeight: 'bold',
+        textAlign: 'right',
+    },
+    cellBody: {
+        padding: '2px 3px',
+        lineHeight: 1.5,
+    },
+    cellSpan3: {
+        width: 160,
+        gridColumn: 'span 3',
+    },
 }));
 
 // const ITEM_HEIGHT = 48;
@@ -276,7 +302,7 @@ const mobileCheck = function() {
 };
 
 export function SensorComparison({lenses, sensors, texts}: Props) {
-    const isMobile = mobileCheck();
+    const _isMobile = mobileCheck();
     const classes = useStyles();
     const [selectedSensors, setSelectedSensors] = useState(sensors.filter((s) => s.default));
     const [realPhysicalSensorSize, setRealPhysicalSensorSize] = useState(false);
@@ -305,6 +331,13 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [selectedLensesStr, setSelectedLensesStr] = React.useState([]);
     const [selectedLenses, setSelectedLenses] = React.useState([]);
 
+    // Hack: Need when first loading mobile it would be wrong otherwise
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    useEffect(() => {
+        setIsMobile(_isMobile);
+    }, [_isMobile]);
+
     const visibleLenses = [...selectedLenses];
     if (imageCircle > 0) {
         individualImageCircleLense.model = `Individual Image Circle (${imageCircle.toFixed(2)} mm)`;
@@ -326,7 +359,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const maxSensorHeight = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircle, height: imageCircle }], s => s.height);
 
     let factor = 1;
-    if (maxSensorWidth != null) {
+    if (maxSensorWidth != null && (selectedSensors.length > 0 || selectedLensesAdded.length > 0 || imageCircle)) {
         const factorWidth = maxWidth / maxSensorWidth.width;
         const factorHeight = maxHeight / maxSensorHeight.height;
 
@@ -610,6 +643,9 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     });
 
     const onMouseEnterLeaveSensorProps = (sensor: ISensor) => ({
+        onClick: () => {
+            onToggleSensor(sensor);
+        },
         onMouseEnter: () => {
             setHoveredSensor(sensor);
         },
@@ -797,13 +833,11 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
                     <h3 className={classes.title}>{'\u00A0'}</h3>
                     <div className={classes.tableSelected}>
-                        <table className="table-no-select table-selected">
-                            <thead>
-                            <tr>
-                                <th className={classes.cellLogo}/>
-                                <th className={classes.cellCheckbox}/>
-                                <th className={classes.cellModel}>Selected Models</th>
-                                <th colSpan={3} className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('width', 'height')}>
+                        <div className={`${isMobile ? classes.gridMobile : classes.grid} table-no-select table-selected`}>
+                                <div className={`${classes.cellHead} ${classes.cellLogo}`}/>
+                                <div className={`${classes.cellHead} ${classes.cellCheckbox}`}/>
+                                <div className={`${classes.cellHead} ${classes.cellModel}`}>Selected Models</div>
+                                <div className={`${classes.cellHead} ${classes.cellSpan3} ${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('width', 'height')}>
                                     <CustomTooltip title={texts.dimensions}>
                                         Dimensions (mm)
                                         {
@@ -811,8 +845,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </CustomTooltip>
-                                </th>
-                                <th className={`${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSelectedSort('aspectRatio')}>
+                                </div>
+                                <div className={`${classes.cellHead} ${classes.cellAspectRatio} ${classes.pointer}`} onClick={() => changeSelectedSort('aspectRatio')}>
                                     <CustomTooltip title={texts.aspectRatio}>
                                         Aspect Ratio
                                         {
@@ -820,8 +854,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </CustomTooltip>
-                                </th>
-                                <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('diagonal')}>
+                                </div>
+                                <div className={`${classes.cellHead} ${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('diagonal')}>
                                     <CustomTooltip title={texts.diagonal}>
                                         Diagonal (mm)
                                         {
@@ -829,8 +863,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </CustomTooltip>
-                                </th>
-                                <th className={`${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('resolutionX', 'resolutionY')}>
+                                </div>
+                                <div className={`${classes.cellHead} ${classes.cell} ${classes.pointer}`} onClick={() => changeSelectedSort('resolutionX', 'resolutionY')}>
                                     <CustomTooltip title={texts.resolution}>
                                         Resolution (px)
                                         {
@@ -838,11 +872,11 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             <FontAwesomeIcon className={classes.sortIcon} icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp} />
                                         }
                                     </CustomTooltip>
-                                </th>
+                                </div>
                                 {
                                     !isMobile &&
                                     <>
-                                        <th className={`${classes.cellWithout} ${classes.pointer}`}
+                                        <div className={`${classes.cellHead} ${classes.cellWithout} ${classes.pointer}`}
                                             onClick={() => changeSelectedSort('cropFactor')}>
                                             <CustomTooltip title={texts.cropFactor}>
                                                 {'\u00A0\u00A0\u00A0\u00A0'}
@@ -853,8 +887,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                                      icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp}/>
                                                 }
                                             </CustomTooltip>
-                                        </th>
-                                        <th className={`${classes.cellWithout} ${classes.pointer}`}
+                                        </div>
+                                        <div className={`${classes.cellHead} ${classes.cellWithout} ${classes.pointer}`}
                                             onClick={() => changeSelectedSort('photositeDensity')}>
                                             <CustomTooltip title={texts.density}>
                                                 {'\u00A0\u00A0\u00A0\u00A0'}
@@ -865,44 +899,42 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                                      icon={selectedSortDirection === 'desc' ? faArrowDown : faArrowUp}/>
                                                 }
                                             </CustomTooltip>
-                                        </th>
+                                        </div>
                                     </>
                                 }
-                            </tr>
-                            </thead>
-                            <tbody>
                                 {
-                                    filteredSelectedSensors.map((sensor, i) => (
-                                        <tr key={i} className={`${classes.row} ${classes.pointer} ${hoveredSensor === sensor ? 'hovered' : ''}`} onClick={() => onToggleSensor(sensor)}>
-                                            <td className={classes.cellLogo} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</td>
+                                    filteredSelectedSensors.map((sensor, i) => {
+                                        const cClass = `${classes.cellBody} ${classes.pointer} ${hoveredSensor === sensor ? classes.cellHovered : ''}`;
+                                        return (
+                                        <Fragment key={i}>
+                                            <div className={`${classes.cellLogo} ${classes.pointer} ${hoveredSensor === sensor ? classes.cellHovered : ''}`} style={{textAlign: 'right', paddingRight: 10}}>{sensor.logo}</div>
                                             {
                                                 sensor.model !== 'temp' &&
                                                     <>
-                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellCheckbox}>
-                                                            <input className={classes.pointer} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => {}}/>
-                                                        </td>
-                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellModel}>{sensor.model}</td>
-                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellW}>{sensor.width.toFixed(2)}</td>
-                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellX}>x</td>
-                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellH}>{sensor.height.toFixed(2)}</td>
-                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellAspectRatio}>{getAspectRatio(sensor.aspectRatio)}</td>
-                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cell}>{getDiagonal(sensor)}</td>
-                                                        <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cell}>{getResolution(sensor)}</td>
+                                                        <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellCheckbox}`}>
+                                                            <input className={`${classes.pointer}`} type="checkbox" checked={selectedSensors.includes(sensor)} onChange={() => {}}/>
+                                                        </div>
+                                                        <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellModel}`}>{sensor.model}</div>
+                                                        <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellW}`}>{sensor.width.toFixed(2)}</div>
+                                                        <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellX}`}>x</div>
+                                                        <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellH}`}>{sensor.height.toFixed(2)}</div>
+                                                        <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellAspectRatio}`}>{getAspectRatio(sensor.aspectRatio)}</div>
+                                                        <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cell}`}>{getDiagonal(sensor)}</div>
+                                                        <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cell}`}>{getResolution(sensor)}</div>
 
                                                         {
                                                             !isMobile &&
                                                             <>
-                                                                <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellWithout}>{sensor.cropFactor}</td>
-                                                                <td {...onMouseEnterLeaveSensorProps(sensor)} className={classes.cellWithout}>{getDensity(sensor)}</td>
+                                                                <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellWithout}`}>{sensor.cropFactor}</div>
+                                                                <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellWithout}`}>{getDensity(sensor)}</div>
                                                             </>
                                                         }
                                                     </>
                                             }
-                                        </tr>
-                                    ))
+                                        </Fragment>
+                                    ); })
                                 }
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
 
                     <table className="table-no-select">
