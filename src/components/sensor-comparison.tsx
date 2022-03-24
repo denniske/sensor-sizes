@@ -436,12 +436,16 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const router = useRouter();
 
     useEffect(() => {
-        if (router.query.sensors || router.query.lenses) {
+        if (router.query.sensors || router.query.lenses || router.query.imageCircles) {
             setSelectedSensors(sensors.filter(s => JSON.parse((router.query.sensors || '[]') as string).includes(s.id)));
 
             const newLenses = lenses.filter(s => JSON.parse((router.query.lenses || '[]') as string).includes(s.id));
             setSelectedLenses(newLenses);
             setSelectedLensesStr(newLenses.map(l => l.model));
+
+            const imageCircles = JSON.parse((router.query.imageCircles || '[]') as string);
+            setImageCircles(imageCircles);
+            setImageCirclesStr(imageCircles.map(imageCircle => imageCircle?.toString().replace('.', ',')));
 
             console.log('applied query params', router.query);
             router.push('/', undefined, { shallow: true });
@@ -452,9 +456,10 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         const data = {
             sensors: JSON.stringify(selectedSensors.map(s => s.id)),
             lenses: JSON.stringify(selectedLenses.map(l => l.id)),
+            imageCircles: JSON.stringify(imageCircles),
         };
 
-        const link = `${location.origin}?sensors=${data.sensors}&lenses=${data.lenses}`;
+        const link = `${location.origin}?sensors=${data.sensors}&lenses=${data.lenses}&imageCircles=${data.imageCircles}`;
 
         copyTextToClipboard(link);
 

@@ -19,6 +19,7 @@ x paypal button fertig machen
 
 
 - amazon badge mit tracking id
+x share individual image circles
 x klick auf visualisierung von linse soll linse entfernen (auch für ind. image circle)
 x mehrere individual image circles
 
