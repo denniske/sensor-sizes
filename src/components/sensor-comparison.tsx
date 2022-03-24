@@ -447,7 +447,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
             setImageCircles(imageCircles);
             setImageCirclesStr(imageCircles.map(imageCircle => imageCircle?.toString().replace('.', ',')));
 
-            console.log('applied query params', router.query);
+            console.log('applied query params', router.query, imageCircles.map(imageCircle => imageCircle?.toString().replace('.', ',')));
             router.push('/', undefined, { shallow: true });
         }
     }, [router.query]);
@@ -456,7 +456,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         const data = {
             sensors: JSON.stringify(selectedSensors.map(s => s.id)),
             lenses: JSON.stringify(selectedLenses.map(l => l.id)),
-            imageCircles: JSON.stringify(imageCircles),
+            imageCircles: JSON.stringify(imageCircles.map(imageCircle => imageCircle > 0 ? imageCircle : null)),
         };
 
         const link = `${location.origin}?sensors=${data.sensors}&lenses=${data.lenses}&imageCircles=${data.imageCircles}`;
