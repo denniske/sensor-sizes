@@ -386,9 +386,10 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const maxHeight = 700;
 
     const selectedLensesAdded = selectedLenses.map(l => ({width: l.imageCircle, height: l.imageCircle}));
+    const imageCirclesAdded = imageCircles.map(imageCircle => ({width: imageCircle, height: imageCircle}));
 
-    const maxSensorWidth = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircles, height: imageCircles }], s => s.width);
-    const maxSensorHeight = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircles, height: imageCircles }], s => s.height);
+    const maxSensorWidth = maxBy([...selectedSensors, ...selectedLensesAdded, ...imageCirclesAdded], s => s.width);
+    const maxSensorHeight = maxBy([...selectedSensors, ...selectedLensesAdded, ...imageCirclesAdded], s => s.height);
 
     let factor = 1;
     if (maxSensorWidth != null && (selectedSensors.length > 0 || selectedLensesAdded.length > 0 || imageCircles)) {
