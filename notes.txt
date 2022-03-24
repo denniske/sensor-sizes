@@ -18,6 +18,11 @@ x zeilen hervorheben
 x paypal button fertig machen
 
 
+- amazon badge mit tracking id
+x klick auf visualisierung von linse soll linse entfernen (auch für ind. image circle)
+x mehrere individual image circles
+
+
 
 mobile:
 - fix visualization of sensors + lenses & make lense label inwards)

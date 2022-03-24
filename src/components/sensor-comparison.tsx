@@ -299,13 +299,15 @@ function sortSensors(selectedSensors: ISensor[], sensors: ISensor[]) {
 
 const offset = 50;
 
-const individualImageCircleLense = {
-    logo: '',
-    model: `Individual Image Circle`,
-    imageCircle: 0,
-    color: '#cccccc',
-    textColor: 'black',
-};
+// const individualImageCircleLense = {
+//     logo: '',
+//     model: `Individual Image Circle`,
+//     imageCircle: 0,
+//     color: '#cccccc',
+//     textColor: 'black',
+// };
+
+const individualImageCircleLenses = [{},{},{}];
 
 const mobileCheck = function() {
     if (typeof window === "undefined") return false;
@@ -327,9 +329,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [selectedSortDirection, setSelectedSortDirection] = useState(null);
     const [screenSize, setScreenSize] = useState<number>(typeof window !== 'undefined' ? Math.sqrt(window.screen.width*window.screen.width+window.screen.height*window.screen.height)/96 : 100);
     const [screenSizeStr, setScreenSizeStr] = useState<string>('');
-    const [imageCircle, setImageCircle] = useState<number>(0);
-    const [imageCircleStr, setImageCircleStr] = useState<string>('');
-    const [imageCircleVisible, setImageCircleVisible] = useState(false);
+    const [imageCircles, setImageCircles] = useState<number[]>([0, 0, 0]);
+    const [imageCirclesStr, setImageCirclesStr] = useState<string[]>(['', '', '']);
     const [searchStr, setSearchStr] = useState<string>('');
     const [filteredSensors, setFilteredSensors] = useState<ISensor[]>(sensors);
     const [showLogo, setShowLogo] = useState(true);
@@ -352,15 +353,33 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     }, [_isMobile]);
 
     const visibleLenses = [...selectedLenses];
-    if (imageCircle > 0) {
-        individualImageCircleLense.model = `Individual Image Circle (${imageCircle.toFixed(2)} mm)`;
-        individualImageCircleLense.imageCircle = imageCircle;
-        visibleLenses.push(individualImageCircleLense);
+    let i = 0;
+    for (const imageCircle of imageCircles) {
+        if (imageCircle > 0) {
+            Object.assign(individualImageCircleLenses[i], {
+                logo: '',
+                model: `Individual Image Circle ${String.fromCharCode(i + 65)} (${imageCircle.toFixed(2)} mm)`,
+                imageCircle,
+                color: '#cccccc',
+                textColor: 'black',
+                index: i,
+            });
+            visibleLenses.push(individualImageCircleLenses[i]);
+        }
+        i++;
     }
 
-    const handleChange = (event) => {
-        setSelectedLensesStr(event.target.value);
-        setSelectedLenses(lenses.filter(l => event.target.value.includes(l.model)));
+    const handleChange = (value) => {
+        setSelectedLensesStr(value);
+        setSelectedLenses(lenses.filter(l => value.includes(l.model)));
+    };
+
+    const onToggleLense = (lense: ILense) => {
+        if (selectedLensesStr.includes(lense.model)) {
+            handleChange(selectedLensesStr.filter(s => s !== lense.model));
+        } else {
+            handleChange([...selectedLensesStr, lense.model]);
+        }
     };
 
     const maxWidth = width - offset*2;
@@ -368,11 +387,11 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
     const selectedLensesAdded = selectedLenses.map(l => ({width: l.imageCircle, height: l.imageCircle}));
 
-    const maxSensorWidth = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircle, height: imageCircle }], s => s.width);
-    const maxSensorHeight = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircle, height: imageCircle }], s => s.height);
+    const maxSensorWidth = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircles, height: imageCircles }], s => s.width);
+    const maxSensorHeight = maxBy([...selectedSensors, ...selectedLensesAdded, { width: imageCircles, height: imageCircles }], s => s.height);
 
     let factor = 1;
-    if (maxSensorWidth != null && (selectedSensors.length > 0 || selectedLensesAdded.length > 0 || imageCircle)) {
+    if (maxSensorWidth != null && (selectedSensors.length > 0 || selectedLensesAdded.length > 0 || imageCircles)) {
         const factorWidth = maxWidth / maxSensorWidth.width;
         const factorHeight = maxHeight / maxSensorHeight.height;
 
@@ -521,13 +540,13 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         setScreenSize(parseFloat(event.target.value.replace(',', '.')));
     };
 
-    const onToggleImageCircle = (val) => {
-        setImageCircleVisible(!imageCircleVisible);
-    };
-
-    const onImageCircleChange = (event) => {
-        setImageCircleStr(event.target.value.replace(',', '.'));
-        setImageCircle(parseFloat(event.target.value.replace(',', '.')));
+    const onImageCircleChange = (value, i) => {
+        const imageCirclesStr2 = [...imageCirclesStr];
+        imageCirclesStr2[i] = value.replace(',', '.');
+        setImageCirclesStr(imageCirclesStr2);
+        const imageCircles2 = [...imageCircles];
+        imageCircles2[i] = parseFloat(value.replace(',', '.'));
+        setImageCircles(imageCircles2);
     };
 
     const onSearchChange = (event) => {
@@ -653,7 +672,15 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     };
 
     const onMouseEnterLeaveLenseProps = (lense: ILense) => ({
+        onClick: () => {
+            if (lense.model.includes('Individual')) {
+                onImageCircleChange('', lense.index);
+            } else {
+                onToggleLense(lense);
+            }
+        },
         onMouseEnter: () => {
+            console.log('setHoveredLense', lense);
             setHoveredLense(lense);
         },
         onMouseLeave: () => {
@@ -815,7 +842,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 id="demo-mutiple-checkbox"
                                 multiple
                                 value={selectedLensesStr}
-                                onChange={handleChange}
+                                onChange={(event) => handleChange(event.target.value)}
                                 input={<Input />}
                                 displayEmpty={true}
                                 renderValue={(selected: string[] | null) => selected?.length + ' selected'}
@@ -831,10 +858,17 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                         </FormControl>
                         <div className={`${classes.optionsText}`}>
                             <CustomTooltip title={texts.individualImageCircle}>
-                                Individual image circle (mm)
+                                Individual image circles (mm)
                             </CustomTooltip>
                         </div>
-                        <div><input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={onImageCircleChange} /></div>
+                        {
+                            imageCirclesStr.map((imageCircleStr, i) => (
+                                <div key={i}>
+                                    <input type="text" className={classes.text} placeholder="size" value={imageCircleStr} onChange={(event) => onImageCircleChange(event.target.value, i)} />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+                            ))
+                        }
                     </div>
 
                     <br/>

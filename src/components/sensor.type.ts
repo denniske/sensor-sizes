@@ -26,6 +26,7 @@ export interface ILense {
     imageCircle: number;
     color: string;
     textColor: string;
+    index?: number;
 }
 
 export interface ITexts {
