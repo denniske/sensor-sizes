@@ -110,6 +110,12 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                         <img className={classes.linkImage}
                              src="https://img.shields.io/static/v1?label=Paypal&message=donate&color=444&labelColor=CCC&logo=paypal&logoColor=violet"/>
                     </a>
+                    <a className={classes.link}
+                       href="https://www.amazon.de/?&_encoding=UTF8&tag=sensorsizes-21&linkCode=ur2&linkId=33f297f674a2a08ac2be0747aa8ed48e&camp=1638&creative=6742"
+                       target="_blank">
+                        <img className={classes.linkImage}
+                             src="https://img.shields.io/static/v1?label=Amazon&message=affiliate&color=444&labelColor=CCC&logo=amazon&logoColor=black"/>
+                    </a>
                     {
                         dev &&
                         <a className={classes.link} href="https://vercel.com/denniske/sensor-sizes/deployments"
