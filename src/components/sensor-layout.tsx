@@ -6,6 +6,7 @@ import {Link} from '@material-ui/core';
 import React, {useEffect, useState} from 'react';
 import {CustomTooltip} from './light-tooltip';
 import Script from 'next/script'
+import ReactMarkdown from 'react-markdown';
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -132,27 +133,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
 
                 <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
 
-                <h3 className={classes.explanationTitle}>
-                    {titles.descriptionText}
-                </h3>
-                {
-                    texts.descriptionText.split('\n').map((text, i) =>
-                        <p key={i} className={classes.explanationText}>
-                            {text?.trim()}
-                        </p>
-                    )
-                }
-
-                <h3 className={classes.explanationTitle}>
-                    {titles.explanationText}
-                </h3>
-                {
-                    texts.explanationText.split('\n').map((text, i) =>
-                        <p key={i} className={classes.explanationText}>
-                            {text?.trim()}
-                        </p>
-                    )
-                }
+                <ReactMarkdown  className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>
 
                 <div className={classes.footerLinks} data-nosnippet>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">

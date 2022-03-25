@@ -34,6 +34,12 @@ table {
   border-collapse: collapse;
 }
 
+.explanation-text h1 {
+  font-size: 1.17em;
+  text-align: center;
+  margin-top: 50px;
+}
+
 /*.table-selected tbody tr:hover td,*/
 /*.table-all tbody tr:hover td {*/
 /*  background: #333;*/
