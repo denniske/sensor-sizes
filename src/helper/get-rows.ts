@@ -66,7 +66,6 @@ export const getTextsFromSheet = async (doc: GoogleSpreadsheet) => {
         metaTitle: titleRow.metaTitle || '',
         metaDescription: titleRow.metaDescription || '',
         metaTags: titleRow.metaTags || '',
-        explanationText: titleRow.explanationText || '',
         descriptionText: titleRow.descriptionText || '',
     }, {
         individualImageCircle: textRow.individualImageCircle,
@@ -81,7 +80,6 @@ export const getTextsFromSheet = async (doc: GoogleSpreadsheet) => {
         metaTitle: textRow.metaTitle,
         metaDescription: textRow.metaDescription,
         metaTags: textRow.metaTags,
-        explanationText: textRow.explanationText,
         descriptionText: textRow.descriptionText,
     }];
 };
