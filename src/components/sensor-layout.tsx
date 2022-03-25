@@ -38,15 +38,13 @@ const useStyles = createStylesheet((theme) => ({
     titlePart: {
         marginHorizontal: 2,
     },
-    explanationTitle: {
-        marginTop: 50,
-    },
     explanationText: {
         width: '100%',
         maxWidth: 700,
         textAlign: 'justify',
-        marginVertical: 10,
+        marginBottom: 10,
         lineHeight: '1.3em',
+        marginTop: 40,
     },
 }));
 

@@ -38,6 +38,7 @@ table {
   font-size: 1.17em;
   text-align: center;
   margin-top: 50px;
+  margin-bottom: 25px;
 }
 
 /*.table-selected tbody tr:hover td,*/
