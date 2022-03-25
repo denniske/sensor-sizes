@@ -133,7 +133,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
 
                 <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
 
-                <ReactMarkdown  className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>
+                <ReactMarkdown className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>
 
                 <div className={classes.footerLinks} data-nosnippet>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">
