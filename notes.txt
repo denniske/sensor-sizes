@@ -18,6 +18,19 @@ x zeilen hervorheben
 x paypal button fertig machen
 
 
+
+sensorsizes
+
+https://sensorsizes.com/
+
+Photo & Video & Camera
+
+US: Your unique Associate ID is sensorsizes-20
+
+https://www.amazon.com?&_encoding=UTF8&tag=sensorsizes-20&linkCode=ur2&linkId=13f734e0c2ed02bdd25d316167ab0dd0&camp=1789&creative=9325
+
+
+
 x amazon badge mit tracking id
 x klick auf visualisierung von linse soll linse entfernen (auch für ind. image circle)
 x mehrere individual image circles
