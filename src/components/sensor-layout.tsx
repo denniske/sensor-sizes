@@ -14,12 +14,24 @@ const useStyles = createStylesheet((theme) => ({
         flex: 1,
         justifyContent: 'flex-end',
         flexDirection: 'row',
-        // marginTop: 25,
         marginBottom: 60,
         zIndex: 20,
     },
     link: {
         marginHorizontal: 10,
+    },
+    sponsorings: {
+        position: 'absolute',
+        display: 'flex',
+        alignItems: 'flex-end',
+        flexDirection: 'column',
+        gap: 10,
+        top: 25,
+        right: 15,
+        zIndex: 20,
+    },
+    sponsoringImage: {
+        height: 32,
     },
     linkImage: {
         height: 18,
@@ -94,6 +106,14 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
             <Script type="text/javascript" src="/google-analytics.js"></Script>
 
             <main className={styles.main}>
+                <div className={classes.sponsorings} data-nosnippet>
+                    <a className={classes.link} href="https://patona.de/kamera/" target="_blank">
+                        <img className={classes.sponsoringImage} src="/sponsoring/patona.png"/>
+                    </a>
+                    <a className={classes.link} href="https://www.funkyfotosgroup.com/" target="_blank">
+                        <img className={classes.sponsoringImage} src="/sponsoring/ffg.png"/>
+                    </a>
+                </div>
                 <div className={classes.links} data-nosnippet>
                     <a className={classes.link} href="https://github.com/denniske/sensor-sizes" target="_blank">
                         <img className={classes.linkImage}
