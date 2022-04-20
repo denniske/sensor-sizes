@@ -113,7 +113,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                     <a className={classes.link} href="https://www.funkyfotosgroup.com/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/ffg.png"/>
                     </a>
-                    <a className={classes.link} href="https://www.alvinscables.com/" target="_blank">
+                    <a className={classes.link} href="https://alvinscable.com/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/alvinscables.png"/>
                     </a>
                 </div>
