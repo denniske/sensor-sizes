@@ -2,7 +2,6 @@ import {GoogleSpreadsheet} from 'google-spreadsheet';
 
 export const getSheet = async () => {
     const doc = new GoogleSpreadsheet('1xyqPZE26X79eLvy7M2yxTAfa3xlvgLGsG60voC0eCeI');
-    console.log(process.env.GOOGLE_SHEETS_API_KEY);
     await doc.useApiKey(process.env.GOOGLE_SHEETS_API_KEY);
     await doc.loadInfo();
     return doc;
