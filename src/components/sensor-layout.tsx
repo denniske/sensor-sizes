@@ -133,7 +133,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                        href="https://www.paypal.com/donate?business=hello%40sensorsizes.com&item_name=Compare+Sensor+Sizes&currency_code=EUR"
                        target="_blank">
                         <img className={classes.linkImage}
-                             src="https://img.shields.io/static/v1?label=Paypal&message=donate&color=444&labelColor=CCC&logo=paypal&logoColor=violet"/>
+                             src="https://img.shields.io/static/v1?label=Paypal&message=donate&color=444&labelColor=CCC&logo=paypal"/>
                     </a>
                     <a className={classes.link}
                        href="https://www.amazon.com?&_encoding=UTF8&tag=sensorsizes-20&linkCode=ur2&linkId=13f734e0c2ed02bdd25d316167ab0dd0&camp=1789&creative=9325"
