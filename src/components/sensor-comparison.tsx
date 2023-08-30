@@ -1075,6 +1075,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         </CustomTooltip>
                                     </div>
 
+
                                     {
                                         !isMobile &&
                                         <>
