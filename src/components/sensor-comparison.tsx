@@ -621,6 +621,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                 'Area (mm²)',
                 'Resolution (px)',
                 'Crop Factor (S35)',
+                'Crop Factor (FF)',
                 'Density (px/mm²)',
             ].join('\t'),
             ...filteredSelectedSensors.filter(s => s.model !== 'temp').map(sensor => [
@@ -630,7 +631,8 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                 `${getDiagonal(sensor)}`,
                 `${getArea(sensor)}`,
                 `${getResolution(sensor)}`,
-                `${sensor.cropFactor}`,
+                `${sensor.cropFactorS35}`,
+                `${sensor.cropFactorFF}`,
                 `${getDensity(sensor)}`,
             ].join('\t'))
         ];
@@ -932,10 +934,10 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                     !isMobile &&
                                     <>
                                         <div className={`${classes.cellHead} ${classes.cellWithout} ${classes.pointer}`}
-                                            onClick={() => changeSelectedSort('cropFactor')}>
+                                            onClick={() => changeSelectedSort('cropFactorS35')}>
                                             <CustomTooltip title={texts.cropFactor}>
                                                 {'\u00A0\u00A0\u00A0\u00A0'}
-                                                Crop Factor (S35)
+                                                Crop Factor (S35 / FF)
                                                 {
                                                     selectedSortColumn === 'cropFactor' &&
                                                     <FontAwesomeIcon className={classes.sortIcon}
@@ -982,7 +984,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                         {
                                                             !isMobile &&
                                                             <>
-                                                                <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellWithout}`}>{sensor.cropFactor}</div>
+                                                                <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellWithout}`}>{sensor.cropFactorS35} / {sensor.cropFactorFF}</div>
                                                                 <div {...onMouseEnterLeaveSensorProps(sensor)} className={`${cClass} ${classes.cellWithout}`}>{getDensity(sensor)}</div>
                                                             </>
                                                         }
@@ -1076,10 +1078,10 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                     {
                                         !isMobile &&
                                         <>
-                                            <div className={`${classes.cellHead} ${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('cropFactor')}>
+                                            <div className={`${classes.cellHead} ${classes.cellWithout} ${classes.pointer}`} onClick={() => changeSort('cropFactorS35')}>
                                                 <CustomTooltip title={texts.cropFactor}>
                                                     {'\u00A0\u00A0\u00A0\u00A0'}
-                                                    Crop Factor (S35)
+                                                    Crop Factor (S35 / FF)
                                                     {
                                                         sortColumn === 'cropFactor' &&
                                                         <FontAwesomeIcon className={classes.sortIcon} icon={sortDirection === 'desc' ? faArrowDown : faArrowUp} />
@@ -1175,7 +1177,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                                     {
                                                         !isMobile &&
                                                         <>
-                                                            <div {...onMouseEnterLeaveSensorPropsAll(sensor)} className={`${cClass} ${classes.cellWithout}`}>{sensor.cropFactor}</div>
+                                                            <div {...onMouseEnterLeaveSensorPropsAll(sensor)} className={`${cClass} ${classes.cellWithout}`}>{sensor.cropFactorS35} / {sensor.cropFactorFF}</div>
                                                             <div {...onMouseEnterLeaveSensorPropsAll(sensor)} className={`${cClass} ${classes.cellWithout}`}>{getDensity(sensor)}</div>
                                                         </>
                                                     }
