@@ -28,6 +28,7 @@ export interface ILense {
     color: string;
     textColor: string;
     index?: number;
+    expansion?: number;
 }
 
 export interface ITexts {

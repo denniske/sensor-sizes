@@ -299,15 +299,7 @@ function sortSensors(selectedSensors: ISensor[], sensors: ISensor[]) {
 
 const offset = 50;
 
-// const individualImageCircleLense = {
-//     logo: '',
-//     model: `Individual Image Circle`,
-//     imageCircle: 0,
-//     color: '#cccccc',
-//     textColor: 'black',
-// };
-
-const individualImageCircleLenses = [{},{},{}];
+const individualImageCircleLenses: ILense[] = [{},{},{}] as any;
 
 const mobileCheck = function() {
     if (typeof window === "undefined") return false;
@@ -363,6 +355,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                 color: '#cccccc',
                 textColor: 'black',
                 index: i,
+                expansion: individualImageCircleLenses[i]?.expansion || 1,
             });
             visibleLenses.push(individualImageCircleLenses[i]);
         }
@@ -385,8 +378,13 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const maxWidth = width - offset*2;
     const maxHeight = 700;
 
-    const selectedLensesAdded = selectedLenses.map(l => ({width: l.imageCircle, height: l.imageCircle}));
-    const imageCirclesAdded = imageCircles.map(imageCircle => ({width: imageCircle, height: imageCircle}));
+    const selectedLensesAdded = selectedLenses.map(l => ({width: l.imageCircle*l.expansion, height: l.imageCircle*l.expansion}));
+    const imageCirclesAdded = imageCircles
+        .filter(imageCircle => imageCircle != null)
+        .map((imageCircle, i) => ({
+            width: individualImageCircleLenses[i].imageCircle*individualImageCircleLenses[i].expansion,
+            height: individualImageCircleLenses[i].imageCircle*individualImageCircleLenses[i].expansion,
+        }));
 
     const maxSensorWidth = maxBy([...selectedSensors, ...selectedLensesAdded, ...imageCirclesAdded], s => s.width);
     const maxSensorHeight = maxBy([...selectedSensors, ...selectedLensesAdded, ...imageCirclesAdded], s => s.height);
@@ -441,10 +439,26 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
             setSelectedSensors(sensors.filter(s => JSON.parse((router.query.sensors || '[]') as string).includes(s.id)));
 
             const newLenses = lenses.filter(s => JSON.parse((router.query.lenses || '[]') as string).includes(s.id));
+
+            if (router.query.lenseExpansions) {
+                const lenseExpansions = JSON.parse((router.query.lenseExpansions || '[]') as string);
+                for (let i = 0; i < lenseExpansions.length; i++) {
+                    newLenses[i].expansion = lenseExpansions[i];
+                }
+            }
+
             setSelectedLenses(newLenses);
             setSelectedLensesStr(newLenses.map(l => l.model));
 
             const imageCircles = JSON.parse((router.query.imageCircles || '[]') as string);
+
+            if (router.query.imageCircleExpansions) {
+                const imageCircleExpansions = JSON.parse((router.query.imageCircleExpansions || '[]') as string);
+                for (let i = 0; i < imageCircleExpansions.length; i++) {
+                    individualImageCircleLenses[i].expansion = imageCircleExpansions[i];
+                }
+            }
+
             setImageCircles(imageCircles);
             setImageCirclesStr(imageCircles.map(imageCircle => imageCircle?.toString().replace('.', ',')));
 
@@ -457,10 +471,14 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         const data = {
             sensors: JSON.stringify(selectedSensors.map(s => s.id)),
             lenses: JSON.stringify(selectedLenses.map(l => l.id)),
+            lenseExpansions: JSON.stringify(selectedLenses.map(l => l.expansion)),
             imageCircles: JSON.stringify(imageCircles.map(imageCircle => imageCircle > 0 ? imageCircle : null)),
+            imageCircleExpansions: JSON.stringify(individualImageCircleLenses.map(imageCircle => imageCircle.expansion ?? 1)),
         };
 
-        const link = `${location.origin}?sensors=${data.sensors}&lenses=${data.lenses}&imageCircles=${data.imageCircles}`;
+        const link = `${location.origin}?sensors=${data.sensors}&lenses=${data.lenses}&lenseExpansions=${data.lenseExpansions}&imageCircles=${data.imageCircles}&imageCircleExpansions=${data.imageCircleExpansions}`;
+
+        console.log(link);
 
         copyTextToClipboard(link);
 
@@ -544,6 +562,11 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const onScreenSizeChange = (event) => {
         setScreenSizeStr(event.target.value.replace(',', '.'));
         setScreenSize(parseFloat(event.target.value.replace(',', '.')));
+    };
+
+    const onLenseExpansionChange = (lense, expansion) => {
+        console.log(lense, expansion);
+        lense.expansion = expansion;
     };
 
     const onImageCircleChange = (value, i) => {
@@ -681,11 +704,11 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
     const onMouseEnterLeaveLenseProps = (lense: ILense) => ({
         onClick: () => {
-            if (lense.model.includes('Individual')) {
-                onImageCircleChange('', lense.index);
-            } else {
-                onToggleLense(lense);
-            }
+            // if (lense.model.includes('Individual')) {
+            //     onImageCircleChange('', lense.index);
+            // } else {
+            //     onToggleLense(lense);
+            // }
         },
         onMouseEnter: () => {
             console.log('setHoveredLense', lense);
@@ -795,10 +818,10 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                     {
                         loaded && orderBy(visibleLenses, l => l.imageCircle).map((lense, i) =>
                             <div key={lense.model} style={{
-                                width: lense.imageCircle*factor,
-                                height: lense.imageCircle*factor,
-                                left: centerX-(lense.imageCircle*factor)/2,
-                                top: maxHeight/2-(lense.imageCircle*factor)/2,
+                                width: lense.imageCircle*lense.expansion*factor,
+                                height: lense.imageCircle*lense.expansion*factor,
+                                left: centerX-(lense.imageCircle*lense.expansion*factor)/2,
+                                top: maxHeight/2-(lense.imageCircle*lense.expansion*factor)/2,
                                 borderColor: hoveredLense == lense ? 'white' : lense.color,
                                 justifyContent: 'flex-end',
                                 alignItems: 'center',
@@ -814,10 +837,28 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         // transform: `translate(-0.5%) rotate(${i * -5}deg)`,
                                         transform: `translate(100%) rotate(${i * -5}deg)`,
                                         marginLeft: -1,
-                                        transformOrigin: -lense.imageCircle * factor / 2,
+                                        transformOrigin: -lense.imageCircle*lense.expansion * factor / 2,
                                         color: hoveredLense == lense ? 'black' : lense.textColor,
                                         backgroundColor: hoveredLense == lense ? 'white' : lense.color,
-                                    }}>{lense.logo} {lense.model}</div>
+                                    }}>
+                                        {/*<input type="button" value="X"/>*/}
+                                        <span>{lense.logo + ' ' + lense.model}</span>
+                                        <span>{' – '}Exp/Red{' '}</span>
+                                        <select value={lense.expansion.toFixed(2)} onChange={(event) => onLenseExpansionChange(lense, parseFloat(event.target.value))}>
+                                            <option value="0.50">0.50</option>
+                                            <option value="0.58">0.58</option>
+                                            <option value="0.64">0.64</option>
+                                            <option value="0.70">0.70</option>
+                                            <option value="0.71">0.71</option>
+                                            <option value="0.80">0.80</option>
+                                            <option value="1.00">1.0</option>
+                                            <option value="1.20">1.2</option>
+                                            <option value="1.40">1.4</option>
+                                            <option value="1.60">1.6</option>
+                                            <option value="1.70">1.7</option>
+                                            <option value="2.00">2.0</option>
+                                        </select>
+                                    </div>
                                 }
                             </div>
                         )

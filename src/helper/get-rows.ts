@@ -104,6 +104,7 @@ export const getLensesFromSheet = async (doc: GoogleSpreadsheet) => {
             imageCircle: parseFloat(r.get('imageCircle')),
             color: r.get('color'),
             textColor: r.get('textColor'),
+            expansion: 1.0,
         });
     });
 
