@@ -335,7 +335,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const [shared, setShared] = useState<any>(null);
 
     const [selectedLensesStr, setSelectedLensesStr] = React.useState([]);
-    const [selectedLenses, setSelectedLenses] = React.useState([]);
+    const [selectedLenses, setSelectedLenses] = React.useState<ILense[]>([]);
 
     // Hack: Need when first loading mobile it would be wrong otherwise
     const [isMobile, setIsMobile] = React.useState(false);
@@ -378,7 +378,10 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
     const maxWidth = width - offset*2;
     const maxHeight = 700;
 
-    const selectedLensesAdded = selectedLenses.map(l => ({width: l.imageCircle*l.expansion, height: l.imageCircle*l.expansion}));
+    const selectedLensesAdded = selectedLenses.map(l => ({
+        width: l.imageCircle*l.expansion,
+        height: l.imageCircle*l.expansion,
+    }));
     const imageCirclesAdded = imageCircles
         .filter(imageCircle => imageCircle != null)
         .map((imageCircle, i) => ({
@@ -835,15 +838,16 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         zIndex: 30,
                                         cursor: 'default',
                                         // transform: `translate(-0.5%) rotate(${i * -5}deg)`,
-                                        transform: `translate(100%) rotate(${i * -5}deg)`,
-                                        marginLeft: -1,
+                                        transform: `translate(99%) rotate(${i * -11}deg)`,
+                                        marginLeft: -1, // does not work
                                         transformOrigin: -lense.imageCircle*lense.expansion * factor / 2,
                                         color: hoveredLense == lense ? 'black' : lense.textColor,
                                         backgroundColor: hoveredLense == lense ? 'white' : lense.color,
                                     }}>
                                         {/*<input type="button" value="X"/>*/}
                                         <span>{lense.logo + ' ' + lense.model}</span>
-                                        <span>{' – '}Exp/Red{' '}</span>
+                                        <br/>
+                                        <span>Expansion/Reduction{' '}</span>
                                         <select value={lense.expansion.toFixed(2)} onChange={(event) => onLenseExpansionChange(lense, parseFloat(event.target.value))} onClick={(e) => { e.stopPropagation() }}>
                                             <option value="0.50">0.50</option>
                                             <option value="0.58">0.58</option>
