@@ -704,11 +704,11 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
 
     const onMouseEnterLeaveLenseProps = (lense: ILense) => ({
         onClick: () => {
-            // if (lense.model.includes('Individual')) {
-            //     onImageCircleChange('', lense.index);
-            // } else {
-            //     onToggleLense(lense);
-            // }
+            if (lense.model.includes('Individual')) {
+                onImageCircleChange('', lense.index);
+            } else {
+                onToggleLense(lense);
+            }
         },
         onMouseEnter: () => {
             console.log('setHoveredLense', lense);
@@ -844,14 +844,14 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         {/*<input type="button" value="X"/>*/}
                                         <span>{lense.logo + ' ' + lense.model}</span>
                                         <span>{' – '}Exp/Red{' '}</span>
-                                        <select value={lense.expansion.toFixed(2)} onChange={(event) => onLenseExpansionChange(lense, parseFloat(event.target.value))}>
+                                        <select value={lense.expansion.toFixed(2)} onChange={(event) => onLenseExpansionChange(lense, parseFloat(event.target.value))} onClick={(e) => { e.stopPropagation() }}>
                                             <option value="0.50">0.50</option>
                                             <option value="0.58">0.58</option>
                                             <option value="0.64">0.64</option>
                                             <option value="0.70">0.70</option>
                                             <option value="0.71">0.71</option>
                                             <option value="0.80">0.80</option>
-                                            <option value="1.00">1.0</option>
+                                            <option value="1.00">–</option>
                                             <option value="1.20">1.2</option>
                                             <option value="1.40">1.4</option>
                                             <option value="1.60">1.6</option>
