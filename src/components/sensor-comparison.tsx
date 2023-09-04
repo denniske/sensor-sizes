@@ -579,6 +579,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
         const imageCircles2 = [...imageCircles];
         imageCircles2[i] = parseFloat(value.replace(',', '.'));
         setImageCircles(imageCircles2);
+        individualImageCircleLenses[i].expansion = 1;
     };
 
     const onSearchChange = (event) => {
@@ -847,7 +848,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                         {/*<input type="button" value="X"/>*/}
                                         <span>{lense.logo + ' ' + lense.model}</span>
                                         <br/>
-                                        <span>Expansion/Reduction{' '}</span>
+                                        <span>Expander/Reducer{' '}</span>
                                         <select value={lense.expansion.toFixed(2)} onChange={(event) => onLenseExpansionChange(lense, parseFloat(event.target.value))} onClick={(e) => { e.stopPropagation() }}>
                                             <option value="0.50">0.50</option>
                                             <option value="0.58">0.58</option>
@@ -859,6 +860,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             <option value="1.20">1.2</option>
                                             <option value="1.40">1.4</option>
                                             <option value="1.60">1.6</option>
+                                            <option value="1.66">1.66</option>
                                             <option value="1.70">1.7</option>
                                             <option value="2.00">2.0</option>
                                         </select>
