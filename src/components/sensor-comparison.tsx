@@ -858,6 +858,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                             <option value="0.80">0.80</option>
                                             <option value="1.00">–</option>
                                             <option value="1.20">1.2</option>
+                                            <option value="1.25">1.25</option>
                                             <option value="1.40">1.4</option>
                                             <option value="1.60">1.6</option>
                                             <option value="1.66">1.66</option>
