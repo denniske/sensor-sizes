@@ -107,6 +107,9 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
 
             <main className={styles.main}>
                 <div className={classes.sponsorings} data-nosnippet>
+                    <a className={classes.link} href="https://kipon.de/" target="_blank">
+                        <img className={classes.sponsoringImage} src="/sponsoring/kipon.png"/>
+                    </a>
                     <a className={classes.link} href="https://patona.de/kamera/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/patona.png"/>
                     </a>
