@@ -167,6 +167,11 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                         className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
                 </h1>
 
+                <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
+
+                <ReactMarkdown
+                    className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>
+
                 {
                     newsletter &&
                     <>
@@ -182,10 +187,6 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                                 }}></iframe>
                     </>
                 }
-                <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
-
-                <ReactMarkdown
-                    className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>
 
                 <div className={classes.footerLinks} data-nosnippet>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">
