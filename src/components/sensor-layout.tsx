@@ -7,6 +7,7 @@ import React, {useEffect, useState} from 'react';
 import {CustomTooltip} from './light-tooltip';
 import Script from 'next/script'
 import ReactMarkdown from 'react-markdown';
+import {useRouter} from "next/router";
 
 const useStyles = createStylesheet((theme) => ({
     links: {
@@ -70,12 +71,20 @@ interface Props {
 
 export default function SensorLayout({lenses, sensors, texts, titles, dev}: Props) {
     const [loaded, setLoaded] = useState(false);
+    const [newsletter, setNewsletter] = useState(false);
 
     useEffect(() => {
         setLoaded(true);
     });
 
     const classes = useStyles();
+
+    const router = useRouter();
+
+    useEffect(() => {
+        setNewsletter(router.query.newsletter == 'true');
+    }, [router.query]);
+
     return (
         <div className={styles.container}>
             <Head>
@@ -158,9 +167,25 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                         className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
                 </h1>
 
+                {
+                    newsletter &&
+                    <>
+                        <br/>
+                        <iframe width="540" height="705"
+                                src="https://4eb6abab.sibforms.com/serve/MUIFACbHv5TMj0jt9fSBmFuiWoW9ltvpp7B3brqhiYs4w8WUO55F--HEV4FkqHZWTQ8zqOGPHNMk3KM78igi8Pe2bX-RGP8J1DOyji6ITBS587JIRqmAnNrVVXmo0a1XGipWpfs8TOaSmPhgoUSRengBvcYbHdTgBuxvaxIipQmsQvox38Yt3HfsZwICBKTchebmQ254EkrLeAIy"
+                                frameBorder="0" scrolling="auto" allowFullScreen
+                                style={{
+                                    display: 'block',
+                                    marginLeft: 'auto',
+                                    marginRight: 'auto',
+                                    maxWidth: '100%'
+                                }}></iframe>
+                    </>
+                }
                 <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
 
-                <ReactMarkdown className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>
+                <ReactMarkdown
+                    className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>
 
                 <div className={classes.footerLinks} data-nosnippet>
                     <a className={classes.footerLink} href="mailto:hello@sensorsizes.com" target="_blank">
