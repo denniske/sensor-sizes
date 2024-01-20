@@ -19,7 +19,13 @@ const useStyles = createStylesheet((theme) => ({
         zIndex: 20,
     },
     link: {
+        display: 'block',
         marginHorizontal: 10,
+        paddingHorizontal: 3,
+        paddingVertical: 3,
+        fontSize: 0,
+        backgroundColor: '#393939',
+        borderRadius: 5,
     },
     sponsorings: {
         position: 'absolute',
