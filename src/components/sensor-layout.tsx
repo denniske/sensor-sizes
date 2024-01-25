@@ -10,13 +10,37 @@ import ReactMarkdown from 'react-markdown';
 import {useRouter} from "next/router";
 
 const useStyles = createStylesheet((theme) => ({
+    supported: {
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        zIndex: 20,
+        backgroundColor: '#393939',
+        padding: 8,
+        gap: 20,
+        width: '100%',
+        fontSize: 12,
+    },
     links: {
         display: 'flex',
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
+        alignItems: 'center',
         flexDirection: 'row',
         marginBottom: 60,
         zIndex: 20,
+        backgroundColor: '#393939',
+        padding: 8,
+        gap: 20,
+        width: '100%',
+    },
+    supported2: {
+        display: 'block',
+        marginHorizontal: 10,
+        paddingHorizontal: 3,
+        paddingVertical: 3,
+        fontSize: 12,
     },
     link: {
         display: 'block',
@@ -24,6 +48,7 @@ const useStyles = createStylesheet((theme) => ({
         paddingHorizontal: 3,
         paddingVertical: 3,
         fontSize: 0,
+
     },
     linkWithBorder: {
         display: 'block',
@@ -37,15 +62,15 @@ const useStyles = createStylesheet((theme) => ({
     sponsorings: {
         position: 'absolute',
         display: 'flex',
-        alignItems: 'flex-end',
+        alignItems: 'flex-start',
         flexDirection: 'column',
         gap: 10,
-        top: 25,
-        right: 15,
+        top: 80,
+        left: 15,
         zIndex: 20,
     },
     sponsoringImage: {
-        height: 32,
+        height: 29,
     },
     linkImage: {
         height: 18,
@@ -128,7 +153,13 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
             <Script type="text/javascript" src="/google-analytics.js"></Script>
 
             <main className={styles.main}>
-                <div className={classes.sponsorings} data-nosnippet>
+                {/*<div className={classes.supported} data-nosnippet>*/}
+                {/*    Supported by*/}
+                {/*</div>*/}
+                <div className={classes.links} data-nosnippet>
+                    <div className={classes.supported2} data-nosnippet>
+                        Supported by
+                    </div>
                     <a className={classes.linkWithBorder} href="https://kipon.de/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/kipon.png"/>
                     </a>
@@ -142,10 +173,10 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                         <img className={classes.sponsoringImage} src="/sponsoring/alvinscables.png"/>
                     </a>
                     <a className={classes.linkWithBorder} href="https://rafcamera.com/" target="_blank">
-                        <img className={classes.sponsoringImage} src="/sponsoring/rafcamera.jpg"/>
+                        <img className={classes.sponsoringImage} src="/sponsoring/rafcamera.png"/>
                     </a>
                 </div>
-                <div className={classes.links} data-nosnippet>
+                <div className={classes.sponsorings} data-nosnippet>
                     <a className={classes.link} href="https://github.com/denniske/sensor-sizes" target="_blank">
                         <img className={classes.linkImage}
                              src="https://img.shields.io/badge/github-sensor--sizes-green?label=Github&logo=github&labelColor=00AA00&color=444"/>
