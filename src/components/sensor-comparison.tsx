@@ -878,17 +878,17 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                         <div className={classes.shareCopiedLink}>{ shared ? 'Copied link to clipboard!' : '\u00A0' }</div>
                         <button disabled={selectedSensors.length === 0 && selectedLenses.length === 0} className={classes.button} onClick={share}>Share</button>
                     </div>
-                    <br/>
-                    <div className={classes.options}>
-                        <input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} />
-                        <div className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>
-                            <CustomTooltip title={texts.realPhysicalSensorSize}>
-                                Real physical sensor size
-                            </CustomTooltip>
-                        </div>
-                        <div className={`${classes.optionsText}`}>Your screen size (inch)</div>
-                        <div><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>
-                    </div>
+                    {/*<br/>*/}
+                    {/*<div className={classes.options}>*/}
+                    {/*    <input className={classes.pointer} type="checkbox" checked={realPhysicalSensorSize} onChange={onToggleRealPhysicalSensorSize} />*/}
+                    {/*    <div className={`${classes.pointer} ${classes.optionsLabel}`} onClick={onToggleRealPhysicalSensorSize}>*/}
+                    {/*        <CustomTooltip title={texts.realPhysicalSensorSize}>*/}
+                    {/*            Real physical sensor size*/}
+                    {/*        </CustomTooltip>*/}
+                    {/*    </div>*/}
+                    {/*    <div className={`${classes.optionsText}`}>Your screen size (inch)</div>*/}
+                    {/*    <div><input type="text" className={classes.text} placeholder="size" value={screenSizeStr} onChange={onScreenSizeChange} /></div>*/}
+                    {/*</div>*/}
 
                     <div className={classes.heading}>Selected Lenses</div>
                     <div className={classes.selectedLenses}>
