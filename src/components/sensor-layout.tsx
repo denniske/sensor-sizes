@@ -24,6 +24,13 @@ const useStyles = createStylesheet((theme) => ({
         paddingHorizontal: 3,
         paddingVertical: 3,
         fontSize: 0,
+    },
+    linkWithBorder: {
+        display: 'block',
+        marginHorizontal: 10,
+        paddingHorizontal: 3,
+        paddingVertical: 3,
+        fontSize: 0,
         backgroundColor: '#393939',
         borderRadius: 5,
     },
@@ -122,19 +129,19 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
 
             <main className={styles.main}>
                 <div className={classes.sponsorings} data-nosnippet>
-                    <a className={classes.link} href="https://kipon.de/" target="_blank">
+                    <a className={classes.linkWithBorder} href="https://kipon.de/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/kipon.png"/>
                     </a>
-                    <a className={classes.link} href="https://patona.de/kamera/" target="_blank">
+                    <a className={classes.linkWithBorder} href="https://patona.de/kamera/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/patona.png"/>
                     </a>
-                    <a className={classes.link} href="https://www.funkyfotosgroup.com/" target="_blank">
+                    <a className={classes.linkWithBorder} href="https://www.funkyfotosgroup.com/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/ffg.png"/>
                     </a>
-                    <a className={classes.link} href="https://alvinscable.com/" target="_blank">
+                    <a className={classes.linkWithBorder} href="https://alvinscable.com/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/alvinscables.png"/>
                     </a>
-                    <a className={classes.link} href="https://rafcamera.com/" target="_blank">
+                    <a className={classes.linkWithBorder} href="https://rafcamera.com/" target="_blank">
                         <img className={classes.sponsoringImage} src="/sponsoring/rafcamera.jpg"/>
                     </a>
                 </div>
