@@ -177,10 +177,6 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                     </a>
                 </div>
                 <div className={classes.sponsorings} data-nosnippet>
-                    <a className={classes.link} href="https://github.com/denniske/sensor-sizes" target="_blank">
-                        <img className={classes.linkImage}
-                             src="https://img.shields.io/badge/github-sensor--sizes-green?label=Github&logo=github&labelColor=00AA00&color=444"/>
-                    </a>
                     <a className={classes.link} href="https://www.buymeacoffee.com/sensorsizes" target="_blank">
                         <img className={classes.linkImage}
                              src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshields-io-buymeacoffee.vercel.app%2Fapi%3Fusername%3Dsensorsizes&color=444"/>
@@ -196,6 +192,10 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                        target="_blank">
                         <img className={classes.linkImage}
                              src="https://img.shields.io/static/v1?label=Amazon&message=affiliate&color=444&labelColor=CCC&logo=amazon&logoColor=black"/>
+                    </a>
+                    <a className={classes.link} href="https://github.com/denniske/sensor-sizes" target="_blank">
+                        <img className={classes.linkImage}
+                             src="https://img.shields.io/badge/github-sensor--sizes-green?label=Github&logo=github&labelColor=00AA00&color=444"/>
                     </a>
                     {
                         dev &&
