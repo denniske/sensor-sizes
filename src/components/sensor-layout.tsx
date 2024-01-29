@@ -40,7 +40,7 @@ const useStyles = createStylesheet((theme) => ({
         marginHorizontal: 10,
         paddingHorizontal: 3,
         paddingVertical: 3,
-        fontSize: 12,
+        fontSize: 11,
     },
     link: {
         display: 'block',
