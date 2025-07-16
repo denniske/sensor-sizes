@@ -16,6 +16,7 @@ import {CustomTooltip} from './light-tooltip';
 import useDimensions from '../hooks/use-dimensions';
 import {useRouter} from "next/router";
 import ReactMarkdown from "react-markdown";
+import {OutlinedInput} from "@mui/material";
 
 
 const useStyles = createStylesheet((theme) => ({
@@ -232,7 +233,7 @@ const useStyles = createStylesheet((theme) => ({
     selectedLenses: {
         flexDirection: 'row',
         fontSize: 14,
-        alignItems: 'flex-end',
+        alignItems: 'center',
         marginLeft: 180,
     },
     formControl: {
@@ -285,7 +286,7 @@ const MenuProps = {
         },
     },
     variant: "menu",
-    getContentAnchorEl: null,
+    // getContentAnchorEl: null,
 };
 
 interface Props {
@@ -904,7 +905,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 multiple
                                 value={selectedLensesStr}
                                 onChange={(event) => handleChange(event.target.value)}
-                                input={<Input />}
+                                input={<OutlinedInput />}
                                 displayEmpty={true}
                                 renderValue={(selected: string[] | null) => selected?.length + ' selected'}
                                 MenuProps={MenuProps as any}

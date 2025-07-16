@@ -17,7 +17,7 @@
     "@mui/styles": "^5.16.4",
     "google-spreadsheet": "^4.0.2",
     "lodash": "^4.17.21",
-    "next": "15.0.2",
+    "next": "^15.4.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0"
