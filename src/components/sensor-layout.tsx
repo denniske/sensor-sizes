@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import {createStylesheet} from '../helper/styles';
-// import {SensorComparison} from './sensor-comparison';
+import {SensorComparison} from './sensor-comparison';
 import Link from '@mui/material/Link';
 import React, {useEffect, useState} from 'react';
 import {CustomTooltip} from './light-tooltip';
@@ -211,7 +211,7 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
                         className={classes.titlePart}>SENSOR</span> <span className={classes.titlePart}>SIZES</span></a>
                 </h1>
 
-                {/*<SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>*/}
+                <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
 
                 {/*<ReactMarkdown*/}
                 {/*    className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>*/}
