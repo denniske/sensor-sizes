@@ -570,12 +570,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:types-react@19.0.0-rc.1":
-  version: 19.0.0-rc.1
-  resolution: "types-react@npm:19.0.0-rc.1"
+"@types/react@npm:*, @types/react@npm:^19.0.0":
+  version: 19.1.8
+  resolution: "@types/react@npm:19.1.8"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10c0/408cd9f3f960e806d510f7a9a3569f92a7f1cff3c57f5465fab4c139f0020c88dc7a08e6f357d2a116bd2c76e641851ce84527cb765f36824a6e818e0d477bbc
+  checksum: 10c0/4908772be6dc941df276931efeb0e781777fa76e4d5d12ff9f75eb2dcc2db3065e0100efde16fde562c5bafa310cc8f50c1ee40a22640459e066e72cd342143e
   languageName: node
   linkType: hard
 
@@ -2876,14 +2876,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.0.0-rc-02c0e824-20241028":
-  version: 19.0.0-rc-02c0e824-20241028
-  resolution: "react-dom@npm:19.0.0-rc-02c0e824-20241028"
+"react-dom@npm:^19.0.0":
+  version: 19.1.0
+  resolution: "react-dom@npm:19.1.0"
   dependencies:
-    scheduler: "npm:0.25.0-rc-02c0e824-20241028"
+    scheduler: "npm:^0.26.0"
   peerDependencies:
-    react: 19.0.0-rc-02c0e824-20241028
-  checksum: 10c0/3c3d32edaac11ab0811cbd66e32368ddf59a5a35f2704296bda6bffed56845997068edbe3d65840b401e571ee02f4b03b5c1277fa026c9a3778dcc1344be11d7
+    react: ^19.1.0
+  checksum: 10c0/3e26e89bb6c67c9a6aa86cb888c7a7f8258f2e347a6d2a15299c17eb16e04c19194e3452bc3255bd34000a61e45e2cb51e46292392340432f133e5a5d2dfb5fc
   languageName: node
   linkType: hard
 
@@ -2949,10 +2949,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.0.0-rc-02c0e824-20241028":
-  version: 19.0.0-rc-02c0e824-20241028
-  resolution: "react@npm:19.0.0-rc-02c0e824-20241028"
-  checksum: 10c0/e19a6b9310d76cbb9afcbc1de130890070a9dd0abf9de8bc66861488d3273d76f617bf8acebd5117f4b617a4d034c9175fec5accdbc94053eb37e0616531f23a
+"react@npm:^19.0.0":
+  version: 19.1.0
+  resolution: "react@npm:19.1.0"
+  checksum: 10c0/530fb9a62237d54137a13d2cfb67a7db6a2156faed43eecc423f4713d9b20c6f2728b026b45e28fcd72e8eadb9e9ed4b089e99f5e295d2f0ad3134251bdd3698
   languageName: node
   linkType: hard
 
@@ -3120,10 +3120,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:0.25.0-rc-02c0e824-20241028":
-  version: 0.25.0-rc-02c0e824-20241028
-  resolution: "scheduler@npm:0.25.0-rc-02c0e824-20241028"
-  checksum: 10c0/bb05dfd4946b70b5dcbf455c37a20e3e3a0df42a5bf1bb15ca6a8c9735b8bdbba05986bc2a9858251ac49751f6859ae6972d172bea0e9eefdf7228300d0a2b76
+"scheduler@npm:^0.26.0":
+  version: 0.26.0
+  resolution: "scheduler@npm:0.26.0"
+  checksum: 10c0/5b8d5bfddaae3513410eda54f2268e98a376a429931921a81b5c3a2873aab7ca4d775a8caac5498f8cbc7d0daeab947cf923dbd8e215d61671f9f4e392d34356
   languageName: node
   linkType: hard
 
@@ -3154,13 +3154,13 @@ __metadata:
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
     "@material-ui/core": "npm:^4.12.4"
     "@types/node": "npm:^18.15.3"
-    "@types/react": "npm:types-react@19.0.0-rc.1"
+    "@types/react": "npm:^19.0.0"
     eslint-config-next: "npm:15.0.2"
     google-spreadsheet: "npm:^4.0.2"
     lodash: "npm:^4.17.21"
     next: "npm:15.0.2"
-    react: "npm:19.0.0-rc-02c0e824-20241028"
-    react-dom: "npm:19.0.0-rc-02c0e824-20241028"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
     react-markdown: "npm:^8.0.7"
     typescript: "npm:^5.2.2"
   languageName: unknown
