@@ -52,8 +52,8 @@ export default function CustomCheckbox(props) {
                 '&:hover': {
                     bgcolor: 'transparent',
                 },
-                marginRight: 10,
-                marginBottom: 4,
+                marginRight: 1.25,
+                marginBottom: 0,
             }}
             disableRipple
             color="default"

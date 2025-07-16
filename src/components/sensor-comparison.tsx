@@ -15,7 +15,7 @@ import CustomCheckbox from './custom-checkbox';
 import {CustomTooltip} from './light-tooltip';
 import useDimensions from '../hooks/use-dimensions';
 import {useRouter} from "next/router";
-// import ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 
 
 const useStyles = createStylesheet((theme) => ({
@@ -912,7 +912,7 @@ export function SensorComparison({lenses, sensors, texts}: Props) {
                                 {lenses.map(lense => (
                                     <MenuItem key={lense.model} value={lense.model}>
                                         <CustomCheckbox checked={selectedLenses.includes(lense)} />
-                                        {/*<ListItemText primary={<ReactMarkdown unwrapDisallowed={true} disallowedElements={['p']} >{`${lense.logo} ${lense.model} (⌀ ${lense.imageCircle.toFixed(2)} mm)`}</ReactMarkdown>} />*/}
+                                        <ListItemText primary={<ReactMarkdown unwrapDisallowed={true} disallowedElements={['p']} >{`${lense.logo} ${lense.model} (⌀ ${lense.imageCircle.toFixed(2)} mm)`}</ReactMarkdown>} />
                                     </MenuItem>
                                 ))}
                             </Select>
