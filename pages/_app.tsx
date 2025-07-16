@@ -1,12 +1,12 @@
 import theme from '../src/theme'
 import '../styles/globals.css'
-import {MuiThemeProvider} from '@material-ui/core';
+import { ThemeProvider } from '@mui/material/styles';
 
 function MyApp({ Component, pageProps }) {
   return  (
-      <MuiThemeProvider theme={theme} >
+      <ThemeProvider theme={theme} >
         <Component {...pageProps} />
-      </MuiThemeProvider>
+      </ThemeProvider>
   );
 }
 

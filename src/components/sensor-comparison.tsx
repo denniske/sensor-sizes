@@ -6,7 +6,11 @@ import useWindowDimensions from '../hooks/use-window-dimensions';
 import useClientLoaded from '../hooks/use-client-loaded';
 import {faArrowDown, faArrowUp, faCoffee, faCross, faTimes} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormControl, Select, Input, MenuItem, ListItemText } from '@material-ui/core';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Input from '@mui/material/Input';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
 import CustomCheckbox from './custom-checkbox';
 import {CustomTooltip} from './light-tooltip';
 import useDimensions from '../hooks/use-dimensions';

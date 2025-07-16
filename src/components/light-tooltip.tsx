@@ -1,8 +1,11 @@
-import {Tooltip, TooltipProps, withStyles} from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
 import React from 'react';
 
-export const LightTooltip = withStyles((theme) => ({
-    tooltip: {
+export const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+    [`& .MuiTooltip-tooltip`]: {
         backgroundColor: theme.palette.common.white,
         color: 'rgba(0, 0, 0, 0.87)',
         boxShadow: theme.shadows[1],
@@ -11,10 +14,10 @@ export const LightTooltip = withStyles((theme) => ({
         maxWidth: 1000,
         padding: 12,
     },
-    arrow: {
+    [`& .MuiTooltip-arrow`]: {
         color: theme.palette.common.white,
     },
-}))(Tooltip);
+}));
 
 export function CustomTooltip(props: Omit<TooltipProps, 'children'> & { children: (string | React.ReactNode)[] | string | React.ReactNode }) {
     const { children, ...rest } = props;

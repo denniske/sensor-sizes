@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import {createStylesheet} from '../helper/styles';
 // import {SensorComparison} from './sensor-comparison';
-import {Link} from '@material-ui/core';
+import Link from '@mui/material/Link';
 import React, {useEffect, useState} from 'react';
 import {CustomTooltip} from './light-tooltip';
 import Script from 'next/script'

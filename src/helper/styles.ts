@@ -1,7 +1,7 @@
 import * as CSS from 'csstype';
 import {Property} from "csstype";
-import {makeStyles} from "@material-ui/core/styles";
-import {Theme as DefaultTheme} from "@material-ui/core/styles/createTheme";
+import {makeStyles} from "@mui/styles";
+import {Theme as DefaultTheme} from "@mui/material/styles";
 import {merge} from 'lodash';
 
 interface StandardCSSProperties extends CSS.Properties<number | string> {}
