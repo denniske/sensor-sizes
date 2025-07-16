@@ -6,7 +6,7 @@ import Link from '@mui/material/Link';
 import React, {useEffect, useState} from 'react';
 import {CustomTooltip} from './light-tooltip';
 import Script from 'next/script'
-// import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 import {useRouter} from "next/router";
 
 const useStyles = createStylesheet((theme) => ({
@@ -213,8 +213,9 @@ export default function SensorLayout({lenses, sensors, texts, titles, dev}: Prop
 
                 <SensorComparison lenses={lenses} sensors={sensors} texts={texts}/>
 
-                {/*<ReactMarkdown*/}
-                {/*    className={`${classes.explanationText} explanation-text`}>{texts.descriptionText}</ReactMarkdown>*/}
+                <div className={`${classes.explanationText} explanation-text`}>
+                    <ReactMarkdown>{texts.descriptionText}</ReactMarkdown>
+                </div>
 
                 {
                     newsletter &&
