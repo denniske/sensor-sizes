@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3001",
+    "dev": "next dev --turbopack --port 3001",
     "build": "next build",
     "start": "next start"
   },
@@ -12,16 +12,21 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@material-ui/core": "^4.12.4",
+    "eslint-config-next": "15.0.2",
     "google-spreadsheet": "^4.0.2",
     "lodash": "^4.17.21",
-    "next": "^13.4.19",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "15.0.2",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-markdown": "^8.0.7"
   },
   "devDependencies": {
     "@types/node": "^18.15.3",
-    "@types/react": "^18.2.21",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
     "typescript": "^5.2.2"
-  }
+  },
+  "resolutions": {
+    "@types/react": "npm:types-react@19.0.0-rc.1"
+  },
+  "packageManager": "yarn@4.9.2"
 }
